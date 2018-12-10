@@ -2,6 +2,10 @@ import React from 'react';
 
 export default function NavTop(props) {
   return (
+    // general layout is modified base on
+    // Author : www.webthemez.com
+    // License: Commons Attribution 3.0
+    // http://creativecommons.org/licenses/by/3.0/
     <div className="navbar navbar-default top-navbar">
 	            <div className="navbar-header">
 	                <span>Admin</span>
@@ -10,7 +14,7 @@ export default function NavTop(props) {
 	                <li className="dropdown">
 	                    <a className="dropdown-toggle" href="javascript:;">
 	                        <i className="fa fa-user fa-fw"></i>
-		                   
+
                             <i className="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul className="dropdown-menu dropdown-user">

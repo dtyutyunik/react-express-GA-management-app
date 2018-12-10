@@ -6,6 +6,7 @@ import StudentPortal from './StudentPortal';
 import Login from './Login';
 import LandingPage from './LandingPage';
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +29,7 @@ class App extends Component {
       portal: view
     })
   }
+
   returnToLanding() {
     this.setState({
       portal: 'landing'
@@ -69,6 +71,8 @@ class App extends Component {
               <button className='btn btn-default'
                       onClick={() => {this.setPortal('student')}}
                 >Student</button>
+              
+              <Login />
             </div>
     let isLandingPortal = this.state.portal === 'landing';
     return (

@@ -24,7 +24,6 @@ try{
 });
 
 
-
 app.get('/students', async(req,res) => {
   try{
     const studentList = await Student.findAll({});
@@ -36,10 +35,11 @@ app.get('/students', async(req,res) => {
   }
 });
 
+
 app.get('/instructors', async(req,res) => {
   try{
     const instructorList = await Instructor.findAll({});
-    res.json({studentList});
+    res.json({instructorList});
   }
   catch(e){
     console.log(e);

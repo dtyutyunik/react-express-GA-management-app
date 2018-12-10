@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 class Home extends React.Component {
   render() {
     return (
-      <div>Home</div>
+      <div>Home
+        <button className='btn btn-default'>TEST</button>
+      </div>
+
     )
   }
 }

@@ -90,6 +90,69 @@ const coursepost = await Course.create(req.body);
 });
 
 
+//delete routes
+
+app.delete('/students/:id', async (req,res) => {
+  try{
+    const id = req.params.id;
+    const destroystu = await Student.destroy({
+      where:{
+        id: id
+      }
+    })
+    res.json(destroystu);
+  }catch (e){
+      console.log(e);
+      res.status(500).json({msg:e.message});
+  }
+});
+
+app.delete('/instructors/:id', async (req,res) => {
+  try{
+    const id = req.params.id;
+    const destroyinst = await Instructor.destroy({
+      where:{
+        id: id
+      }
+    })
+    res.json(destroyinst);
+  }catch (e){
+      console.log(e);
+      res.status(500).json({msg:e.message});
+  }
+});
+
+app.delete('/courses/:id', async (req,res) => {
+  try{
+    const id = req.params.id;
+    const destroycour = await Course.destroy({
+      where:{
+        id: id
+      }
+    })
+    res.json(destroycour);
+  }catch (e){
+      console.log(e);
+      res.status(500).json({msg:e.message});
+  }
+});
+
+//put routes
+app.put('/students/:id', async(req,res)=>{
+  try{
+
+    let stuinfo= await Student.findByPk(req.params.id);
+
+    stuinfo.email=req.body.email;
+    stuinfo.save();
+    res.json(stuinfo);
+
+  }catch(e){
+    res.status(500).json({message:e.message});
+  }
+
+});
+
 
 
 app.listen(PORT, () => {

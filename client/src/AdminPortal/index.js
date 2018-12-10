@@ -4,16 +4,17 @@ import Course from './components/page/Course';
 import Instructor from './components/page/Instructor';
 import Student from './components/page/Student';
 import Order from './components/page/Order';
-import './index.css';
 import NavTop from './components/NavTop';
 import NavLeft from './components/NavLeft';
+import './index.css';
+import './index.scss';
 
 
 class AdminPortal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      screen: '',
+      screen: 'home',
     }
   }
 
@@ -32,9 +33,6 @@ class AdminPortal extends Component {
       case 'instructor':
         contentView = (<Instructor />);
         break;
-      case 'order':
-        contentView = (<Order />);
-        break;
       default:
         contentView = (<Home />);
 
@@ -43,6 +41,7 @@ class AdminPortal extends Component {
       <div id='wrapper'>
         <NavTop />
         <NavLeft />
+        
         { contentView }
        </div>
 

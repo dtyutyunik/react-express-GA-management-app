@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import './index.scss'
 
 class Home extends React.Component {
   render() {
     return (
-      <div>Home
-        <button className='btn btn-default'>This is button</button>
+      <div className="home-page">Home
+
       </div>
 
     )

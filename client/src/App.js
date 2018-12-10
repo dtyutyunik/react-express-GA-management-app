@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import AdminPortal from './AdminPortal';
+import InstructorPortal from './InstructorPortal';
+import StudentPortal from './StudentPortal';
+import Login from './Login';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      portal: 'admin'
+    }
+  }
   render() {
+    let contentView;
+    switch (this.state.portal) {
+      case 'admin':
+        contentView = (<AdminPortal />);
+        break;
+      case 'instructor':
+        contentView = (<InstructorPortal />);
+        break;
+      case 'student':
+        contentView = (<StudentPortal />);
+        break;
+      default:
+        contentView = (<Login />);
+    }
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>General Assembly</h1>
+        { contentView }
       </div>
     );
   }

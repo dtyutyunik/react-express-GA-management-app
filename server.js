@@ -27,7 +27,7 @@ try{
 app.get('/students', async(req,res) => {
   try{
     const studentList = await Student.findAll({});
-    res.json({studentList});
+    res.json(studentList);
 
   }
   catch(e){
@@ -39,7 +39,7 @@ app.get('/students', async(req,res) => {
 app.get('/instructors', async(req,res) => {
   try{
     const instructorList = await Instructor.findAll({});
-    res.json({instructorList});
+    res.json(instructorList);
   }
   catch(e){
     console.log(e);
@@ -50,12 +50,46 @@ app.get('/instructors', async(req,res) => {
 app.get('/courses', async(req,res) => {
   try{
     const courseList = await Course.findAll({});
-    res.json({courseList});
+    res.json(courseList);
   }
   catch(e){
     console.log(e);
   }
 });
+// post routes
+
+app.post('/students', async (req,res) => {
+try{
+const studentpost = await Student.create(req.body);
+  res.json(studentsput);
+}catch (e){
+  console.log(e);
+  res.status(500).json({msg:e.message});
+  }
+});
+
+app.post('/instructors', async (req,res) => {
+try{
+const instructorpost = await Instructor.create(req.body);
+  res.json(instructorpost);
+}catch (e){
+  console.log(e);
+  res.status(500).json({msg:e.message});
+  }
+});
+
+
+app.post('/courses', async (req,res) => {
+try{
+const coursepost = await Course.create(req.body);
+  res.json(coursepost);
+}catch (e){
+  console.log(e);
+  res.status(500).json({msg:e.message});
+  }
+});
+
+
 
 
 app.listen(PORT, () => {

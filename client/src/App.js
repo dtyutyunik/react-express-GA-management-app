@@ -23,6 +23,11 @@ class App extends Component {
     })
   }
 
+  setPortal(view) {
+    this.setState({
+      portal: view
+    })
+  }
 
   render() {
     let contentView;
@@ -34,7 +39,6 @@ class App extends Component {
         contentView=(<LandingPage
           info={this.state.process}
           changeRegistration={this.changeRegistration}
-
 
           />
         );
@@ -48,12 +52,23 @@ class App extends Component {
       default:
         contentView = (<Login />);
     }
+    const landingNavBar = <div className="navbar">
+              <img className="Logo" src="https://lh3.googleusercontent.com/-AlEjJmP0ofE/VOVDme9hxKI/AAAAAAAAABE/LXO0f_WTqMY/s530-p/bs.png" alt="logo"/>
+              <h1>BootCamp Startup</h1>
+              <button className='btn btn-primary'
+                      onClick={() => {this.setPortal('admin')}}
+                >Admin</button>
+              <button className='btn btn-success'
+                      onClick={() => {this.setPortal('instructor')}}
+                >Instructor</button>
+              <button className='btn btn-default'
+                      onClick={() => {this.setPortal('student')}}
+                >Student</button>
+            </div>
+    let isLandingPortal = this.state.portal === 'landing';
     return (
       <div className="App">
-        <div className="navbar">
-          <img className="Logo" src="https://lh3.googleusercontent.com/-AlEjJmP0ofE/VOVDme9hxKI/AAAAAAAAABE/LXO0f_WTqMY/s530-p/bs.png" alt="logo"/>
-          <h1>BootCamp Startup</h1>
-      </div>
+        { isLandingPortal ? (landingNavBar) : null }
       { contentView }
       </div>
     );

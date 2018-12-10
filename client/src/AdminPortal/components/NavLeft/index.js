@@ -29,7 +29,7 @@ export default function NavLeft(props) {
                         <span className="fa arrow"></span>
                         <ul className="nav nav-second-level collapse in">
                     <li>
-                          <a>Instructor List</a>
+                          <a>Instructor Management</a>
                          </li>
                          </ul>
                     </li>

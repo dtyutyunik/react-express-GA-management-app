@@ -7,13 +7,14 @@ import Order from './components/page/Order';
 import NavTop from './components/NavTop';
 import NavLeft from './components/NavLeft';
 import './index.css';
+import './index.scss';
 
 
 class AdminPortal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      screen: '',
+      screen: 'home',
     }
   }
 
@@ -40,6 +41,7 @@ class AdminPortal extends Component {
       <div id='wrapper'>
         <NavTop />
         <NavLeft />
+        
         { contentView }
        </div>
 

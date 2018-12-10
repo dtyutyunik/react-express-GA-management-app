@@ -4,19 +4,40 @@ import AdminPortal from './AdminPortal';
 import InstructorPortal from './InstructorPortal';
 import StudentPortal from './StudentPortal';
 import Login from './Login';
+import LandingPage from './LandingPage';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      portal: 'admin'
+      portal: 'landing',
+      process: 'Register'
     }
+    this.changeRegistration=this.changeRegistration.bind(this);
   }
+
+  changeRegistration(){
+
+    this.setState({
+      process: 'Signed In'
+    })
+  }
+
+
   render() {
     let contentView;
     switch (this.state.portal) {
       case 'admin':
         contentView = (<AdminPortal />);
+        break;
+      case 'landing':
+        contentView=(<LandingPage
+          info={this.state.process}
+          changeRegistration={this.changeRegistration}
+
+
+          />
+        );
         break;
       case 'instructor':
         contentView = (<InstructorPortal />);
@@ -29,9 +50,13 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>General Assembly</h1>
-        { contentView }
-        <h2>Dima</h2>
+        <div className="navbar">
+          <img className="Logo" src="https://lh3.googleusercontent.com/-AlEjJmP0ofE/VOVDme9hxKI/AAAAAAAAABE/LXO0f_WTqMY/s530-p/bs.png" alt="logo"/>
+          <h1>BootCamp Startup</h1>
+      </div>
+      { contentView }
+
+
       </div>
     );
   }

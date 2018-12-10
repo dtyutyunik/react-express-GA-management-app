@@ -6,15 +6,16 @@ export default function NavLeft(props) {
     // Author : www.webthemez.com
     // License: Commons Attribution 3.0
     // http://creativecommons.org/licenses/by/3.0/
-    <div className="navbar-default navbar-side">
+    <div className="navbar-default navbar-side" role="navigation">
         <div className="sidebar-collapse">
-            <ul className="nav">
+            <ul className="nav" id="main-menu">
                   <li>
-                      <i className="fa fa-dashboard"></i>
-                      <span>DashBoard</span>
+                      <a className="active-menu">
+                        DashBoard
+                      </a>
                   </li>
                   <li className="active">
-                      <i className="fa fa-sitemap"></i>
+                      
                       <span>Course</span>
                       <span className="fa arrow"></span>
                       <ul className="nav nav-second-level collapse in">

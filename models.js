@@ -28,7 +28,7 @@ const Student = sequelize.define('student', {
 const Instructor = sequelize.define('instructor', {
   name: Sequelize.STRING,
   email: Sequelize.STRING,
-  phone: Sequelize.STIRNG,
+  phone: Sequelize.STRING,
   title: Sequelize.STRING
 });
 

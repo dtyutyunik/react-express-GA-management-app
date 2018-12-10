@@ -29,7 +29,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>General Assembly</h1>
+        <h2>General Assembly</h2>
         { contentView }
       </div>
     );

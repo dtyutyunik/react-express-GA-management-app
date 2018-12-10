@@ -31,6 +31,7 @@ class App extends Component {
       <div className="App">
         <h1>General Assembly</h1>
         { contentView }
+        <h2>Dima</h2>
       </div>
     );
   }

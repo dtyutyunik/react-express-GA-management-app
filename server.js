@@ -15,13 +15,47 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-app.get('/', (req, res) => {
-
+app.get('/', async (req, res) => {
+try{
   res.json({msg: 'Welcome to the BS API!'});
+}catch(e){
+  console.log(e);
+}
 });
 
 
 
+app.get('/students', async(req,res) => {
+  try{
+    const studentList = await Student.findAll({});
+    res.json({studentList});
+
+  }
+  catch(e){
+    console.log(e);
+  }
+});
+
+app.get('/instructors', async(req,res) => {
+  try{
+    const instructorList = await Instructor.findAll({});
+    res.json({studentList});
+  }
+  catch(e){
+    console.log(e);
+  }
+});
+
+
+app.get('/classes', async(req,res) => {
+  try{
+    const classList = await Class.findAll({});
+    res.json({classList});
+  }
+  catch(e){
+    console.log(e);
+  }
+});
 
 
 app.listen(PORT, () => {

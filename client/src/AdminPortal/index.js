@@ -16,7 +16,11 @@ class AdminPortal extends Component {
       screen: 'home',
     }
   }
-
+  handlePageChange(e) {
+    this.setState({
+      screen: e.currentTarget.name,
+    })
+  }
   render() {
     let contentView;
     switch (this.state.screen) {
@@ -39,7 +43,7 @@ class AdminPortal extends Component {
     return (
       <div id='wrapper'>
         <NavTop returnToLanding={this.props.returnToLanding}/>
-        <NavLeft />
+        <NavLeft handlePageChange={this.handlePageChange.bind(this)}/>
 
         { contentView }
        </div>

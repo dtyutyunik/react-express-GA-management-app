@@ -15,12 +15,15 @@ export default function NavLeft(props) {
                       </a>
                   </li>
                   <li className="active">
-                      
+
                       <span>Course</span>
                       <span className="fa arrow"></span>
                       <ul className="nav nav-second-level collapse in">
                           <li>
-                            <a>Course Management</a>
+                            <a onClick={props.handlePageChange}
+                               name="course"
+                          >Course Management</a>
+
                           </li>
                         </ul>
                    </li>
@@ -30,17 +33,21 @@ export default function NavLeft(props) {
                         <span className="fa arrow"></span>
                         <ul className="nav nav-second-level collapse in">
                     <li>
-                          <a>Instructor Management</a>
+                          <a onClick={props.handlePageChange}
+                             name="instructor"
+                          >Instructor Management</a>
                          </li>
                          </ul>
                     </li>
                       <li className="active">
-                              <i className="fa fa-user-o"></i>
-                              <span>Student Management</span>
-                              <span className="fa arrow"></span>
-                          <ul className="nav nav-second-level collapse in">
+                          <i className="fa fa-user-o"></i>
+                          <span>Student Management</span>
+                          <span className="fa arrow"></span>
+                           <ul className="nav nav-second-level collapse in">
                               <li>
-                                  <a>Student List</a>
+                                  <a onClick={props.handlePageChange}
+                                  name="student"
+                                  >Student List</a>
                               </li>
                           </ul>
                       </li>

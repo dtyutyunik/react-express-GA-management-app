@@ -28,12 +28,17 @@ class App extends Component {
       portal: view
     })
   }
+  returnToLanding() {
+    this.setState({
+      portal: 'landing'
+    })
+  }
 
   render() {
     let contentView;
     switch (this.state.portal) {
       case 'admin':
-        contentView = (<AdminPortal />);
+        contentView = (<AdminPortal returnToLanding={this.returnToLanding.bind(this)}/>);
         break;
       case 'landing':
         contentView=(<LandingPage

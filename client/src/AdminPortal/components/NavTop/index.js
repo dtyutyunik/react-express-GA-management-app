@@ -19,7 +19,7 @@ export default function NavTop(props) {
 	                    </a>
 	                    <ul className="dropdown-menu dropdown-user">
 	                        <li>
-		                        <a onClick ={(e) => {this.onLogout();}} >
+		                        <a onClick ={e => {props.returnToLanding();}} >
 	                              <i className="fa fa-sign-out fa-fw"></i>
 	                              <span>Log Out</span>
 		                        </a>

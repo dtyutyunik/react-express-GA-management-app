@@ -38,7 +38,7 @@ class AdminPortal extends Component {
     }
     return (
       <div id='wrapper'>
-        <NavTop />
+        <NavTop returnToLanding={this.props.returnToLanding}/>
         <NavLeft />
 
         { contentView }

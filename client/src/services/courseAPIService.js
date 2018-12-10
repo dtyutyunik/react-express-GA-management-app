@@ -16,7 +16,7 @@ async function createCourse(courseData) {
   return response.data;
 }
 async function editCourse(courseData) {
-  const response = await axios.put(`${BASE_URL}/course`), courseData);
+  const response = await axios.put(`${BASE_URL}/course`, courseData);
   return response.data;
 }
 

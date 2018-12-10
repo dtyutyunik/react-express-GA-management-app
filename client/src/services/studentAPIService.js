@@ -15,19 +15,19 @@ async function createStudent(studentData) {
   const response = await axios.post(`${BASE_URL}/student`, studentData);
   return response.data;
 }
-async function editCourse(course) {
-  const response = await axios.put(`${BASE_URL}/course`), courseData);
+async function editStudent(studentData) {
+  const response = await axios.put(`${BASE_URL}/student`), studentData);
   return response.data;
 }
 
-async function deleteCourse(id) {
-  await axios.delete(`${BASE_URL}/courses/${id}`);
+async function deleteStudent(id) {
+  await axios.delete(`${BASE_URL}/students/${id}`);
 }
 
 export {
-  getAllCourses,
-  getOneCourse,
-  createCourse,
-  deleteCourse,
-  editCourse
+  getAllStudents,
+  getOneStudent,
+  createStudent,
+  deleteStudent,
+  editStudent
 }

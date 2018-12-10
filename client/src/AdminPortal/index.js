@@ -4,6 +4,10 @@ import Course from './components/page/Course';
 import Instructor from './components/page/Instructor';
 import Student from './components/page/Student';
 import Order from './components/page/Order';
+import './index.css';
+import NavTop from './components/NavTop';
+import NavLeft from './components/NavLeft';
+
 
 class AdminPortal extends Component {
   constructor(props) {
@@ -36,10 +40,12 @@ class AdminPortal extends Component {
 
     }
     return (
-      <div>
-      Admin Portal
-      { contentView }
-      </div>
+      <div id='wrapper'>
+        <NavTop />
+        <NavLeft />
+        { contentView }
+       </div>
+
 
     )
   }

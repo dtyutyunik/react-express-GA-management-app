@@ -9,7 +9,7 @@ async function seed() {
       Instructor.destroy({ where: {}})
     ]);
 
-    const studentPromise = Student.bulkCreate([
+    const studentPromise = await Student.bulkCreate([
       {
         name: 'Test Student',
         email: 'teststudent@test.com',
@@ -17,19 +17,7 @@ async function seed() {
       }
     ]);
 
-    const classPromise = Class.bulkCreate([
-      {
-        title: 'Test 101',
-        description:"sjkdhfksjdfhskdjhfksdjhf",
-        details:"sjdhkjshdkfjhsdkjfhsdkjfhskjdhfkjsdhfkjsd",
-        start_date:moment('3 January 2018'),
-        end_date:moment('5 January 2018'),
-        price: 500,
-        capacity:5
-      }
-    ])
-
-    const instructorPromise = Instructor.bulkCreate([
+    const instructorPromise = await Instructor.bulkCreate([
       {
         name: 'Not A Teacher',
         email: 'hellothere',
@@ -37,6 +25,20 @@ async function seed() {
         title: 'Lead'
       }
     ]);
+
+    const classPromise = await Class.bulkCreate([
+      {
+        title: 'Test 101',
+        description:"sjkdhfksjdfhskdjhfksdjhf",
+        details:"sjdhkjshdkfjhsdkjfhsdkjfhskjdhfkjsdhfkjsd",
+        start_date: moment('2016-01-01'),
+        end_date: moment('2016-01-01').add(2, 'week'),
+        price: 500,
+        capacity:5
+      }
+    ]);
+
+
 
   }
   catch(e) {

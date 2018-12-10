@@ -1,0 +1,11 @@
+import React from 'react';
+
+class Student extends React.Component {
+  render() {
+    return (
+      <div> Student Management </div>
+    )
+  }
+}
+
+export default Student;

@@ -38,9 +38,9 @@ const User = sequelize.define('user', {
   auth_level: Sequelize.STRING
 });
 
-Class.hasmany(Students);
+Class.hasmany(Student);
 Instructor.belongsTo(Class);
-Instructor.hasmany(Students);
+Instructor.hasmany(Student);
 
 
 module.exports = {

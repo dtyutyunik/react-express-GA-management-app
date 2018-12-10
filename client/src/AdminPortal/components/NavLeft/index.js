@@ -25,21 +25,21 @@ export default function NavLeft(props) {
                    </li>
                    <li className="active">
                        <i className="fa fa-check-square-o"></i>
-                        <span>Order</span>
+                        <span>Instructor Management</span>
                         <span className="fa arrow"></span>
                         <ul className="nav nav-second-level collapse in">
                     <li>
-                          <a>Instructor Management</a>
+                          <a>Instructor List</a>
                          </li>
                          </ul>
                     </li>
                       <li className="active">
                               <i className="fa fa-user-o"></i>
-                              <span>Student</span>
+                              <span>Student Management</span>
                               <span className="fa arrow"></span>
                           <ul className="nav nav-second-level collapse in">
                               <li>
-                                  <a>Student Management</a>
+                                  <a>Student List</a>
                               </li>
                           </ul>
                       </li>

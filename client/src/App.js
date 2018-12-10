@@ -29,7 +29,6 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>General Assembly</h1>
         { contentView }
       </div>
     );

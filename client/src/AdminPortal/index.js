@@ -4,9 +4,9 @@ import Course from './components/page/Course';
 import Instructor from './components/page/Instructor';
 import Student from './components/page/Student';
 import Order from './components/page/Order';
-import './index.css';
 import NavTop from './components/NavTop';
 import NavLeft from './components/NavLeft';
+import './index.css';
 
 
 class AdminPortal extends Component {
@@ -31,9 +31,6 @@ class AdminPortal extends Component {
         break;
       case 'instructor':
         contentView = (<Instructor />);
-        break;
-      case 'order':
-        contentView = (<Order />);
         break;
       default:
         contentView = (<Home />);

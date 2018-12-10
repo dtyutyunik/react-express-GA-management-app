@@ -5,7 +5,7 @@ const logger = require('morgan');
 //const bcrypt = require('bcrypt');
 
 
-const { Class, Student, Instructor, User } = require('./models');
+const { Course, Student, Instructor, User } = require('./models');
 const PORT = 3001;
 const app = express();
 
@@ -47,10 +47,10 @@ app.get('/instructors', async(req,res) => {
 });
 
 
-app.get('/classes', async(req,res) => {
+app.get('/courses', async(req,res) => {
   try{
-    const classList = await Class.findAll({});
-    res.json({classList});
+    const courseList = await Course.findAll({});
+    res.json({courseList});
   }
   catch(e){
     console.log(e);

@@ -1,10 +1,10 @@
-const { Class, Student, Instructor, User } = require('./models');
+const { Course, Student, Instructor, User } = require('./models');
 const moment = require('moment');
 
 async function seed() {
   try {
     await Promise.all([
-      Class.destroy({ where: {}}),
+      Course.destroy({ where: {}}),
       Student.destroy({ where: {}}),
       Instructor.destroy({ where: {}})
     ]);
@@ -26,7 +26,7 @@ async function seed() {
       }
     ]);
 
-    const classPromise = await Class.bulkCreate([
+    const coursePromise = await Course.bulkCreate([
       {
         title: 'Test 101',
         description:"sjkdhfksjdfhskdjhfksdjhf",

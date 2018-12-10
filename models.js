@@ -9,7 +9,7 @@ const sequelize = new Sequelize({
   }
 });
 
-const Class = sequelize.define('class', {
+const Course = sequelize.define('course', {
   title: Sequelize.STRING,
   description: Sequelize.STRING,
   details: Sequelize.TEXT,
@@ -39,15 +39,15 @@ const User = sequelize.define('user', {
 });
 
 
-Class.hasMany(Student);
-Instructor.belongsTo(Class);
+Course.hasMany(Student);
+Instructor.belongsTo(Course);
 Instructor.hasMany(Student);
 
 
 
 module.exports = {
   sequelize,
-  Class,
+  Course,
   Student,
   Instructor,
   User

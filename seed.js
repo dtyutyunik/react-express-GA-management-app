@@ -23,7 +23,7 @@ async function seed() {
         description:"sjkdhfksjdfhskdjhfksdjhf",
         details:"sjdhkjshdkfjhsdkjfhsdkjfhskjdhfkjsdhfkjsd",
         start_date:moment('3 January 2018'),
-        end_date:moment('3 April 2018'),
+        end_date:moment('5 January 2018'),
         price: 500,
         capacity:5
       }

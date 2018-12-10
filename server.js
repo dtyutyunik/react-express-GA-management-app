@@ -17,8 +17,9 @@ app.use(cors());
 
 app.get('/', (req, res) => {
 
-  res.json({msg: 'Welcome to BS  API!'});
+  res.json({msg: 'Welcome to the BS API!'});
 });
+
 
 
 

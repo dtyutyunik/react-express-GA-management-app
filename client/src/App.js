@@ -55,8 +55,6 @@ class App extends Component {
           <h1>BootCamp Startup</h1>
       </div>
       { contentView }
-
-
       </div>
     );
   }

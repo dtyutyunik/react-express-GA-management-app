@@ -37,6 +37,7 @@ export default class HeaderNav extends React.Component {
                 //to show the modal
                 console.log('im to show modal')
                 this.setModalVisible(true);
+
             } else {
                 this.setState({current: e.key});
             }
@@ -45,6 +46,7 @@ export default class HeaderNav extends React.Component {
         //default state of modal is invisible
  setModalVisible(value) {
     this.setState({modalVisable: value});
+    console.log(this.state.modalVisable)
   }
 
     // add modal inside of return

@@ -5,9 +5,7 @@ import Instructor from './components/page/Instructor';
 import Student from './components/page/Student';
 import NavTop from './components/NavTop';
 import NavLeft from './components/NavLeft';
-import './index.css';
 import './index.scss';
-
 
 class AdminPortal extends Component {
   constructor(props) {

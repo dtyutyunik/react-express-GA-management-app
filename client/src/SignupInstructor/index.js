@@ -4,8 +4,16 @@ export default function SignupInstructor(props) {
   return (
     <div>
     <form onSubmit={props.onSignupInsSubmit} className="Form">
+      <label>
+      Full Name:
+      <input type='text'
+             name="fullname"
+             value={props.name}
+             onChange={props.onSignupInsChange}
+      ></input>
+      </label>
      <label>
-     username:
+     Username:
      <input type='text'
             name="username"
             value={props.name}
@@ -13,7 +21,7 @@ export default function SignupInstructor(props) {
      ></input>
      </label>
      <label>
-     password:
+     Password:
      <input type="password"
             name="password"
             value={props.password}
@@ -21,21 +29,14 @@ export default function SignupInstructor(props) {
      ></input>
      </label>
      <label>
-     authentication code:
+     Authentication Code:
      <input type="text"
             name="authcode"
             value={props.authcode}
             onChange={props.onSignupInsChange}
       />
     </label>
-    <label>
-    email address:
-    <input type='text'
-           name='email'
-           value={props.email}
-           onChange={props.onSignupInsChange}
-      />
-     </label>
+
      <button type="submit">Instructor Signup Here</button>
      </form>
     </div>

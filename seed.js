@@ -10,6 +10,7 @@ async function seed() {
       User.destroy({ where: {}})
     ]);
 
+
     const studentPromise = await Student.bulkCreate([
       {
         name: 'Shirely Stu',
@@ -60,6 +61,7 @@ async function seed() {
       }
     ]);
 
+
     const classPromise = await Class.bulkCreate([
       {
         title: 'Web Development Immersive',
@@ -80,6 +82,7 @@ async function seed() {
         capacity: 30
       },
       {
+
         title: 'Data Science Immersive',
         description: '12-Week full-time career accelerator',
         details: 'Learn the tools and techniques you need to make better decisions through data, and land a job in one of the most sought after fields in tech.',
@@ -96,6 +99,7 @@ async function seed() {
         end_date: moment('2016-01-01').add(2, 'week'),
         price: 15950,
         capacity: 30
+
       }
     ]);
 

@@ -21,19 +21,20 @@ const Course = sequelize.define('course', {
 });
 
 const Student = sequelize.define('student', {
-  name: Sequelize.STRING,
+  fullname: Sequelize.STRING,
   email: Sequelize.STRING,
   phone: Sequelize.STRING
 });
 
 const Instructor = sequelize.define('instructor', {
-  name: Sequelize.STRING,
+  fullname: Sequelize.STRING,
   email: Sequelize.STRING,
   phone: Sequelize.STRING,
   title: Sequelize.STRING
 });
 
 const User = sequelize.define('user', {
+  fullname: Sequelize.STRING,
   username: Sequelize.STRING,
   password: Sequelize.STRING,
   auth_level: Sequelize.STRING
@@ -46,7 +47,11 @@ User.beforeCreate((user, options) => {
 
 Course.hasMany(Student);
 Instructor.belongsTo(Course);
-Instructor.hasMany(Student);
+Instructor.hasMany(Student, {as: "Instructor"});
+
+User.hasOne(Instructor);
+User.hasOne(Student);
+
 
 
 

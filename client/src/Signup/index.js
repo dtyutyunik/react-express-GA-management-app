@@ -4,8 +4,16 @@ export default function Signup(props) {
   return (
     <div>
     <form onSubmit={props.onSignupSubmit} className="StudentForm">
+      <label>
+      Full Name:
+      <input type='text'
+             name="fullname"
+             value={props.name}
+             onChange={props.onSignupChange}
+      ></input>
+      </label>
      <label>
-     username:
+     Username:
      <input type='text'
             name="username"
             value={props.name}
@@ -13,7 +21,7 @@ export default function Signup(props) {
      ></input>
      </label>
      <label>
-     password:
+     Password:
      <input type="password"
             name="password"
             value={props.password}

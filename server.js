@@ -21,7 +21,7 @@ try{
   console.log(e);
 }
 });
-
+// the end_point should be customized not just users
 app.post('/users', async (req, res) => {
   try {
     const user = await User.create(req.body);
@@ -43,14 +43,16 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.find({where: { username }});
     const passwordValid = await bcrypt.compare(password, user.password);
-    const { id, nationality } = user;
+    const { id, auth_level } = user;
     if (passwordValid) {
       const token = sign({
         id,
         username,
         auth_level,
       });
-      res.json({ token });
+      res.json({ token,
+                 auth_level
+       });
     } else {
       throw Error('Invalid credentials!');
     }

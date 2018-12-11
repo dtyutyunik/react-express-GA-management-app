@@ -1,20 +1,20 @@
 import React from 'react';
+import { Menu, Icon } from 'antd';
+import HeaderNav from './HeaderNav';
 
 
-
-export default function LandingPage(props){
-  return(
-    <div>
-      <div>
-
-        <button onClick={()=>console.log('clicked')}>Courses</button>
-        <button onClick={props.changeRegistration}>{props.info==="Register"?"Register":"Signed In" }</button>
-
-      </div>
-        <img className="stats" src="https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/4605/original/are-coding-bootcamps-worth-it-infographic.png"
-                               alt="notes"/>
-    </div>
-  )
-
-
+export default class LandingPage extends React.Component{
+    constructor(props){
+        super(props);
+    }
+    render(){
+        return(
+            <div>
+                <HeaderNav />
+                // {this.props.children}
+                <img className="stats" src="https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/4605/original/are-coding-bootcamps-worth-it-infographic.png"
+                                       alt="notes"/>
+            </div>
+        );
+    }
 }

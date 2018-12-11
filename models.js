@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
 
 const sequelize = new Sequelize({
   database: 'bootcamp_startup_db',
@@ -38,6 +39,10 @@ const User = sequelize.define('user', {
   auth_level: Sequelize.STRING
 });
 
+User.beforeCreate((user, options) => {
+  const password_digest = bcrypt.hashSync(user.password, 10);
+  user.password = password_digest;
+});
 
 Course.hasMany(Student);
 Instructor.belongsTo(Course);

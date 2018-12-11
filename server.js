@@ -2,13 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-//const bcrypt = require('bcrypt');
-
+const bcrypt = require('bcrypt');
+const { passport, sign } = require('./auth');
 
 const { Course, Student, Instructor, User } = require('./models');
 const PORT = 3001;
 const app = express();
-
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -23,6 +22,46 @@ try{
 }
 });
 
+app.post('/users', async (req, res) => {
+  try {
+    const user = await User.create(req.body);
+    const { id, username, auth_level } = user.dataValues;
+    const token = sign({
+      id,
+      username,
+      auth_level
+    });
+    res.json({user, token});
+  } catch(e) {
+    console.log(e);
+    res.status(500).json({msg: e.message});
+  }
+});
+
+app.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.find({where: { username }});
+    const passwordValid = await bcrypt.compare(password, user.password);
+    const { id, nationality } = user;
+    if (passwordValid) {
+      const token = sign({
+        id,
+        username,
+        auth_level,
+      });
+      res.json({ token });
+    } else {
+      throw Error('Invalid credentials!');
+    }
+  } catch(e) {
+    res.status(401).json({msg: e.message});
+  }
+});
+
+app.get('/currentuser', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.json({msg: 'logged in', user: req.user });
+});
 
 app.get('/students', async(req,res) => {
   try{

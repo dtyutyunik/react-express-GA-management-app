@@ -13,14 +13,6 @@ import axios from 'axios';
 const BASE_URL = "http://localhost:3001";
 
 
-
-import {
-  userStudentSignup,
-  userInstructorSignup,
-  userLogin
-} from './services/userAPIService.js';
-
-
 class App extends Component {
   constructor(props) {
     super(props);

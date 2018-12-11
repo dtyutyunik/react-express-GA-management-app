@@ -11,58 +11,8 @@ async function seed() {
     ]);
 
 
-    const studentPromise = await Student.bulkCreate([
-      {
-        fullname: 'Shirely Stu',
-        email: 'studentemail@gmail.com',
-        phone: '(615)210-6655'
-      },
-      {
-        fullname: 'Stu Davis',
-        email: 'student@student.com',
-        phone: '(775)310-0905'
-      },
-      {
-        fullname: 'James Stu Kurt',
-        email: 'stustu@gmail.com',
-        phone: '(935)091-6675'
-      },
-      {
-        fullname: 'Steven Studens',
-        email: 'studens.stu@gmail.com',
-        phone: '(995)330-2105'
-      }
-    ]);
 
-    const instructorPromise = await Instructor.bulkCreate([
-      {
-        fullname: 'Maggie Reams',
-        email: 'maggie@mags.com',
-        phone: '(775)501-6677',
-        title: 'Lead Instructor'
-      },
-      {
-        fullname: 'Bob Hamm',
-        email: 'bobbyhammy@gmail.com',
-        phone: '(775)601-6337',
-        title: 'Lead Instructor'
-      },
-      {
-        fullname: 'Dylan Grant',
-        email: 'd.grant@comcast.net',
-        phone: '(775)950-3732',
-        title: 'Teaching Assistant'
-      },
-      {
-        fullname: 'John Michaels',
-        email: 'michael@gmail.com',
-        phone: '(890)444-6677',
-        title: 'Teaching Assistant'
-      }
-    ]);
-
-
-    const classPromise = await Course.bulkCreate([
+    const courses = await Course.bulkCreate([
       {
         title: 'Web Development Immersive',
         description: 'Master the skills to become a job-ready full-stack developer',
@@ -70,7 +20,7 @@ async function seed() {
         start_date: moment('2016-01-01'),
         end_date: moment('2016-01-01').add(2, 'week'),
         price: 14950,
-        capacity: 30
+        capacity: 30,
       },
       {
         title: 'User Experience Design Immersive',
@@ -102,6 +52,71 @@ async function seed() {
 
       }
     ]);
+    //pulls course info so we can attach it later
+    const cs = await Course.findAll();
+
+    const students = await Student.bulkCreate([
+      {
+        fullname: 'Shirely Stu',
+        email: 'studentemail@gmail.com',
+        phone: '(615)210-6655',
+        course_id: cs[1].id
+
+      },
+      {
+        fullname: 'Stu Davis',
+        email: 'student@student.com',
+        phone: '(775)310-0905',
+        course_id: cs[2].id
+      },
+      {
+        fullname: 'James Stu Kurt',
+        email: 'stustu@gmail.com',
+        phone: '(935)091-6675',
+        course_id: cs[2].id
+      },
+      {
+        fullname: 'Steven Studens',
+        email: 'studens.stu@gmail.com',
+        phone: '(995)330-2105',
+        course_id: cs[3].id
+      }
+    ]);
+
+
+    const instructors = await Instructor.bulkCreate([
+      {
+        fullname: 'Maggie Reams',
+        email: 'maggie@mags.com',
+        phone: '(775)501-6677',
+        title: 'Lead Instructor',
+        course_id: cs[0].id
+      },
+      {
+        fullname: 'Bob Hamm',
+        email: 'bobbyhammy@gmail.com',
+        phone: '(775)601-6337',
+        title: 'Lead Instructor',
+        course_id: cs[1].id
+      },
+      {
+        fullname: 'Dylan Grant',
+        email: 'd.grant@comcast.net',
+        phone: '(775)950-3732',
+        title: 'Teaching Assistant',
+        course_id: cs[2].id
+      },
+      {
+        fullname: 'John Michaels',
+        email: 'michael@gmail.com',
+        phone: '(890)444-6677',
+        title: 'Teaching Assistant',
+        course_id: cs[3].id
+      }
+    ]);
+
+
+
 
   }
   catch(e) {
@@ -110,4 +125,22 @@ async function seed() {
   process.exit();
 }
 
+async function InstructorLinkCourse(locations){
+try{
+  let pull=await Instructor.findByPk(1);
+
+  console.log(pull.dataValues);
+  // let coursepull= await Course.findByPk(1);
+  // console.log(coursepull.dataValues);
+
+  // Instructor.addCourse(coursepull);
+}
+  catch(e){
+    console.log(e);
+  }
+  process.exit();
+
+}
+
 seed();
+// InstructorLinkCourse(1);

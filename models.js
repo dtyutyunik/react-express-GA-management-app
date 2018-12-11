@@ -46,7 +46,8 @@ User.beforeCreate((user, options) => {
 });
 
 Course.hasMany(Student);
-Instructor.belongsTo(Course);
+// Instructor.belongsTo(Course);
+Course.hasOne(Instructor);
 Instructor.hasMany(Student, {as: "Instructor"});
 
 User.hasOne(Instructor);

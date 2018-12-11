@@ -98,8 +98,7 @@ app.post('/login', async (req, res) => {
         username,
         auth_level,
       });
-      res.json({ token,
-                 auth_level
+      res.json({ token
        });
     } else {
       throw Error('Invalid credentials!');

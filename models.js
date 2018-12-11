@@ -45,13 +45,23 @@ User.beforeCreate((user, options) => {
   user.password = password_digest;
 });
 
-Course.hasMany(Student);
-// Instructor.belongsTo(Course);
-Course.hasOne(Instructor);
-Instructor.hasMany(Student, {as: "Instructor"});
 
-User.hasOne(Instructor);
-User.hasOne(Student);
+
+
+//correct
+Student.belongsTo(Course);
+Course.hasMany(Student);
+
+Course.belongsTo(Instructor);
+Instructor.hasOne(Course);
+
+
+
+// Instructor.hasMany(Student);
+User.hasMany(Instructor);
+User.hasMany(Student);
+
+
 
 
 

@@ -5,6 +5,11 @@ import InstructorPortal from './InstructorPortal';
 import StudentPortal from './StudentPortal';
 import Login from './Login';
 import LandingPage from './LandingPage';
+import {
+  userStudentSignup,
+  userInstructorSignup,
+  userLogin
+} from './services/userAPIService.js';
 
 
 class App extends Component {
@@ -15,6 +20,17 @@ class App extends Component {
       process: 'Register'
     }
     this.changeRegistration=this.changeRegistration.bind(this);
+  }
+
+  async componentDidMount() {
+    const data = {
+      "username": "tester038",
+	    "password": "password"
+    }
+    const response = await userLogin(data);
+    this.setState({
+      portal: response
+    })
   }
 
   changeRegistration(){
@@ -71,7 +87,7 @@ class App extends Component {
               <button className='btn btn-default'
                       onClick={() => {this.setPortal('student')}}
                 >Student</button>
-              
+
               <Login />
             </div>
     let isLandingPortal = this.state.portal === 'landing';

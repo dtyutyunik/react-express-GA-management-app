@@ -22,14 +22,28 @@ try{
 }
 });
 // the end_point should be customized not just users
-app.post('/users', async (req, res) => {
+app.post('/users/students', async (req, res) => {
   try {
     const user = await User.create(req.body);
-    const { id, username, auth_level } = user.dataValues;
+    const { id, username } = user.dataValues;
     const token = sign({
       id,
       username,
-      auth_level
+    });
+    res.json({user, token});
+  } catch(e) {
+    console.log(e);
+    res.status(500).json({msg: e.message});
+  }
+});
+
+app.post('/users/instructors', async (req, res) => {
+  try {
+    const user = await User.create(req.body);
+    const { id, username } = user.dataValues;
+    const token = sign({
+      id,
+      username,
     });
     res.json({user, token});
   } catch(e) {

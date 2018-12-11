@@ -42,22 +42,25 @@ export default class HeaderNav extends React.Component {
         }
         //set if the login/register modal to show
         //default state of modal is invisible
-    setModalVisible(value) {
-            this.setState({modalVisable: value});
-        }
+ setModalVisible(value) {
+    this.setState({modalVisable: value});
+  }
 
     // add modal inside of return
   logout() {
         localStorage.userName = '';
-        localStorage.userId = '';
         this.setState({
           hasLogined: false,
           userName: ''
           });
         }
-  login() {
-
-  }
+  login(userLogin) {
+      this.setState({
+        userName: userLogin.userName,
+        hasLogined: true
+      });
+      localStorage.userName = userLogin.userName;
+    }
 render() {
   return (
     <header>
@@ -70,7 +73,8 @@ render() {
             </a>
           </Col>
         <Col span={18}>
-        <UserNav hasLogined={this.state.hasLogined}
+        <UserNav
+             hasLogined={this.state.hasLogined}
              logout={this.logout.bind(this)}
              userName={this.state.userName}
              current={this.state.current}
@@ -79,11 +83,10 @@ render() {
          <LoginRegisterModal
              setModalVisible={this.setModalVisible.bind(this)}
              login={this.login.bind(this)}
-             visible={this.state.modalVisable}
+             visible={this.state.modalVisible}
              />
           </Col>
         </Row>
-
       </header>
         );
       }

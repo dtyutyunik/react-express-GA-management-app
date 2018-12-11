@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button} from 'antd';
+import { Button } from 'antd';
 //if already login
 export default class Logout extends React.Component {
   constructor(props) {

@@ -11,7 +11,7 @@ export default class LandingPage extends React.Component{
         return(
             <div>
                 <HeaderNav />
-                // {this.props.children}
+                 {/*{this.props.children}*/}
                 <img className="stats" src="https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/4605/original/are-coding-bootcamps-worth-it-infographic.png"
                                        alt="notes"/>
             </div>

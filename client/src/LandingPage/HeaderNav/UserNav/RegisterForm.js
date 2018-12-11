@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon, message,  Form, Input, Button} from 'antd';
+import { Icon, message,  Form, Input, Button } from 'antd';
 //注册表单组件
 class RegisterForm extends React.Component {
 

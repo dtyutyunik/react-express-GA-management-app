@@ -39,7 +39,6 @@ async function seed() {
     ]);
 
 
-
   }
   catch(e) {
     console.error(e);

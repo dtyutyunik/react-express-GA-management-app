@@ -17,20 +17,24 @@ class App extends Component {
     super(props);
     this.state = {
       portal: 'landing',
-      process: 'Register'
+      process: 'Register',
+      loginFormData: {
+        username: '',
+        password: ''
+      }
     }
     this.changeRegistration=this.changeRegistration.bind(this);
   }
 
   async componentDidMount() {
-    const data = {
-      "username": "tester038",
-	    "password": "password"
-    }
-    const response = await userLogin(data);
-    this.setState({
-      portal: response
-    })
+    // const data = {
+    //   "username": "tester038",
+	  //   "password": "password"
+    // }
+    // const response = await userLogin(data);
+    // this.setState({
+    //   portal: response
+    // })
   }
 
   changeRegistration(){
@@ -50,6 +54,29 @@ class App extends Component {
     this.setState({
       portal: 'landing'
     })
+  }
+  async userLoginAttemp(userData) {
+    const response = await userLogin(userData);
+    this.setState({
+      portal: response
+    })
+  }
+
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState(prevState => {
+      return {
+        loginFormData: {
+          ...prevState.loginFormData,
+          [name]: value
+        }
+      }
+    });
+  }
+  handleSubmit = async e => {
+    e.preventDefault();
+    await this.userLoginAttemp(this.state.loginFormData);
+
   }
 
   render() {
@@ -73,7 +100,7 @@ class App extends Component {
         contentView = (<StudentPortal />);
         break;
       default:
-        contentView = (<Login />);
+        contentView = (<LandingPage />);
     }
     const landingNavBar = <div className="navbar">
               <img className="Logo" src="https://lh3.googleusercontent.com/-AlEjJmP0ofE/VOVDme9hxKI/AAAAAAAAABE/LXO0f_WTqMY/s530-p/bs.png" alt="logo"/>
@@ -88,7 +115,12 @@ class App extends Component {
                       onClick={() => {this.setPortal('student')}}
                 >Student</button>
 
-              <Login />
+              <Login onChange={this.handleChange}
+                     onSubmit={this.handleSubmit}
+                     username={this.state.loginFormData.username}
+                     password={this.state.loginFormData.password}
+
+                />
             </div>
     let isLandingPortal = this.state.portal === 'landing';
     return (

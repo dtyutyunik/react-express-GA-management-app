@@ -29,6 +29,13 @@ app.post('/users/students', async (req, res) => {
 
     if(!usercheck){
         const user = await User.create(req.body);
+        await Student.create({
+          fullname: req.body.fullname,
+          email: null,
+          phone: null,
+          user_id: user.dataValues.id
+        });
+
         const { id, username } = user.dataValues;
         const token = sign({
           id,
@@ -54,6 +61,14 @@ app.post('/users/instructors', async (req, res) => {
 
     if(!usercheck){
         const user = await User.create(req.body);
+        await Instructor.create({
+          fullname: req.body.fullname,
+          email: null,
+          phone: null,
+          title: null,
+          user_id: user.dataValues.id
+        });
+
         const { id, username } = user.dataValues;
         const token = sign({
           id,

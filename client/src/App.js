@@ -25,16 +25,17 @@ class App extends Component {
         password: ''
       },
       signupFormData: {
+        fullName: '',
         username: '',
         password: '',
         auth_level: 'student'
       },
       signupInsFormData: {
+        fullName: '',
         username: '',
         password: '',
         auth_level: 'instructor',
-        authcode: '',
-        email: ''
+        authcode: ''
       }
     }
     this.changeRegistration=this.changeRegistration.bind(this);
@@ -171,6 +172,7 @@ class App extends Component {
                 />
               <Signup onSignupChange={this.handleSignupChange}
                       onSignupSubmit={this.handleSingupSubmit}
+                      fullName={this.state.signupFormData.fullName}
                       username={this.state.signupFormData.username}
                       password={this.state.signupFormData.password}
 
@@ -178,10 +180,10 @@ class App extends Component {
               <SignupInstructor
                       onSignupInsChange={this.handleSignupInsChange}
                       onSignupInsSubmit={this.handleSignupInsSubmit}
+                      fullName={this.state.signupFormData.fullName}
                       username={this.state.signupInsFormData.username}
                       password={this.state.signupInsFormData.password}
                       authcode={this.state.signupInsFormData.authcode}
-                      email={this.state.signupInsFormData.email}
                 />
             </div>
     let isLandingPortal = this.state.portal === 'landing';

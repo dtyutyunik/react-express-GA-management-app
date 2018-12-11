@@ -15,8 +15,11 @@ class Course extends React.Component {
 
    render() {
     return (
-      <div className="course-page"> Course Management
-        <h1>big list of courses</h1>
+      <div className="page-wrapper">
+        <div id="page-inner">
+          Course Management
+          <h1>big list of courses</h1>
+        </div>
        </div>
     )
   }

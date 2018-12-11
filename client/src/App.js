@@ -41,14 +41,6 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    // const data = {
-    //   "username": "tester038",
-	  //   "password": "password"
-    // }
-    // const response = await userLogin(data);
-    // this.setState({
-    //   portal: response
-    // })
   }
 
   changeRegistration(){

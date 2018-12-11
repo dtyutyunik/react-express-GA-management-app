@@ -3,7 +3,7 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgress://localhost/bootcamp_startup_db'
+    connection: 'postgres://localhost/bootcamp_startup_db'
   },
 
   // staging: {

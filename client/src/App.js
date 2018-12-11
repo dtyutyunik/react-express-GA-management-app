@@ -3,16 +3,13 @@ import './App.css';
 import AdminPortal from './AdminPortal';
 import InstructorPortal from './InstructorPortal';
 import StudentPortal from './StudentPortal';
+import { Button } from 'antd'
 import Login from './Login';
 import Signup from './Signup';
 import SignupInstructor from './SignupInstructor';
 import LandingPage from './LandingPage';
-import {
-  userStudentSignup,
-  userInstructorSignup,
-  userLogin
-} from './services/userAPIService.js';
-
+import axios from 'axios';
+const BASE_URL = "http://localhost:3001";
 
 class App extends Component {
   constructor(props) {
@@ -43,10 +40,22 @@ class App extends Component {
 
   async componentDidMount() {
 
-
+  }
+  async userStudentSignup(userData) {
+    const response = await axios.post(`${BASE_URL}/users/students`, userData);
+    return response.user;
   }
 
+  async userInstructorSignup(userData) {
+    const response = await axios.post(`${BASE_URL}/users/instructors`, userData);
+    return response.user;
+  }
 
+  async userLogin(userData) {
+    const response = await axios.post(`${BASE_URL}/login`, userData);
+    console.log(response);
+    return response.data['auth_level'];
+  }
 
   changeRegistration(){
 
@@ -67,7 +76,7 @@ class App extends Component {
     })
   }
   async userLoginAttemp(userData) {
-    const response = await userLogin(userData);
+    const response = await this.userLogin(userData);
 
     this.setState({
       portal: response['auth_level'],
@@ -77,13 +86,13 @@ class App extends Component {
 
   }
   async userSignupAttemp(userData) {
-    const response = await userStudentSignup(userData);
+    const response = await this.userStudentSignup(userData);
     // this.setState({
     //   portal: 'student'
     // });
   }
   async instructorSignupAttemp(userData) {
-    const response = await userInstructorSignup(userData);
+    const response = await this.userInstructorSignup(userData);
     // this.setState({
     //   portal: 'instructor'
     // })

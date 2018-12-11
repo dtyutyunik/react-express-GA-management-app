@@ -1,14 +1,30 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const passport = require('passport');
+const passportJWT = require('passport-jwt');
+const JwtStrategy = passportJWT.Strategy;
+const ExtractJwt = passportJWT.ExtractJwt;
 //const bcrypt = require('bcrypt');
-
-
 const { Course, Student, Instructor, User } = require('./models');
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const app = express();
 
+const opts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.SECRET_OR_KEY
+}
+// whenever I get a webtoken, i will get a user by this way
+const strategy = new JwtStrategy(opts, (payload, next) => {
+  // TODO: fetch user from Database
+  const user = null;
+  next(null, user);
+});
+passport.use(strategy);
+app.use(passport.initialize());
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

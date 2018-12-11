@@ -1,6 +1,6 @@
-# react-express-GA-management-app
+# Bootcamp-StartUp-management-app
 ## Introduction
-Bootcamp Startup is a user-friendly app to start up your own bootcamp with your choice of
+Bootcamp StartUp is a user-friendly app to start up your own bootcamp with your choice of
 courses and instructors.
 
 ## Features

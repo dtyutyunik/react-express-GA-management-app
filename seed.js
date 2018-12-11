@@ -1,10 +1,10 @@
-const { Class, Student, Instructor, User } = require('./models');
+const { Course, Student, Instructor, User } = require('./models');
 const moment = require('moment');
 
 async function seed() {
   try {
     await Promise.all([
-      Class.destroy({ where: {}}),
+      Course.destroy({ where: {}}),
       Student.destroy({ where: {}}),
       Instructor.destroy({ where: {}}),
       User.destroy({ where: {}})
@@ -13,22 +13,22 @@ async function seed() {
 
     const studentPromise = await Student.bulkCreate([
       {
-        name: 'Shirely Stu',
+        fullname: 'Shirely Stu',
         email: 'studentemail@gmail.com',
         phone: '(615)210-6655'
       },
       {
-        name: 'Stu Davis',
+        fullname: 'Stu Davis',
         email: 'student@student.com',
         phone: '(775)310-0905'
       },
       {
-        name: 'James Stu Kurt',
+        fullname: 'James Stu Kurt',
         email: 'stustu@gmail.com',
         phone: '(935)091-6675'
       },
       {
-        name: 'Steven Studens',
+        fullname: 'Steven Studens',
         email: 'studens.stu@gmail.com',
         phone: '(995)330-2105'
       }
@@ -36,25 +36,25 @@ async function seed() {
 
     const instructorPromise = await Instructor.bulkCreate([
       {
-        name: 'Maggie Reams',
+        fullname: 'Maggie Reams',
         email: 'maggie@mags.com',
         phone: '(775)501-6677',
         title: 'Lead Instructor'
       },
       {
-        name: 'Bob Hamm',
+        fullname: 'Bob Hamm',
         email: 'bobbyhammy@gmail.com',
         phone: '(775)601-6337',
         title: 'Lead Instructor'
       },
       {
-        name: 'Dylan Grant',
+        fullname: 'Dylan Grant',
         email: 'd.grant@comcast.net',
         phone: '(775)950-3732',
         title: 'Teaching Assistant'
       },
       {
-        name: 'John Michaels',
+        fullname: 'John Michaels',
         email: 'michael@gmail.com',
         phone: '(890)444-6677',
         title: 'Teaching Assistant'
@@ -62,7 +62,7 @@ async function seed() {
     ]);
 
 
-    const classPromise = await Class.bulkCreate([
+    const classPromise = await Course.bulkCreate([
       {
         title: 'Web Development Immersive',
         description: 'Master the skills to become a job-ready full-stack developer',

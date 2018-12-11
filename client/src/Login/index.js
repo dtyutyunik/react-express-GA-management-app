@@ -20,10 +20,9 @@ function Login(props) {
                onChange={props.onChange}
         ></input>
         </label>
-
-        <button>Signup Here</button>
         <button type="submit">Login Here</button>
         </form>
+
       </div>
     )
 }

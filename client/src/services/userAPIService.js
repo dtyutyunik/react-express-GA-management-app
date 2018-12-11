@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const BASE_URL = "http://localhost:3001";
 
 async function userStudentSignup(userData) {
@@ -15,12 +14,8 @@ async function userInstructorSignup(userData) {
 
 async function userLogin(userData) {
   const response = await axios.post(`${BASE_URL}/login`, userData);
-  console.log(response.data);
-  sessionStorage.setItem('Token',response.data.token);
-
-
-  console.log(`sessionStorage has: ${sessionStorage.getItem('Token')}`  )
-  return response.data;
+  console.log(response);
+  return response.data['auth_level'];
 }
 
 export {

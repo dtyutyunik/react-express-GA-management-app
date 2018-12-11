@@ -5,6 +5,7 @@ import InstructorPortal from './InstructorPortal';
 import StudentPortal from './StudentPortal';
 import Login from './Login';
 import Signup from './Signup';
+import SignupInstructor from './SignupInstructor';
 import LandingPage from './LandingPage';
 import {
   userStudentSignup,
@@ -27,6 +28,13 @@ class App extends Component {
         username: '',
         password: '',
         auth_level: 'student'
+      },
+      signupInsFormData: {
+        username: '',
+        password: '',
+        auth_level: 'instructor',
+        authcode: '',
+        email: ''
       }
     }
     this.changeRegistration=this.changeRegistration.bind(this);
@@ -69,9 +77,15 @@ class App extends Component {
   }
   async userSignupAttemp(userData) {
     const response = await userStudentSignup(userData);
-    this.setState({
-      portal: 'student'
-    });
+    // this.setState({
+    //   portal: 'student'
+    // });
+  }
+  async instructorSignupAttemp(userData) {
+    const response = await userInstructorSignup(userData);
+    // this.setState({
+    //   portal: 'instructor'
+    // })
   }
 
   handleChange = e => {
@@ -106,7 +120,21 @@ class App extends Component {
     await this.userSignupAttemp(this.state.signupFormData);
 
   }
-
+  handleSignupInsChange = e => {
+    const { name, value } = e.target;
+    this.setState( prevState => {
+      return {
+        signupInsFormData: {
+          ...prevState.signupInsFormData,
+          [name]: value
+        }
+      }
+    });
+  }
+  handleSignupInsSubmit = async e => {
+    e.preventDefault();
+    await this.instructorSignupAttemp(this.state.signupInsFormData);
+  }
   render() {
     let contentView;
     switch (this.state.portal) {
@@ -154,6 +182,14 @@ class App extends Component {
                       username={this.state.signupFormData.username}
                       password={this.state.signupFormData.password}
 
+                />
+              <SignupInstructor
+                      onSignupInsChange={this.handleSignupInsChange}
+                      onSignupInsSubmit={this.handleSignupInsSubmit}
+                      username={this.state.signupInsFormData.username}
+                      password={this.state.signupInsFormData.password}
+                      authcode={this.state.signupInsFormData.authcode}
+                      email={this.state.signupInsFormData.email}
                 />
             </div>
     let isLandingPortal = this.state.portal === 'landing';

@@ -1,9 +1,9 @@
 import React from 'react';
 import Logout from './Logout';
-import {Menu, Icon} from 'antd';
+import { Menu, Icon } from 'antd';
 import LoginRegisterModal from './LoginRegisterModal';
 
-export default class Nav extends React.Component{
+export default class UserNav extends React.Component{
     render(){
         // check if user login or not
         const userShow = this.props.hasLogined ?
@@ -13,7 +13,7 @@ export default class Nav extends React.Component{
                 userName={this.props.userName}/>
             </Menu.Item> :
             <Menu.Item key='register'>
-                <Icon type='appstore'/>Register/Login
+                <Icon type='appstore' />Register/Login
             </Menu.Item>;
 
         return(

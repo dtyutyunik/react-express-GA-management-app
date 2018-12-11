@@ -206,7 +206,6 @@ class App extends Component {
     let isLandingPortal = this.state.portal === 'landing';
     return (
       <div className="App">
-        <Button type="primary">Button</Button>
         { isLandingPortal ? (landingNavBar) : null }
       { contentView }
       </div>

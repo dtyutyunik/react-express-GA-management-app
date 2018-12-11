@@ -1,4 +1,4 @@
-// code snippet imported from the ant design
+// code snippet imported from the ant design framework
 import React from 'react';
 import { Row, Col, Nav } from 'antd';
 import UserNav from './UserNav';
@@ -35,6 +35,7 @@ export default class HeaderNav extends React.Component {
                 //highlight the menu
                 this.setState({current: 'register'});
                 //to show the modal
+                console.log('im to show modal')
                 this.setModalVisible(true);
             } else {
                 this.setState({current: e.key});
@@ -67,10 +68,10 @@ render() {
       <Row>
         <Col span={2}></Col>
         <Col span={4}>
-            <a className='logo' href='/'>
+            <div className='logo' href='/'>
             <img src={logo} alt='logo'/>
-            <span>About Us</span>
-            </a>
+            <span>Bootcamp Startup</span>
+            </div>
           </Col>
         <Col span={18}>
         <UserNav

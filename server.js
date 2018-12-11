@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const bcrypt = require('bcrypt');
 const { passport, sign } = require('./auth');
+const Sequelize = require('sequelize');
+
 
 const { Course, Student, Instructor, User } = require('./models');
 const PORT = 3001;
@@ -93,13 +95,35 @@ app.post('/login', async (req, res) => {
     const passwordValid = await bcrypt.compare(password, user.password);
     const { id, auth_level } = user;
     if (passwordValid) {
+
+      try{
+
+      const stock = await user.getStudent();
+
+      console.log(stock.dataValues.fullname);
+    }catch(e){
+      console.log(e);
+    }
+
+
       const token = sign({
         id,
         username,
         auth_level,
       });
+<<<<<<< Updated upstream
       res.json({ token
+=======
+
+      res.json({ token,
+                 auth_level,
+                 stock
+>>>>>>> Stashed changes
        });
+
+
+
+
     } else {
       throw Error('Invalid credentials!');
     }
@@ -112,7 +136,7 @@ app.get('/currentuser', passport.authenticate('jwt', { session: false }), (req, 
   res.json({msg: 'logged in', user: req.user });
 });
 
-app.get('/students', async(req,res) => {
+app.get('/students', passport.authenticate('jwt', { session: false }),  async(req,res) => {
   try{
     const studentList = await Student.findAll({});
     res.json(studentList);

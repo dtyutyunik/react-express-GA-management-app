@@ -8,8 +8,19 @@ import Login from './Login';
 import Signup from './Signup';
 import SignupInstructor from './SignupInstructor';
 import LandingPage from './LandingPage';
+<<<<<<< Updated upstream
 import axios from 'axios';
 const BASE_URL = "http://localhost:3001";
+=======
+
+
+
+import {
+  userStudentSignup,
+  userInstructorSignup,
+  userLogin
+} from './services/userAPIService.js';
+>>>>>>> Stashed changes
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +46,7 @@ class App extends Component {
         authcode: ''
       }
     }
+  //  this.buildHeaders=this.buildHeaders.bind(this)
     this.changeRegistration=this.changeRegistration.bind(this);
   }
 
@@ -46,10 +58,21 @@ class App extends Component {
     return response.user;
   }
 
+<<<<<<< Updated upstream
   async userInstructorSignup(userData) {
     const response = await axios.post(`${BASE_URL}/users/instructors`, userData);
     return response.user;
   }
+=======
+  // buildHeaders() {
+  //     const { token } = this.state;
+  //     return {
+  //       headers: {
+  //         'Authorization': `Bearer ${token}`
+  //       }
+  //     };
+  //   }
+>>>>>>> Stashed changes
 
   async userLogin(userData) {
     const response = await axios.post(`${BASE_URL}/login`, userData);
@@ -82,6 +105,7 @@ class App extends Component {
       portal: response['auth_level'],
       token: response.token
     });
+
 
 
   }

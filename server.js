@@ -111,14 +111,9 @@ app.post('/login', async (req, res) => {
         username,
         auth_level,
       });
-<<<<<<< Updated upstream
-      res.json({ token
-=======
 
       res.json({ token,
-                 auth_level,
                  stock
->>>>>>> Stashed changes
        });
 
 
@@ -136,7 +131,7 @@ app.get('/currentuser', passport.authenticate('jwt', { session: false }), (req, 
   res.json({msg: 'logged in', user: req.user });
 });
 
-app.get('/students', passport.authenticate('jwt', { session: false }),  async(req,res) => {
+app.get('/students',  async(req,res) => {
   try{
     const studentList = await Student.findAll({});
     res.json(studentList);
@@ -168,6 +163,39 @@ app.get('/courses', async(req,res) => {
     console.log(e);
   }
 });
+
+//get singles
+app.get('/students/:id',  async(req,res) => {
+  try{
+    const studentone = await Student.findByPk(req.params.id);
+    res.json(studentone);
+  }
+  catch(e){
+    console.log(e);
+  }
+});
+
+app.get('/instructors/:id',  async(req,res) => {
+  try{
+    const instone = await Instructor.findByPk(req.params.id);
+    res.json(instone);
+  }
+  catch(e){
+    console.log(e);
+  }
+});
+
+app.get('/courses/:id',  async(req,res) => {
+  try{
+    const coursone = await Course.findByPk(req.params.id);
+    res.json(coursone);
+  }
+  catch(e){
+    console.log(e);
+  }
+});
+
+
 // post routes
 
 app.post('/students', async (req,res) => {
@@ -253,11 +281,46 @@ app.delete('/courses/:id', async (req,res) => {
 app.put('/students/:id', async(req,res)=>{
   try{
 
-    let stuinfo= await Student.findByPk(req.params.id);
-
+    const stuinfo= await Student.findByPk(req.params.id);
+    stuinfo.fullname=req.body.fullname;
+    stuinfo.phone=req.body.phone;
     stuinfo.email=req.body.email;
     stuinfo.save();
     res.json(stuinfo);
+
+  }catch(e){
+    res.status(500).json({message:e.message});
+  }
+
+});
+
+app.put('/instructors/:id', async(req,res)=>{
+  try{
+
+    const instinfo= await Instructor.findByPk(req.params.id);
+    instinfo.fullname=req.body.fullname;
+    instinfo.phone=req.body.phone;
+    instinfo.email=req.body.email;
+    instinfo.save();
+    res.json(instinfo);
+
+  }catch(e){
+    res.status(500).json({message:e.message});
+  }
+
+});
+
+app.put('/courses/:id', async(req,res)=>{
+  try{
+
+    const courinfo= await Course.findByPk(req.params.id);
+    courinfo.details=req.body.details;
+    courinfo.title=req.body.title;
+    courinfo.description=req.body.description;
+    courinfo.price=req.body.price;
+    courinfo.capacity=req.body.capacity;
+    courinfo.save();
+    res.json(courinfo);
 
   }catch(e){
     res.status(500).json({message:e.message});

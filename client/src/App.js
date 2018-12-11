@@ -8,8 +8,10 @@ import Login from './Login';
 import Signup from './Signup';
 import SignupInstructor from './SignupInstructor';
 import LandingPage from './LandingPage';
+
 import axios from 'axios';
 const BASE_URL = "http://localhost:3001";
+
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +37,7 @@ class App extends Component {
         authcode: ''
       }
     }
+  //  this.buildHeaders=this.buildHeaders.bind(this)
     this.changeRegistration=this.changeRegistration.bind(this);
   }
 
@@ -50,6 +53,14 @@ class App extends Component {
     const response = await axios.post(`${BASE_URL}/users/instructors`, userData);
     return response.user;
   }
+  // buildHeaders() {
+  //     const { token } = this.state;
+  //     return {
+  //       headers: {
+  //         'Authorization': `Bearer ${token}`
+  //       }
+  //     };
+  //   }
 
   async userLogin(userData) {
     const response = await axios.post(`${BASE_URL}/login`, userData);
@@ -82,6 +93,7 @@ class App extends Component {
       portal: response['auth_level'],
       token: response.token
     });
+
 
 
   }

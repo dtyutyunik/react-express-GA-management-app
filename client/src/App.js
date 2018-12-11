@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
     this.state = {
       portal: 'landing',
-      process: 'Register',
+      token: null,
       loginFormData: {
         username: '',
         password: ''
@@ -41,7 +41,11 @@ class App extends Component {
   }
 
   async componentDidMount() {
+
+
   }
+
+
 
   changeRegistration(){
 
@@ -63,9 +67,13 @@ class App extends Component {
   }
   async userLoginAttemp(userData) {
     const response = await userLogin(userData);
+
     this.setState({
-      portal: response
+      portal: response['auth_level'],
+      token: response.token
     });
+
+
   }
   async userSignupAttemp(userData) {
     const response = await userStudentSignup(userData);

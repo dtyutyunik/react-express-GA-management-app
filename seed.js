@@ -6,7 +6,8 @@ async function seed() {
     await Promise.all([
       Class.destroy({ where: {}}),
       Student.destroy({ where: {}}),
-      Instructor.destroy({ where: {}})
+      Instructor.destroy({ where: {}}),
+      User.destroy({ where: {}})
     ]);
 
     const studentPromise = await Student.bulkCreate([

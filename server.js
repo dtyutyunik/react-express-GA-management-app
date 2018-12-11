@@ -24,13 +24,22 @@ try{
 // the end_point should be customized not just users
 app.post('/users/students', async (req, res) => {
   try {
-    const user = await User.create(req.body);
-    const { id, username } = user.dataValues;
-    const token = sign({
-      id,
-      username,
-    });
-    res.json({user, token});
+    const userNameCheck= req.body.username;
+    const usercheck = await User.find({where: { username: userNameCheck }});
+
+    if(!usercheck){
+        const user = await User.create(req.body);
+        const { id, username } = user.dataValues;
+        const token = sign({
+          id,
+          username,
+        });
+        res.json({user, token});
+    }else{
+        res.json("User taken");
+        console.log('user taken');
+      }
+
   } catch(e) {
     console.log(e);
     res.status(500).json({msg: e.message});
@@ -39,13 +48,23 @@ app.post('/users/students', async (req, res) => {
 
 app.post('/users/instructors', async (req, res) => {
   try {
-    const user = await User.create(req.body);
-    const { id, username } = user.dataValues;
-    const token = sign({
-      id,
-      username,
-    });
-    res.json({user, token});
+
+    const userNameCheck= req.body.username;
+    const usercheck = await User.find({where: { username: userNameCheck }});
+
+    if(!usercheck){
+        const user = await User.create(req.body);
+        const { id, username } = user.dataValues;
+        const token = sign({
+          id,
+          username,
+        });
+        res.json({user, token});
+    }else{
+        res.json("User taken");
+        console.log('user taken');
+
+    }
   } catch(e) {
     console.log(e);
     res.status(500).json({msg: e.message});

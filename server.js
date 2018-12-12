@@ -369,8 +369,15 @@ app.put('/instructors/:id', async(req,res)=>{
 //gets courses that instructor teaches
 app.get('/instructors/:id/courses',async(req,res)=>{
     try{
-      const courseTeach= await Course.findOne({where:{instructor_id: req.params.id}});
-      res.json(courseTeach);
+        const id = req.params.id;
+      const courseTeach= await Instructor.findOne({
+        where:{id: id},
+        include:[{
+          model:Course,
+          required:true,
+        }]
+      });
+      res.json(courseTeach.course);
     }catch(e){
       res.status(500).json({e:e.message});
     }
@@ -380,13 +387,29 @@ app.get('/instructors/:id/courses',async(req,res)=>{
 //gets students that instructor teaches
 app.get('/instructors/:id/students',async(req,res)=>{
   try{
-    const getStudents= await Student.findAll({where:{course_id: studentTeach.id}});
+    const id = req.params.id;
+    const getinststu= await Instructor.findOne({
+      where:{id:id},
+      include:[{
+        model:Course,
+        required:true,
+      }]
+    });
       // const studentTeach= await Course.findOne(
       //   {where:{instructor_id: req.params.id}},
       // include: getStudents);
       // res.json(studentTeach);
+      const finalstu = await Course.findOne({
+        where:{id:getinststu.course.id},
+        include:[{
+          model:Student,
+          required:true,
+        }]
+      });
 
-      res.json(studentTeach);
+
+
+      res.json(finalstu.students);
   }catch(e){
     res.status(500).json({e:e.message});
   }

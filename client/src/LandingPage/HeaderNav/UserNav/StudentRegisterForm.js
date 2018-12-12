@@ -45,7 +45,16 @@ class StudentRegisterForm extends React.Component {
         let { getFieldDecorator } = this.props.form;
         return (
             <Form onSubmit={this.handleRegisterSubmit.bind(this)}>
-                <Form.Item lable="Account">
+                <Form.Item label="full name">
+                    {getFieldDecorator('r_fullName', {
+                        rules: [{required: true, message: 'Please enter your full name'}],
+                    })
+                    (<Input
+                        prefix={<Icon type="user"
+                                      style={{color: 'rgba(0,0,0,.25)'}}/>}
+                        placeholder='Please enter your full name'/>)}
+                </Form.Item>
+                <Form.Item label="account username">
                     {getFieldDecorator('r_userName', {
                         rules: [{required: true, message: 'Please enter your username'}],
                     })
@@ -55,7 +64,7 @@ class StudentRegisterForm extends React.Component {
                         placeholder='Please enter your username'/>)}
                 </Form.Item>
 
-                <Form.Item lable="password">
+                <Form.Item label="password">
                     {getFieldDecorator('r_password', {
                         rules: [{required: true,
                                  message: 'Please enter your password'}, {
@@ -68,7 +77,7 @@ class StudentRegisterForm extends React.Component {
                                              placeholder='Please enter your password'/>)}
                 </Form.Item>
 
-                <Form.Item lable="confirmpassword">
+                <Form.Item label="confirm password">
                     {getFieldDecorator('r_confirmPassword', {
                         rules: [{
                             required: true, message: 'Please confirm password!',

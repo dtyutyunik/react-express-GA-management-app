@@ -19,6 +19,7 @@ class LoginForm extends React.Component {
         console.log('Received values of form: ', formData);
           //axios api request
             const resp = await userLogin(formData);
+            console.log(resp)
             if (resp !== null) {
                 console.log(resp);
                 let userLogin = {
@@ -78,7 +79,7 @@ class LoginForm extends React.Component {
                         Log in
                 </Button>
                 </Form.Item>
-              <Form.Item>
+              {/*<Form.Item>
                 <Button type="primary"
                         onClick={this.props.toggleToSignupTab('student')}
                 > Student Signup </Button>
@@ -87,7 +88,7 @@ class LoginForm extends React.Component {
                 <Button type="primary"
                         onClick={this.props.toggleToSignupTab('instructor')}
                 > Instructor Signup </Button>
-              </Form.Item>
+              </Form.Item>*/}
             </Form>
         );
     }

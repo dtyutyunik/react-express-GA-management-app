@@ -12,7 +12,6 @@ import LandingPage from './LandingPage';
 import axios from 'axios';
 const BASE_URL = "http://localhost:3001";
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -90,8 +89,8 @@ class App extends Component {
     const response = await this.userLogin(userData);
 
     this.setState({
-      portal: response['auth_level'],
-      token: response.token
+      // portal: response['auth_level'],
+      // token: response.token
     });
 
 

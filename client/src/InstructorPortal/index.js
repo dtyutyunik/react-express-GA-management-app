@@ -2,6 +2,9 @@ import React from 'react';
 import { Menu, Dropdown, Icon, message} from 'antd';
 import InstructorStudents from './instructorStudents';
 import InstructorCourses from './instructorCourses';
+import axios from 'axios';
+
+const BASE_URL = "http://localhost:3001";
 
 class InstructorPortal extends React.Component {
   constructor(props) {
@@ -12,12 +15,12 @@ class InstructorPortal extends React.Component {
     }
   }
 
+  setView = (view) => {
+    this.setState({
+      screen: view
+    });
+  }
 
-setView = (view) => {
-  this.setState({
-    screen: view
-  });
-}
 
   render() {
     let content;

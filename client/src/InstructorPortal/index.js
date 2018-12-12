@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu, Dropdown, Icon, message} from 'antd';
 import InstructorStudents from './instructorStudents';
 import InstructorCourses from './instructorCourses';
+import InstructorScreen from './InstructorScreen';
 import axios from 'axios';
 import { getAllStudents } from '../services/studentAPIService'
 
@@ -40,8 +41,11 @@ class InstructorPortal extends React.Component {
     let content;
     switch (this.state.screen) {
       case 'stu':
-        content = (<InstructorStudents
-                      students={this.state.students}/>);
+        content = ({props.students.map(eachStudent => (
+          <InstructorStudents
+            name={eachStudent.name}
+            />
+        ))}
       break;
       case 'course':
         content = (<InstructorCourses />);

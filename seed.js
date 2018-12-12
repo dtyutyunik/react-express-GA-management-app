@@ -52,10 +52,6 @@ async function seed() {
 
       }
     ]);
-    //pulls course info so we can attach it later
-    // const cs = await Course.findAll();
-
-
 
     const students = await Student.bulkCreate([
       {
@@ -109,8 +105,6 @@ async function seed() {
     ]);
 
 
-
-
   }
   catch(e) {
     console.error(e);
@@ -123,10 +117,9 @@ try{
   const students= await Student.findAll();
 
   const courses= await Course.findAll();
-  // console.log(courses.length);
-  await Promise.all(courses.map(async co=>{
-    // console.log(co.id);
-    return await co.addStudent(students[co.id - 1]);
+
+  await Promise.all(courses.map(async course=>{
+    return await course.addStudent(students[course.id - 1]);
   }))
 
 }
@@ -140,14 +133,11 @@ try{
 async function instructorCourse(){
   try{
     const instructors= await Instructor.findAll();
-    console.log(instructors[1].dataValues);
-
     const courses= await Course.findAll();
 
-  await Promise.all(instructors.map(async inst=>{
-    return await inst.setCourse(courses[inst.id-1])
+  await Promise.all(instructors.map(async instructor=>{
+    return await instructor.setCourse(courses[instructor.id-1])
   }))
-
 
   }catch(e){
     console.log(e);
@@ -169,14 +159,11 @@ async function instructorUser(){
       })
       );
 
-    const userInfo= await User.findAll();
-    userInfo.map(e=>{
-      console.log(e.dataValues);
-    })
+    const userInfo= await User.findAll({where: {'auth_level': 'instructor'}});
 
-  await Promise.all(userInfo.map((e,index)=>{
-    return e.addInstructor(instructors[index]);
-  }));
+    await Promise.all(userInfo.map((e,index)=>{
+      return e.addInstructor(instructors[index]);
+    }));
 
   }catch(e){
     console.log(e);
@@ -188,24 +175,20 @@ async function studentUser(){
   try{
     const students= await Student.findAll();
 
-    // const studentSeed= await User.bulkCreate(
-    //   students.map((e)=>{
-    //     return {fullname: e.dataValues.fullname,
-    //       username: e.dataValues.fullname,
-    //       password: 'no',
-    //       auth_level: 'student'}
-    //   })
-    // );
+    const studentSeed= await User.bulkCreate(
+      students.map((e)=>{
+        return {fullname: e.dataValues.fullname,
+          username: e.dataValues.fullname,
+          password: 'no',
+          auth_level: 'student'}
+      })
+    );
 
     const userInfo= await User.findAll({where: {'auth_level': 'student'}});
-    userInfo.map(e=>{
-      console.log(e.dataValues);
-    })
 
   await Promise.all(userInfo.map((e,index)=>{
     return e.addStudent(students[index]);
   }));
-
 
   }catch(e){
     console.log(e);
@@ -213,13 +196,13 @@ async function studentUser(){
   process.exit();
 }
 
-
+// for mainRunner run each line one at a time
 function mainRunner(){
   // seed();
   // studentCourse();
   // instructorCourse();
   // instructorUser();
-  studentUser();
+  // studentUser();
 }
 
 mainRunner();

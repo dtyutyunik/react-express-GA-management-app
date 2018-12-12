@@ -1,9 +1,6 @@
 import React from 'react';
 import { Menu, Dropdown, Icon, message} from 'antd';
-import axios from 'axios';
 import { getAllStudents } from '../services/studentAPIService'
-
-const BASE_URL = "http://localhost:3001";
 
 class InstructorStudents extends React.Component {
   constructor(props) {

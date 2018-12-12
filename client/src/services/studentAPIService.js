@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:3001';
 
 async function getAllStudents() {
-  const response = await axios(`${BASE_URL}/Students`);
+  const response = await axios(`${BASE_URL}/students`);
   return response.data;
 }
 async function getOneStudent(id) {

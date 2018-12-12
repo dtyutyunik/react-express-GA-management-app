@@ -1,47 +1,61 @@
 import React from 'react';
 import { Menu, Dropdown, Icon, message} from 'antd';
+import InstructorStudents from './instructorStudents';
+import InstructorCourses from './instructorCourses';
 
 class InstructorPortal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       current: 'user',
+      screen: ''
     }
   }
 
-//   handleClick = (e) => {
-//   console.log('click ', e);
-//   this.setState({
-//     current: e.key,
-//   });
-// }
+
+setView = (view) => {
+  this.setState({
+    screen: view
+  });
+}
 
   render() {
-  const onClick = ({ key }) => {
-  message.info(`Click on item ${key}`);
-};
-const SubMenu = Menu.SubMenu;
+    let content;
+    switch (this.state.screen) {
+      case 'stu':
+        content = (<InstructorStudents />);
+      break;
+      case 'course':
+        content = (<InstructorCourses />);
+      break;
+    }
+
+  const SubMenu = Menu.SubMenu;
 
     return (
       <div>
-        <h1>Instructor Portal</h1>
+      <h1>Instructor Portal</h1>
 
       <nav className='instructorMenu'>
         <Menu
-          onClick={onClick}
           selectedKeys={[this.state.current]}
           mode="horizontal">
           <Menu.Item key="user">
             <Icon type="user"/>My Profile
           </Menu.Item>
 
-        <SubMenu title={<span className="subMenu"><Icon type="team" />My Courses</span>}>
-            <Menu.Item key="team:1">Course Info</Menu.Item>
-            <Menu.Item key="team:2">Student List</Menu.Item>
+        <SubMenu title={<span className="subMenu"><Icon type="form" />My Courses</span>}>
+            <Menu.Item
+              onClick={() => this.setView('stu')}
+              key="form:1">Course Info</Menu.Item>
+            <Menu.Item
+              onClick={() => this.setView('course')}
+              key="form:2">Student List</Menu.Item>
         </SubMenu>
         </Menu>
         </nav>
-      </div>
+        {content}
+        </div>
     )
   }
 }

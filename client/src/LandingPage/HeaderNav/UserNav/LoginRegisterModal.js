@@ -11,8 +11,9 @@ export default class LoginRegisterModal extends React.Component {
         this.props.setModalVisible(false);
     }
     render(){
+      console.log(this.props)
         return(
-            <Modal title="User"
+            <Modal title="Welcome To Bootcamp"
                    visible={this.props.visible}
                    onCancel={this.handleCancel.bind(this)}
                    onOk={this.handleCancel.bind(this)}>

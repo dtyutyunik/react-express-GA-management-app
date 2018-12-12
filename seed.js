@@ -155,10 +155,71 @@ async function instructorCourse(){
   process.exit();
 }
 
+
+async function instructorUser(){
+  try{
+    const instructors= await Instructor.findAll();
+
+    const instrcutorC=await User.bulkCreate(
+      instructors.map((e) => {
+        return {fullname: e.dataValues.fullname,
+        username: e.dataValues.fullname,
+        password: 'la',
+        auth_level: 'instructor'}
+      })
+      );
+
+    const userInfo= await User.findAll();
+    userInfo.map(e=>{
+      console.log(e.dataValues);
+    })
+
+  await Promise.all(userInfo.map((e,index)=>{
+    return e.addInstructor(instructors[index]);
+  }));
+
+  }catch(e){
+    console.log(e);
+  }
+  process.exit();
+}
+
+async function studentUser(){
+  try{
+    const students= await Student.findAll();
+
+    // const studentSeed= await User.bulkCreate(
+    //   students.map((e)=>{
+    //     return {fullname: e.dataValues.fullname,
+    //       username: e.dataValues.fullname,
+    //       password: 'no',
+    //       auth_level: 'student'}
+    //   })
+    // );
+
+    const userInfo= await User.findAll({where: {'auth_level': 'student'}});
+    userInfo.map(e=>{
+      console.log(e.dataValues);
+    })
+
+  await Promise.all(userInfo.map((e,index)=>{
+    return e.addStudent(students[index]);
+  }));
+
+
+  }catch(e){
+    console.log(e);
+  }
+  process.exit();
+}
+
+
 function mainRunner(){
-  seed();
+  // seed();
   // studentCourse();
   // instructorCourse();
+  // instructorUser();
+  studentUser();
 }
 
 mainRunner();

@@ -10,12 +10,12 @@ export default class UserNav extends React.Component{
             <Menu.Item key="logout">
                 <Logout
                 logout={this.props.logout}
-                userName={this.props.userName}/>
+                userName={this.props.userName}
+                />
             </Menu.Item> :
             <Menu.Item key='register'>
                 <Icon type='appstore' />Register/Login
             </Menu.Item>;
-
         return(
             <Menu mode="horizontal"
                   selectedKeys={[this.props.current]}

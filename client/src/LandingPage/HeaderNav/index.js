@@ -65,6 +65,7 @@ export default class HeaderNav extends React.Component {
       localStorage.userName = userLogin.userName;
     }
 render() {
+  let modalVisable = this.state.modalVisable;
   return (
     <header>
       <Row>
@@ -86,7 +87,7 @@ render() {
          <LoginRegisterModal
              setModalVisible={this.setModalVisible.bind(this)}
              login={this.login.bind(this)}
-             visible={this.state.modalVisible}
+             visible={modalVisable}
              />
           </Col>
         </Row>

@@ -6,12 +6,20 @@ import WrapInstructorRegisterForm from './InstructorRegisterForm';
 import WrappedLoginForm from './LoginForm'
 
 export default class LoginRegisterModal extends React.Component {
+    constructor(props) {
+      super(props);
+      console.log(props);
+    }
     // function to close the modal
-    handleCancel(){
+    handleCancel() {
         this.props.setModalVisible(false);
     }
+    toggleToSignup() {
+      // mimic clicking on the different signup Tab and toggle between TabPanes
+      
+    }
     render(){
-      console.log(this.props)
+
         return(
             <Modal title="Welcome To Bootcamp"
                    visible={this.props.visible}

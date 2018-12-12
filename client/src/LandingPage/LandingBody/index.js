@@ -1,6 +1,6 @@
 import React from 'react';
 import QueueAnim from 'rc-queue-anim';
-import './landing.scss'
+
 export default class LandingBody extends React.Component {
   render() {
     return (

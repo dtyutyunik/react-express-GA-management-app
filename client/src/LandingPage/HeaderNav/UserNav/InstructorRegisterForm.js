@@ -17,8 +17,11 @@ class InstructorRegisterForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFields( async (err, formData) => {
             if (!err) {
-              const formDataReq = {...formData,
-                          auth_level: 'student'
+              const formDataReq = {
+                          fullname: formData.fullname,
+                          username: formData.username,
+                          password: formData.password,
+                          "auth_level": 'instructor'
               }
                 console.log('Received values of form: ', formDataReq);
                 //start the registration request
@@ -26,7 +29,7 @@ class InstructorRegisterForm extends React.Component {
                 console.log(response.data.user);
 
                 if (response) {
-                    message.success("successfully registered, you can log in now");
+                    message.success(`${response.data.user.username}, successfully registered, you can log in now`);
                     //set modal to disappear
                     console.log('set modal to disappear');
                     this.props.setModalVisible(false);

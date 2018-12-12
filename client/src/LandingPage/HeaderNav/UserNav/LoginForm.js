@@ -19,7 +19,7 @@ class LoginForm extends React.Component {
         console.log('Received values of form: ', formData);
           //axios api request
             const resp = await userLogin(formData);
-            console.log(resp)
+            console.log(resp);
             if (resp !== null) {
                 console.log(resp);
                 let userLogin = {

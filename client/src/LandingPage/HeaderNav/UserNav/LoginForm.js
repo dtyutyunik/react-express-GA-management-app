@@ -23,7 +23,7 @@ class LoginForm extends React.Component {
             if (resp !== null) {
                 console.log(resp);
                 let userLogin = {
-                  userName: resp.username
+                  username: resp.username
                 };
                 this.props.login(userLogin);
                 //set the modal to disappear
@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
       return (
         <Form onSubmit={this.handleLoginSubmit.bind(this)}>
             <Form.Item>
-                {getFieldDecorator('userName', {
+                {getFieldDecorator('username', {
                     rules: [{
                         required: true,
                         message: 'Please input your username!'

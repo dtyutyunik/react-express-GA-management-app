@@ -20,13 +20,13 @@ export default class LoginRegisterModal extends React.Component {
       // mimic clicking on the different signup Tab and toggle between TabPanes
     }
     render(){
-      console.log(this.props)
         return(
             <Modal title="Welcome To Bootcamp Super"
                    visible={this.props.visible}
                    onCancel={this.handleCancel.bind(this)}
                    onOk={this.handleCancel.bind(this)}>
-               <Tabs type="card">
+               <Tabs type="card"
+                     defaultActiveKey={this.props.activeKey}>
                     <Tabs.TabPane
                       tab='Login'
                       key='1'>

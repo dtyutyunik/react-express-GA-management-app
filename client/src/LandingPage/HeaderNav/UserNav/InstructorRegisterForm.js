@@ -1,5 +1,9 @@
 import React from 'react';
-import { Icon, Message,  Form, Input, Button } from 'antd';
+import { Icon, message,  Form, Input, Button } from 'antd';
+import { userInstructorSignup } from '../../../services/userAPIService';
+import axios from 'axios';
+
+const BASE_URL = "http://localhost:3001";
 // form for instructor to register
 // some code snippet imported from ant design
 class InstructorRegisterForm extends React.Component {
@@ -11,15 +15,23 @@ class InstructorRegisterForm extends React.Component {
     async handleRegisterSubmit(e) {
         //stop default, start the api request
         e.preventDefault();
-        this.props.form.validateFields((err, formData) => {
+        this.props.form.validateFields( async (err, formData) => {
             if (!err) {
-                console.log('Received values of form: ', formData);
+              const formDataReq = {...formData,
+                          auth_level: 'student'
+              }
+                console.log('Received values of form: ', formDataReq);
                 //start the registration request
-                // const response = await
-                //     if (response) {
-                //         message.success("successful registered");
-                //         //set modal to disappear
-                //         this.props.setModalVisible(false);
+                const response = await axios.post(`${BASE_URL}/users/instructors`, formDataReq);
+                console.log(response.data.user);
+
+                if (response) {
+                    message.success("successfully registered, you can log in now");
+                    //set modal to disappear
+                    console.log('set modal to disappear');
+                    this.props.setModalVisible(false);
+                    return response.data.user;
+                }
              }
         })
     }
@@ -47,7 +59,7 @@ class InstructorRegisterForm extends React.Component {
     checkAuthCode(rule, value, callback) {
       const form = this.props.form;
       if (value === "general") {
-        callback('auth correct');
+        callback();
       } else {
         callback('auth code not correct');
       }
@@ -58,7 +70,7 @@ class InstructorRegisterForm extends React.Component {
         return (
             <Form onSubmit={this.handleRegisterSubmit.bind(this)}>
                 <Form.Item label="full name">
-                    {getFieldDecorator('fullName', {
+                    {getFieldDecorator('fullname', {
                         rules: [{required: true, message: 'Please enter your full name'}],
                     })
                     (<Input
@@ -67,7 +79,7 @@ class InstructorRegisterForm extends React.Component {
                         placeholder='Please enter your full name'/>)}
                 </Form.Item>
                 <Form.Item label="account username">
-                    {getFieldDecorator('userName', {
+                    {getFieldDecorator('username', {
                         rules: [{
                            required: true,
                            message: 'Please enter your username'
@@ -125,7 +137,5 @@ class InstructorRegisterForm extends React.Component {
         );
     }
 }
-
 const WrapInstructorRegisterForm = Form.create()(InstructorRegisterForm);
-
 export default WrapInstructorRegisterForm;

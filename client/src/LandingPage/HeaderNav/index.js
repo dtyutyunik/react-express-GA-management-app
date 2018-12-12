@@ -13,6 +13,8 @@ export default class HeaderNav extends React.Component {
             userId: '',   //to show id
             current: 'course',//to show the current clicked nav
             modalVisable: false, //indicate if the login/register component needs to show
+            activeKey: '1' // set the Tabpane default tab is log in Tab
+            // right now the activekey is not working
         };
     }
     //before mount, checkout localstorage
@@ -35,7 +37,6 @@ export default class HeaderNav extends React.Component {
                 //highlight the menu
                 this.setState({current: 'register'});
                 //to show the modal
-                console.log('im to show modal')
                 this.setModalVisible(true);
 
             } else {
@@ -45,8 +46,10 @@ export default class HeaderNav extends React.Component {
         //set if the login/register modal to show
         //default state of modal is invisible
  setModalVisible(value) {
-    this.setState({modalVisable: value});
-    console.log(this.state.modalVisable)
+    this.setState({
+      modalVisable: value,
+    });
+
   }
 
     // add modal inside of return
@@ -86,6 +89,7 @@ render() {
              />
          <LoginRegisterModal
              setModalVisible={this.setModalVisible.bind(this)}
+             activeKey={this.state.activeKey}
              login={this.login.bind(this)}
              visible={modalVisable}
              />

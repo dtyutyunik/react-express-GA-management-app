@@ -19,6 +19,7 @@ export default class LoginRegisterModal extends React.Component {
 
     }
     render(){
+      console.log(this.props)
         return(
             <Modal title="Welcome To Bootcamp"
                    visible={this.props.visible}

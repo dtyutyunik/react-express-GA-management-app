@@ -97,10 +97,18 @@ app.post('/login', async (req, res) => {
     if (passwordValid) {
 
       try{
-
+        if(user['auth_level'] = 'student'){
       const stock = await user.getStudent();
 
       console.log(stock.dataValues.fullname);
+
+    }
+
+    else if(user['auth_level'] = 'instructor'){
+        const stock = await user.getInstructor()
+        console.log(stock.dataValues.fullname);
+      }
+
     }catch(e){
       console.log(e);
     }
@@ -113,7 +121,8 @@ app.post('/login', async (req, res) => {
       });
 
       res.json({ token,
-                 stock
+                 stock,
+                 auth_level
        });
 
 

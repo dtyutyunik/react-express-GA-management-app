@@ -53,33 +53,30 @@ async function seed() {
       }
     ]);
     //pulls course info so we can attach it later
-    const cs = await Course.findAll();
+    // const cs = await Course.findAll();
+
+
 
     const students = await Student.bulkCreate([
       {
         fullname: 'Shirely Stu',
         email: 'studentemail@gmail.com',
-        phone: '(615)210-6655',
-        course_id: cs[1].id
-
+        phone: '(615)210-6655'
       },
       {
         fullname: 'Stu Davis',
         email: 'student@student.com',
-        phone: '(775)310-0905',
-        course_id: cs[2].id
+        phone: '(775)310-0905'
       },
       {
         fullname: 'James Stu Kurt',
         email: 'stustu@gmail.com',
-        phone: '(935)091-6675',
-        course_id: cs[2].id
+        phone: '(935)091-6675'
       },
       {
         fullname: 'Steven Studens',
         email: 'studens.stu@gmail.com',
-        phone: '(995)330-2105',
-        course_id: cs[3].id
+        phone: '(995)330-2105'
       }
     ]);
 
@@ -89,29 +86,25 @@ async function seed() {
         fullname: 'Maggie Reams',
         email: 'maggie@mags.com',
         phone: '(775)501-6677',
-        title: 'Lead Instructor',
-        course_id: cs[0].id
+        title: 'Lead Instructor'
       },
       {
         fullname: 'Bob Hamm',
         email: 'bobbyhammy@gmail.com',
         phone: '(775)601-6337',
-        title: 'Lead Instructor',
-        course_id: cs[1].id
+        title: 'Lead Instructor'
       },
       {
         fullname: 'Dylan Grant',
         email: 'd.grant@comcast.net',
         phone: '(775)950-3732',
-        title: 'Teaching Assistant',
-        course_id: cs[2].id
+        title: 'Teaching Assistant'
       },
       {
         fullname: 'John Michaels',
         email: 'michael@gmail.com',
         phone: '(890)444-6677',
-        title: 'Teaching Assistant',
-        course_id: cs[3].id
+        title: 'Teaching Assistant'
       }
     ]);
 
@@ -125,15 +118,17 @@ async function seed() {
   process.exit();
 }
 
-async function InstructorLinkCourse(locations){
+async function studentCourse(){
 try{
-  let pull=await Instructor.findByPk(1);
+  const students= await Student.findAll();
 
-  console.log(pull.dataValues);
-  // let coursepull= await Course.findByPk(1);
-  // console.log(coursepull.dataValues);
+  const courses= await Course.findAll();
+  // console.log(courses.length);
+  await Promise.all(courses.map(async co=>{
+    // console.log(co.id);
+    return await co.addStudent(students[co.id - 1]);
+  }))
 
-  // Instructor.addCourse(coursepull);
 }
   catch(e){
     console.log(e);
@@ -142,5 +137,28 @@ try{
 
 }
 
-seed();
-// InstructorLinkCourse(1);
+async function instructorCourse(){
+  try{
+    const instructors= await Instructor.findAll();
+    console.log(instructors[1].dataValues);
+
+    const courses= await Course.findAll();
+
+  await Promise.all(instructors.map(async inst=>{
+    return await inst.setCourse(courses[inst.id-1])
+  }))
+
+
+  }catch(e){
+    console.log(e);
+  }
+  process.exit();
+}
+
+function mainRunner(){
+  seed();
+  // studentCourse();
+  // instructorCourse();
+}
+
+mainRunner();

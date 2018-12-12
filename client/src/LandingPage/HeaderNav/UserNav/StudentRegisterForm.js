@@ -1,7 +1,9 @@
 import React from 'react';
-import { Icon, Message,  Form, Input, Button } from 'antd';
+import { Icon, message,  Form, Input, Button } from 'antd';
+import axios from 'axios';
 // form for student to register
 // code snippet imported from ant design
+const BASE_URL = "http://localhost:3001";
 class StudentRegisterForm extends React.Component {
     constructor(props) {
         super(props);
@@ -11,22 +13,30 @@ class StudentRegisterForm extends React.Component {
     async handleRegisterSubmit(e) {
         //stop default, start the api request
         e.preventDefault();
-        this.props.form.validateFields((err, formData) => {
+        this.props.form.validateFields(async (err, formData) => {
             if (!err) {
-                console.log('Received values of form: ', formData);
+              const formDataReq = {
+                fullname: formData.fullname,
+                username: formData.username,
+                password: formData.password,
+                "auth_level": 'student'
+              }
                 //start the registration request
-                // const response = await
-                //     if (response) {
-                //         message.success("successful registered");
-                //         //set modal to disappear
-                //         this.props.setModalVisible(false);
-             }
+              console.log('Received values of form: ', formDataReq);
+              const response = await axios.post(`${BASE_URL}/users/students`, formDataReq);
+              console.log(response.data.user);
+                 if (response) {
+                       message.success(`${response.data.user.username}successfully registered`);
+                       //set modal to disappear
+                       this.props.setModalVisible(false)
+              }
+            }
         })
     }
     //check if the passwords are correctly matched
     checkPassword(rule, value, callback) {
         const form = this.props.form;
-        if (value && value !== form.getFieldValue('r_password')) {
+        if (value && value !== form.getFieldValue('password')) {
             callback('two passwords are not matched!');
         } else {
             callback();
@@ -36,7 +46,7 @@ class StudentRegisterForm extends React.Component {
     checkConfirm(rule, value, callback) {
         const form = this.props.form;
         if (value && this.state.confirmDirty) {
-            form.validateFields(['r_confirmPassword'], {force: true});
+            form.validateFields(['confirmPassword'], {force: true});
         }
         callback();
     }
@@ -46,7 +56,7 @@ class StudentRegisterForm extends React.Component {
         return (
             <Form onSubmit={this.handleRegisterSubmit.bind(this)}>
                 <Form.Item label="full name">
-                    {getFieldDecorator('r_fullName', {
+                    {getFieldDecorator('fullname', {
                         rules: [{required: true, message: 'Please enter your full name'}],
                     })
                     (<Input
@@ -55,7 +65,7 @@ class StudentRegisterForm extends React.Component {
                         placeholder='Please enter your full name'/>)}
                 </Form.Item>
                 <Form.Item label="account username">
-                    {getFieldDecorator('r_userName', {
+                    {getFieldDecorator('username', {
                         rules: [{required: true, message: 'Please enter your username'}],
                     })
                     (<Input
@@ -65,7 +75,7 @@ class StudentRegisterForm extends React.Component {
                 </Form.Item>
 
                 <Form.Item label="password">
-                    {getFieldDecorator('r_password', {
+                    {getFieldDecorator('password', {
                         rules: [{required: true,
                                  message: 'Please enter your password'}, {
                                  validator: this.checkConfirm.bind(this),
@@ -78,7 +88,7 @@ class StudentRegisterForm extends React.Component {
                 </Form.Item>
 
                 <Form.Item label="confirm password">
-                    {getFieldDecorator('r_confirmPassword', {
+                    {getFieldDecorator('confirmPassword', {
                         rules: [{
                             required: true, message: 'Please confirm password!',
                         }, {

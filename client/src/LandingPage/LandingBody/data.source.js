@@ -9,10 +9,10 @@ export const Nav00DataSource = {
   Menu: {
     className: 'header0-menu',
     children: [
-      { name: 'item0', a: { children: '导航一', href: '' } },
-      { name: 'item1', a: { children: '导航二', href: '' } },
-      { name: 'item2', a: { children: '导航三', href: '' } },
-      { name: 'item3', a: { children: '导航四', href: '' } },
+      { name: 'item0', a: { children: 'Nav One', href: '' } },
+      { name: 'item1', a: { children: 'Nav Two', href: '' } },
+      { name: 'item2', a: { children: 'Nav Three', href: '' } },
+      { name: 'item3', a: { children: 'Nav Four', href: '' } },
     ],
   },
   mobileMenu: { className: 'header0-mobile-menu' },
@@ -44,7 +44,7 @@ export const Content00DataSource = {
   OverPack: { playScale: 0.3, className: '' },
   titleWrapper: {
     className: 'title-wrapper',
-    children: [{ name: 'title', children: '产品与服务' }],
+    children: [{ name: 'title', children: 'Courses and Service' }],
   },
   block: {
     className: 'block-wrapper',
@@ -60,8 +60,8 @@ export const Content00DataSource = {
             children:
               'https://zos.alipayobjects.com/rmsportal/WBnVOjtIlGWbzyQivuyq.png',
           },
-          title: { className: 'content0-title', children: '一站式业务接入' },
-          content: { children: '支付、结算、核算接入产品效率翻四倍' },
+          title: { className: 'content0-title', children: 'Guarantee' },
+          content: { children: 'No matter how you choose to pay, you’ll still get a job or your money back.' },
         },
       },
       {
@@ -77,9 +77,10 @@ export const Content00DataSource = {
           },
           title: {
             className: 'content0-title',
-            children: '一站式事中风险监控',
+            children: '60-80 Hours',
           },
-          content: { children: '在所有需求配置环节事前风险控制和质量控制能力' },
+          content: { children: `60-80 hours a week of intensive bootcamp-style
+             learning means your new career is your only goal. Graduate in five months.` },
         },
       },
       {
@@ -93,8 +94,9 @@ export const Content00DataSource = {
             children:
               'https://zos.alipayobjects.com/rmsportal/EkXWVvAaFJKCzhMmQYiX.png',
           },
-          title: { className: 'content0-title', children: '一站式数据运营' },
-          content: { children: '沉淀产品接入效率和运营小二工作效率数据' },
+          title: { className: 'content0-title', children: 'Structured' },
+          content: { children: `A daily timeline means defined structure,
+            accountability, proven focus and increasing skills` },
         },
       },
     ],
@@ -108,11 +110,20 @@ export const Content10DataSource = {
     children: 'https://zos.alipayobjects.com/rmsportal/nLzbeGQLPyBJoli.png',
   },
   textWrapper: { className: 'content1-text', md: 14, xs: 24 },
-  title: { className: 'content1-title', children: '企业资源管理' },
+  title: { className: 'content1-title', children: 'IMMERSIVE STUDENT LIFE' },
   content: {
     className: 'content1-content',
     children:
-      '云资源集中编排、弹性伸缩、持续发布和部署，高可用及容灾。云资源集中编排、弹性伸缩、持续发布和部署，高可用及容灾。云资源集中编排、弹性伸缩、持续发布和部署，高可用及容灾。',
+      `Our class had a diverse mix of students - from a
+      twenty-year-old entrepreneur deferring a semester
+      from Northwestern to a mid-career finance trader
+      looking for a career change. It was refreshing to
+      participate in an authentically collaborative
+      atmosphere that moved away from a traditional
+      academic structure. I can honestly say I learned
+      a ton - from computer science fundamentals, to
+      front-end web animation, to how to be a professional
+      in a tech environment.`,
   },
 };
 export const Content30DataSource = {
@@ -124,13 +135,13 @@ export const Content30DataSource = {
     children: [
       {
         name: 'title',
-        children: '蚂蚁金融云提供专业的服务',
+        children: 'Welcome All',
         className: 'title-h1',
       },
       {
         name: 'content',
         className: 'title-content',
-        children: '基于阿里云强大的基础资源',
+        children: '',
       },
     ],
   },
@@ -149,11 +160,11 @@ export const Content30DataSource = {
               'https://zos.alipayobjects.com/rmsportal/ScHBSdwpTkAHZkJ.png',
           },
           textWrapper: { className: 'content3-text' },
-          title: { className: 'content3-title', children: '企业资源管理' },
+          title: { className: 'content3-title', children: '' },
           content: {
             className: 'content3-content',
             children:
-              '云资源集中编排、弹性伸缩、持续发布和部署，高可用及容灾。',
+              '',
           },
         },
       },
@@ -169,11 +180,11 @@ export const Content30DataSource = {
               'https://zos.alipayobjects.com/rmsportal/NKBELAOuuKbofDD.png',
           },
           textWrapper: { className: 'content3-text' },
-          title: { className: 'content3-title', children: '云安全' },
+          title: { className: 'content3-title', children: '' },
           content: {
             className: 'content3-content',
             children:
-              '按金融企业安全要求打造的完整云上安全体系，全方位保障金融应用及数据安全。',
+              '',
           },
         },
       },
@@ -189,11 +200,11 @@ export const Content30DataSource = {
               'https://zos.alipayobjects.com/rmsportal/xMSBjgxBhKfyMWX.png',
           },
           textWrapper: { className: 'content3-text' },
-          title: { className: 'content3-title', children: '云监控' },
+          title: { className: 'content3-title', children: '' },
           content: {
             className: 'content3-content',
             children:
-              '分布式云环境集中监控，统一资源及应用状态视图，智能分析及故障定位。',
+              '',
           },
         },
       },
@@ -209,11 +220,11 @@ export const Content30DataSource = {
               'https://zos.alipayobjects.com/rmsportal/MNdlBNhmDBLuzqp.png',
           },
           textWrapper: { className: 'content3-text' },
-          title: { className: 'content3-title', children: '移动' },
+          title: { className: 'content3-title', children: '' },
           content: {
             className: 'content3-content',
             children:
-              '一站式移动金融APP开发及全面监控；丰富可用组件，动态发布和故障热修复。',
+              '',
           },
         },
       },
@@ -229,11 +240,11 @@ export const Content30DataSource = {
               'https://zos.alipayobjects.com/rmsportal/UsUmoBRyLvkIQeO.png',
           },
           textWrapper: { className: 'content3-text' },
-          title: { className: 'content3-title', children: '分布式中间件' },
+          title: { className: 'content3-title', children: '' },
           content: {
             className: 'content3-content',
             children:
-              '金融级联机交易处理中间件，大规模分布式计算机，数万笔/秒级并发能力，严格保证交易数据统一性。',
+              '',
           },
         },
       },
@@ -249,11 +260,11 @@ export const Content30DataSource = {
               'https://zos.alipayobjects.com/rmsportal/ipwaQLBLflRfUrg.png',
           },
           textWrapper: { className: 'content3-text' },
-          title: { className: 'content3-title', children: '大数据' },
+          title: { className: 'content3-title', children: '' },
           content: {
             className: 'content3-content',
             children:
-              '一站式、全周期大数据协同工作平台，PB级数据处理、毫秒级数据分析工具。',
+              '',
           },
         },
       },

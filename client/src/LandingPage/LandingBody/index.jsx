@@ -1,5 +1,6 @@
 /* eslint no-undef: 0 */
 /* eslint arrow-parens: 0 */
+// template import from https://landing.ant.design/templates/#uid=5c107d6f67f35600669b0386
 import React from 'react';
 import { enquireScreen } from 'enquire-js';
 

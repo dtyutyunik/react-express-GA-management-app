@@ -1,4 +1,4 @@
-// some code snippet imported from ant design
+// some code snippets imported from ant design
 import React from 'react';
 import { Tabs, Modal } from 'antd';
 import WrapStudentRegisterForm from './StudentRegisterForm';
@@ -14,12 +14,11 @@ export default class LoginRegisterModal extends React.Component {
     handleCancel() {
         this.props.setModalVisible(false);
     }
-    toggleToSignup() {
+    toggleToSignupTab() {
       // mimic clicking on the different signup Tab and toggle between TabPanes
-      
+
     }
     render(){
-
         return(
             <Modal title="Welcome To Bootcamp"
                    visible={this.props.visible}
@@ -32,6 +31,7 @@ export default class LoginRegisterModal extends React.Component {
                         <WrappedLoginForm
                           login={this.props.login}
                           setModalVisible={this.props.setModalVisible}
+                          toggleToSignupTab={this.toggleToSignupTab.bind(this)}
                           />
                     </Tabs.TabPane>
                     <Tabs.TabPane

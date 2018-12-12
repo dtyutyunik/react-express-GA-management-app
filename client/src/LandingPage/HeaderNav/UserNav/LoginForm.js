@@ -45,9 +45,10 @@ class LoginForm extends React.Component {
                         message: 'Please input your username!'
                       }],
               })(
-                 <Input prefix={<Icon type="user"
-                                       style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                       placeholder="Username"/>
+                 <Input prefix=
+                   {<Icon type="user"
+                          style={{color: 'rgba(0,0,0,.25)'}}/>}
+                          placeholder="Username"/>
                   )}
             </Form.Item>
             <Form.Item>
@@ -57,9 +58,10 @@ class LoginForm extends React.Component {
                       message: 'Please input your Password!'
                       }],
                   })(
-                  <Input prefix={<Icon type="lock"
-                                       style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                       type="password" placeholder="Password"/>
+                  <Input prefix=
+                   {<Icon type="lock"
+                          style={{color: 'rgba(0,0,0,.25)'}}/>}
+                          type="password" placeholder="Password"/>
                     )}
             </Form.Item>
             <Form.Item>
@@ -78,12 +80,12 @@ class LoginForm extends React.Component {
                 </Form.Item>
               <Form.Item>
                 <Button type="primary"
-                        toggleToStudentSignup={this.props.toggleToStudentSignup}
+                        onClick={this.props.toggleToSignupTab('student')}
                 > Student Signup </Button>
               </Form.Item>
               <Form.Item>
                 <Button type="primary"
-                        toggleToInsSignup={this.props.toggleToInsSignup}
+                        onClick={this.props.toggleToSignupTab('instructor')}
                 > Instructor Signup </Button>
               </Form.Item>
             </Form>

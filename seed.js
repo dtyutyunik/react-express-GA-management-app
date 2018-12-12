@@ -215,11 +215,11 @@ async function studentUser(){
 
 
 function mainRunner(){
-  // seed();
+  seed();
   // studentCourse();
   // instructorCourse();
   // instructorUser();
-  studentUser();
+  // studentUser();
 }
 
 mainRunner();

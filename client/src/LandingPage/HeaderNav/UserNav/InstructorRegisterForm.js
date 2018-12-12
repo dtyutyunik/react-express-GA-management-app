@@ -26,7 +26,7 @@ class InstructorRegisterForm extends React.Component {
     //check if the passwords are correctly matched
     checkPassword(rule, value, callback) {
         const form = this.props.form;
-        if (value && value !== form.getFieldValue('r_password')) {
+        if (value && value !== form.getFieldValue('password')) {
             callback('two passwords are not matched!');
         } else {
             callback();
@@ -36,17 +36,38 @@ class InstructorRegisterForm extends React.Component {
     checkConfirm(rule, value, callback) {
         const form = this.props.form;
         if (value && this.state.confirmDirty) {
-            form.validateFields(['r_confirmPassword'], {force: true});
+            form.validateFields(['confirmPassword'], {force: true});
         }
         callback();
+    }
+    // if there is any kind of err such as value not equal to "general"
+    // then the form won't go through
+    // the final auth code will be generate by admin for one time use
+    // the auth code is used for once then will be discarded
+    checkAuthCode(rule, value, callback) {
+      const form = this.props.form;
+      if (value === "general") {
+        callback('auth correct');
+      } else {
+        callback('auth code not correct');
+      }
     }
 
     render() {
         let {getFieldDecorator} = this.props.form;
         return (
             <Form onSubmit={this.handleRegisterSubmit.bind(this)}>
-                <Form.Item lable="Account">
-                    {getFieldDecorator('r_userName', {
+                <Form.Item label="full name">
+                    {getFieldDecorator('fullName', {
+                        rules: [{required: true, message: 'Please enter your full name'}],
+                    })
+                    (<Input
+                        prefix={<Icon type="user"
+                                      style={{color: 'rgba(0,0,0,.25)'}}/>}
+                        placeholder='Please enter your full name'/>)}
+                </Form.Item>
+                <Form.Item label="account username">
+                    {getFieldDecorator('userName', {
                         rules: [{
                            required: true,
                            message: 'Please enter your username'
@@ -57,8 +78,8 @@ class InstructorRegisterForm extends React.Component {
                                       style={{color: 'rgba(0,0,0,.25)'}}/>}
                                       placeholder='Please enter your username'/>)}
                 </Form.Item>
-                <Form.Item lable="password">
-                    {getFieldDecorator('r_password', {
+                <Form.Item label="password">
+                    {getFieldDecorator('password', {
                         rules: [{required: true, message: 'Please enter your password'}, {
                             validator: this.checkConfirm.bind(this),
                         }],
@@ -70,8 +91,8 @@ class InstructorRegisterForm extends React.Component {
                                             />)}
                 </Form.Item>
 
-                <Form.Item lable="confirmpassword">
-                    {getFieldDecorator('r_confirmPassword', {
+                <Form.Item label="confirmpassword">
+                    {getFieldDecorator('confirmPassword', {
                         rules: [{
                             required: true, message: 'Please confirm password!',
                         }, {
@@ -84,7 +105,18 @@ class InstructorRegisterForm extends React.Component {
                                              placeholder='please enter password again'/>
                     )}
                 </Form.Item>
-
+                <Form.Item label="auth code">
+                    {getFieldDecorator('authcode', {
+                        rules: [{required: true, message: 'Please enter the auth code'}, {
+                            validator: this.checkAuthCode.bind(this),
+                        }],
+                    })(
+                        <Input prefix={<Icon type="lock"
+                                             style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                             type='auth_code'
+                                             placeholder='Please enter the auth code'
+                                            />)}
+                </Form.Item>
                 <Form.Item>
                     <Button type='primary'
                             htmlType='submit'>Register</Button>

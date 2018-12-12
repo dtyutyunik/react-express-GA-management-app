@@ -434,6 +434,27 @@ app.put('/courses/:id', async(req,res)=>{
 
 });
 
+//lets students register to a course
+app.put('/course/:id/student/:stuid', async(req,res)=>{
+  try{
+    const getCourse= await Course.findOne({where: {id: req.params.id}})
+
+    const isStudentRegistered= await Student.findOne({where:{id: req.params.stuid}});
+    if(!isStudentRegistered.course_id && getCourse.capacity>0){
+      getCourse.capacity=getCourse.capacity-1;
+      await getCourse.save();
+      isStudentRegistered.course_id=req.params.id;
+      await isStudentRegistered.save();
+      res.json(isStudentRegistered);
+    }else{
+      res.json("Course is at capacity or student already registered for a course");
+    }
+
+  }catch(e){
+    res.status(500).json({e:e.message});
+  }
+  process.exit();
+});
 
 app.listen(PORT, () => {
   console.log('up and ATOM!!')

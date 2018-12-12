@@ -151,7 +151,7 @@ app.get('/students',  async(req,res) => {
   }
 });
 
-
+//reflects all info about instructors
 app.get('/instructors', async(req,res) => {
   try{
     const instructorList = await Instructor.findAll({});
@@ -184,6 +184,7 @@ app.get('/students/:id',  async(req,res) => {
   }
 });
 
+//one instrcuctor info
 app.get('/instructors/:id',  async(req,res) => {
   try{
     const instone = await Instructor.findByPk(req.params.id);
@@ -217,15 +218,17 @@ const studentpost = await Student.create(req.body);
   }
 });
 
-app.post('/instructors', async (req,res) => {
-try{
-const instructorpost = await Instructor.create(req.body);
-  res.json(instructorpost);
-}catch (e){
-  console.log(e);
-  res.status(500).json({msg:e.message});
-  }
-});
+// Will be used for admin purposes if implemented post mvp
+
+// app.post('/instructors', async (req,res) => {
+// try{
+// const instructorpost = await Instructor.create(req.body);
+//   res.json(instructorpost);
+// }catch (e){
+//   console.log(e);
+//   res.status(500).json({msg:e.message});
+//   }
+// });
 
 
 app.post('/courses', async (req,res) => {
@@ -256,20 +259,21 @@ app.delete('/students/:id', async (req,res) => {
   }
 });
 
-app.delete('/instructors/:id', async (req,res) => {
-  try{
-    const id = req.params.id;
-    const destroyinst = await Instructor.destroy({
-      where:{
-        id: id
-      }
-    })
-    res.json(destroyinst);
-  }catch (e){
-      console.log(e);
-      res.status(500).json({msg:e.message});
-  }
-});
+//will be used for admin purposes post mvp
+// app.delete('/instructors/:id', async (req,res) => {
+//   try{
+//     const id = req.params.id;
+//     const destroyinst = await Instructor.destroy({
+//       where:{
+//         id: id
+//       }
+//     })
+//     res.json(destroyinst);
+//   }catch (e){
+//       console.log(e);
+//       res.status(500).json({msg:e.message});
+//   }
+// });
 
 app.delete('/courses/:id', async (req,res) => {
   try{
@@ -307,16 +311,47 @@ app.put('/instructors/:id', async(req,res)=>{
   try{
 
     const instinfo= await Instructor.findByPk(req.params.id);
+    const userFullNameUpdate= await User.findOne({where:{fullname: instinfo.fullname}});
     instinfo.fullname=req.body.fullname;
-    instinfo.phone=req.body.phone;
-    instinfo.email=req.body.email;
+    instinfo.phone?instinfo.phone=req.body.phone:instinfo.phone=instinfo.phone;
+    instinfo.email?instinfo.email=req.body.email:instinfo.email=instinfo.email;
+    userFullNameUpdate.fullname=instinfo.fullname;
+    userFullNameUpdate.save();
     instinfo.save();
+
     res.json(instinfo);
 
   }catch(e){
     res.status(500).json({message:e.message});
   }
 
+});
+
+//gets courses that instructor teaches
+app.get('/instructors/:id/courses',async(req,res)=>{
+    try{
+      const courseTeach= await Course.findOne({where:{instructor_id: req.params.id}});
+      res.json(courseTeach);
+    }catch(e){
+      res.status(500).json({e:e.message});
+    }
+    process.exit();
+});
+
+//gets students that instructor teaches
+app.get('/instructors/:id/students',async(req,res)=>{
+  try{
+    const getStudents= await Student.findAll({where:{course_id: studentTeach.id}});
+      // const studentTeach= await Course.findOne(
+      //   {where:{instructor_id: req.params.id}},
+      // include: getStudents);
+      // res.json(studentTeach);
+
+      res.json(studentTeach);
+  }catch(e){
+    res.status(500).json({e:e.message});
+  }
+  process.exit();
 });
 
 app.put('/courses/:id', async(req,res)=>{

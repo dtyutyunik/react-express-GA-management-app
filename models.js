@@ -46,24 +46,16 @@ User.beforeCreate((user, options) => {
 });
 
 
-
-
-//correct
 Student.belongsTo(Course);
 Course.hasMany(Student);
 
 Course.belongsTo(Instructor);
 Instructor.hasOne(Course);
 
-
-
-// Instructor.hasMany(Student);
-User.hasMany(Instructor);
-User.hasMany(Student);
-
-
-
-
+User.hasOne(Instructor);
+User.hasOne(Student);
+Instructor.belongsTo(User);
+Student.belongsTo(User);
 
 
 module.exports = {

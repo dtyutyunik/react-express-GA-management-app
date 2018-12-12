@@ -1,5 +1,6 @@
 const { Course, Student, Instructor, User } = require('./models');
 const moment = require('moment');
+const p = (dao) => console.log(JSON.stringify(dao, null, 2));
 
 async function seed() {
   try {
@@ -53,64 +54,171 @@ async function seed() {
       }
     ]);
 
-    const students = await Student.bulkCreate([
-      {
-        fullname: 'Shirely Stu',
-        email: 'studentemail@gmail.com',
-        phone: '(615)210-6655'
-      },
-      {
-        fullname: 'Stu Davis',
-        email: 'student@student.com',
-        phone: '(775)310-0905'
-      },
-      {
-        fullname: 'James Stu Kurt',
-        email: 'stustu@gmail.com',
-        phone: '(935)091-6675'
-      },
-      {
-        fullname: 'Steven Studens',
-        email: 'studens.stu@gmail.com',
-        phone: '(995)330-2105'
-      }
-    ]);
-
-
-    const instructors = await Instructor.bulkCreate([
-      {
-        fullname: 'Maggie Reams',
-        email: 'maggie@mags.com',
-        phone: '(775)501-6677',
-        title: 'Lead Instructor'
-      },
-      {
-        fullname: 'Bob Hamm',
-        email: 'bobbyhammy@gmail.com',
-        phone: '(775)601-6337',
-        title: 'Lead Instructor'
-      },
-      {
-        fullname: 'Dylan Grant',
-        email: 'd.grant@comcast.net',
-        phone: '(775)950-3732',
-        title: 'Teaching Assistant'
-      },
-      {
-        fullname: 'John Michaels',
-        email: 'michael@gmail.com',
-        phone: '(890)444-6677',
-        title: 'Teaching Assistant'
-      }
-    ]);
-
-
   }
   catch(e) {
     console.error(e);
   }
   process.exit();
 }
+
+
+async function createStudentUser(){
+
+try{
+  const dummyStudent1= await User.create({
+    fullname: 'Shirely Stu',
+    username: 'Shirley',
+    password: 'Shirley',
+    auth_level: 'student',
+    student : {
+      fullname: 'Shirely Stu',
+      email: 'studentemail@gmail.com',
+      phone: '(615)210-6655'
+    }},
+    {
+      include: [{
+        model: Student
+      }]
+    });
+
+    const dummyStudent2= await User.create({
+      fullname: 'Stu Davis',
+      username: 'Stu',
+      password: 'Stu',
+      auth_level: 'student',
+      student :   {
+          fullname: 'Stu Davis',
+          email: 'student@student.com',
+          phone: '(775)310-0905'
+        }},
+      {
+        include: [{
+          model: Student
+        }]
+      });
+
+      const dummyStudent3= await User.create({
+        fullname: 'James Stu Kurt',
+        username: 'James',
+        password: 'James',
+        auth_level: 'student',
+        student :   {
+            fullname: 'James Stu Kurt',
+            email: 'stustu@gmail.com',
+            phone: '(935)091-6675'
+          }},
+        {
+          include: [{
+            model: Student
+          }]
+        });
+
+        const dummyStudent4= await User.create({
+          fullname: 'Steven Studens',
+          username: 'Steven',
+          password: 'Steven',
+          auth_level: 'student',
+          student :       {
+                fullname: 'Steven Studens',
+                email: 'studens.stu@gmail.com',
+                phone: '(995)330-2105'
+              }},
+          {
+            include: [{
+              model: Student
+            }]
+          });
+}
+catch(e){
+  console.log(e);
+}
+
+process.exit();
+
+}
+
+async function createInstructorUser(){
+
+
+try{
+
+  const dummyInstructor1= await User.create({
+    fullname: 'Maggie Reams',
+    username: 'Maggie',
+    password: 'Maggie',
+    auth_level: 'instructor',
+    instructor :     {
+          fullname: 'Maggie Reams',
+          email: 'maggie@mags.com',
+          phone: '(775)501-6677',
+          title: 'Lead Instructor'
+        }},
+    {
+      include: [{
+        model: Instructor
+      }]
+    });
+
+    const dummyInstructor2= await User.create({
+      fullname: 'Bob Hamm',
+      username: 'Bob',
+      password: 'Bob',
+      auth_level: 'instructor',
+      instructor :     {
+          fullname: 'Bob Hamm',
+          email: 'bobbyhammy@gmail.com',
+          phone: '(775)601-6337',
+          title: 'Lead Instructor'
+        }},
+      {
+        include: [{
+          model: Instructor
+        }]
+      });
+
+      const dummyInstructor3= await User.create({
+        fullname: 'Dylan Grant',
+        username: 'Dylan',
+        password: 'Dylan',
+        auth_level: 'instructor',
+        instructor :     {
+            fullname: 'Dylan Grant',
+            email: 'd.grant@comcast.net',
+            phone: '(775)950-3732',
+            title: 'Teaching Assistant'
+          }},
+        {
+          include: [{
+            model: Instructor
+          }]
+        });
+
+        const dummyInstructor4= await User.create({
+          fullname: 'John Michaels',
+          username: 'John',
+          password: 'John',
+          auth_level: 'instructor',
+          instructor :       {
+             fullname: 'John Michaels',
+             email: 'michael@gmail.com',
+             phone: '(890)444-6677',
+             title: 'Teaching Assistant'
+           }},
+          {
+            include: [{
+              model: Instructor
+            }]
+          });
+
+}
+catch(e){
+  console.log(e);
+}
+
+  process.exit();
+
+}
+
 
 async function studentCourse(){
 try{
@@ -144,6 +252,7 @@ async function instructorCourse(){
   }
   process.exit();
 }
+
 
 
 async function instructorUser(){
@@ -196,13 +305,18 @@ async function studentUser(){
   process.exit();
 }
 
+
 // for mainRunner run each line one at a time
 function mainRunner(){
   // seed();
   // studentCourse();
-  // instructorCourse();
-  // instructorUser();
-  // studentUser();
+
+  instructorCourse();
+
+
+  // createStudentUser();
+  // createInstructorUser();
+
 }
 
 mainRunner();

@@ -1,5 +1,6 @@
 const { Course, Student, Instructor, User } = require('./models');
 const moment = require('moment');
+const p = (dao) => console.log(JSON.stringify(dao, null, 2));
 
 async function seed() {
   try {
@@ -52,62 +53,6 @@ async function seed() {
 
       }
     ]);
-    //pulls course info so we can attach it later
-    // const cs = await Course.findAll();
-
-
-
-    const students = await Student.bulkCreate([
-      {
-        fullname: 'Shirely Stu',
-        email: 'studentemail@gmail.com',
-        phone: '(615)210-6655'
-      },
-      {
-        fullname: 'Stu Davis',
-        email: 'student@student.com',
-        phone: '(775)310-0905'
-      },
-      {
-        fullname: 'James Stu Kurt',
-        email: 'stustu@gmail.com',
-        phone: '(935)091-6675'
-      },
-      {
-        fullname: 'Steven Studens',
-        email: 'studens.stu@gmail.com',
-        phone: '(995)330-2105'
-      }
-    ]);
-
-
-    const instructors = await Instructor.bulkCreate([
-      {
-        fullname: 'Maggie Reams',
-        email: 'maggie@mags.com',
-        phone: '(775)501-6677',
-        title: 'Lead Instructor'
-      },
-      {
-        fullname: 'Bob Hamm',
-        email: 'bobbyhammy@gmail.com',
-        phone: '(775)601-6337',
-        title: 'Lead Instructor'
-      },
-      {
-        fullname: 'Dylan Grant',
-        email: 'd.grant@comcast.net',
-        phone: '(775)950-3732',
-        title: 'Teaching Assistant'
-      },
-      {
-        fullname: 'John Michaels',
-        email: 'michael@gmail.com',
-        phone: '(890)444-6677',
-        title: 'Teaching Assistant'
-      }
-    ]);
-
 
 
 
@@ -118,15 +63,172 @@ async function seed() {
   process.exit();
 }
 
+
+async function createStudentUser(){
+
+try{
+  const dummyStudent1= await User.create({
+    fullname: 'Shirely Stu',
+    username: 'Shirley',
+    password: 'Shirley',
+    auth_level: 'student',
+    student : {
+      fullname: 'Shirely Stu',
+      email: 'studentemail@gmail.com',
+      phone: '(615)210-6655'
+    }},
+    {
+      include: [{
+        model: Student
+      }]
+    });
+
+    const dummyStudent2= await User.create({
+      fullname: 'Stu Davis',
+      username: 'Stu',
+      password: 'Stu',
+      auth_level: 'student',
+      student :   {
+          fullname: 'Stu Davis',
+          email: 'student@student.com',
+          phone: '(775)310-0905'
+        }},
+      {
+        include: [{
+          model: Student
+        }]
+      });
+
+      const dummyStudent3= await User.create({
+        fullname: 'James Stu Kurt',
+        username: 'James',
+        password: 'James',
+        auth_level: 'student',
+        student :   {
+            fullname: 'James Stu Kurt',
+            email: 'stustu@gmail.com',
+            phone: '(935)091-6675'
+          }},
+        {
+          include: [{
+            model: Student
+          }]
+        });
+
+        const dummyStudent4= await User.create({
+          fullname: 'Steven Studens',
+          username: 'Steven',
+          password: 'Steven',
+          auth_level: 'student',
+          student :       {
+                fullname: 'Steven Studens',
+                email: 'studens.stu@gmail.com',
+                phone: '(995)330-2105'
+              }},
+          {
+            include: [{
+              model: Student
+            }]
+          });
+}
+catch(e){
+  console.log(e);
+}
+
+process.exit();
+
+}
+
+async function createInstructorUser(){
+
+try{
+
+  const dummyInstructor1= await User.create({
+    fullname: 'Maggie Reams',
+    username: 'Maggie',
+    password: 'Maggie',
+    auth_level: 'instructor',
+    instructor :     {
+          fullname: 'Maggie Reams',
+          email: 'maggie@mags.com',
+          phone: '(775)501-6677',
+          title: 'Lead Instructor'
+        }},
+    {
+      include: [{
+        model: Instructor
+      }]
+    });
+
+    const dummyInstructor2= await User.create({
+      fullname: 'Bob Hamm',
+      username: 'Bob',
+      password: 'Bob',
+      auth_level: 'instructor',
+      instructor :     {
+          fullname: 'Bob Hamm',
+          email: 'bobbyhammy@gmail.com',
+          phone: '(775)601-6337',
+          title: 'Lead Instructor'
+        }},
+      {
+        include: [{
+          model: Instructor
+        }]
+      });
+
+      const dummyInstructor3= await User.create({
+        fullname: 'Dylan Grant',
+        username: 'Dylan',
+        password: 'Dylan',
+        auth_level: 'instructor',
+        instructor :     {
+            fullname: 'Dylan Grant',
+            email: 'd.grant@comcast.net',
+            phone: '(775)950-3732',
+            title: 'Teaching Assistant'
+          }},
+        {
+          include: [{
+            model: Instructor
+          }]
+        });
+
+        const dummyInstructor4= await User.create({
+          fullname: 'John Michaels',
+          username: 'John',
+          password: 'John',
+          auth_level: 'instructor',
+          instructor :       {
+             fullname: 'John Michaels',
+             email: 'michael@gmail.com',
+             phone: '(890)444-6677',
+             title: 'Teaching Assistant'
+           }},
+          {
+            include: [{
+              model: Instructor
+            }]
+          });
+
+}
+catch(e){
+  console.log(e);
+}
+
+  process.exit();
+
+}
+
+
 async function studentCourse(){
 try{
   const students= await Student.findAll();
 
   const courses= await Course.findAll();
-  // console.log(courses.length);
-  await Promise.all(courses.map(async co=>{
-    // console.log(co.id);
-    return await co.addStudent(students[co.id - 1]);
+
+  await Promise.all(courses.map(async course=>{
+    return await course.addStudent(students[course.id - 1]);
   }))
 
 }
@@ -140,15 +242,12 @@ try{
 async function instructorCourse(){
   try{
     const instructors= await Instructor.findAll();
-    console.log(instructors[1].dataValues);
-
     const courses= await Course.findAll();
 
-  await Promise.all(instructors.map(async inst=>{
-    return await inst.setCourse(courses[inst.id-1])
+  await Promise.all(instructors.map(async instructor=>{
+    return await instructor.setCourse(courses[instructor.id-1])
   }))
 
-
   }catch(e){
     console.log(e);
   }
@@ -156,70 +255,16 @@ async function instructorCourse(){
 }
 
 
-async function instructorUser(){
-  try{
-    const instructors= await Instructor.findAll();
 
-    const instrcutorC=await User.bulkCreate(
-      instructors.map((e) => {
-        return {fullname: e.dataValues.fullname,
-        username: e.dataValues.fullname,
-        password: 'la',
-        auth_level: 'instructor'}
-      })
-      );
-
-    const userInfo= await User.findAll();
-    userInfo.map(e=>{
-      console.log(e.dataValues);
-    })
-
-  await Promise.all(userInfo.map((e,index)=>{
-    return e.addInstructor(instructors[index]);
-  }));
-
-  }catch(e){
-    console.log(e);
-  }
-  process.exit();
-}
-
-async function studentUser(){
-  try{
-    const students= await Student.findAll();
-
-    // const studentSeed= await User.bulkCreate(
-    //   students.map((e)=>{
-    //     return {fullname: e.dataValues.fullname,
-    //       username: e.dataValues.fullname,
-    //       password: 'no',
-    //       auth_level: 'student'}
-    //   })
-    // );
-
-    const userInfo= await User.findAll({where: {'auth_level': 'student'}});
-    userInfo.map(e=>{
-      console.log(e.dataValues);
-    })
-
-  await Promise.all(userInfo.map((e,index)=>{
-    return e.addStudent(students[index]);
-  }));
-
-
-  }catch(e){
-    console.log(e);
-  }
-  process.exit();
-}
-
-
+// for mainRunner run each line one at a time
 function mainRunner(){
   // seed();
   // studentCourse();
-  // instructorCourse();
-  // instructorUser();
-  studentUser();
+  instructorCourse();
+
+
+  // createStudentUser();
+  // createInstructorUser();
 }
 
 mainRunner();

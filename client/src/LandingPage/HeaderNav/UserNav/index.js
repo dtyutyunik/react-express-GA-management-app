@@ -20,11 +20,11 @@ export default class UserNav extends React.Component{
             <Menu mode="horizontal"
                   selectedKeys={[this.props.current]}
                   onClick={this.props.menuItemClick}>
-                <Menu.Item key="top">
-                   <Icon type="appstore"/>About Us
-                </Menu.Item>
                 <Menu.Item key="course">
                    <Icon type="appstore"/>Courses
+                </Menu.Item>
+                <Menu.Item key="aboutUs">
+                   <Icon type="appstore"/>About Us
                 </Menu.Item>
                 {userShow}
             </Menu>

@@ -54,8 +54,6 @@ async function seed() {
       }
     ]);
 
-
-
   }
   catch(e) {
     console.error(e);
@@ -140,6 +138,7 @@ process.exit();
 }
 
 async function createInstructorUser(){
+
 
 try{
 
@@ -256,15 +255,68 @@ async function instructorCourse(){
 
 
 
+async function instructorUser(){
+  try{
+    const instructors= await Instructor.findAll();
+
+    const instrcutorC=await User.bulkCreate(
+      instructors.map((e) => {
+        return {fullname: e.dataValues.fullname,
+        username: e.dataValues.fullname,
+        password: 'la',
+        auth_level: 'instructor'}
+      })
+      );
+
+    const userInfo= await User.findAll({where: {'auth_level': 'instructor'}});
+
+    await Promise.all(userInfo.map((e,index)=>{
+      return e.addInstructor(instructors[index]);
+    }));
+
+  }catch(e){
+    console.log(e);
+  }
+  process.exit();
+}
+
+async function studentUser(){
+  try{
+    const students= await Student.findAll();
+
+    const studentSeed= await User.bulkCreate(
+      students.map((e)=>{
+        return {fullname: e.dataValues.fullname,
+          username: e.dataValues.fullname,
+          password: 'no',
+          auth_level: 'student'}
+      })
+    );
+
+    const userInfo= await User.findAll({where: {'auth_level': 'student'}});
+
+  await Promise.all(userInfo.map((e,index)=>{
+    return e.addStudent(students[index]);
+  }));
+
+  }catch(e){
+    console.log(e);
+  }
+  process.exit();
+}
+
+
 // for mainRunner run each line one at a time
 function mainRunner(){
   // seed();
   // studentCourse();
+
   instructorCourse();
 
 
   // createStudentUser();
   // createInstructorUser();
+
 }
 
 mainRunner();

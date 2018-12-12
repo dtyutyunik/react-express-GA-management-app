@@ -11,7 +11,7 @@ export default class HeaderNav extends React.Component {
             hasLogined: false, // to show if Login
             userName: '', //to show username
             userId: '',   //to show id
-            current: 'top',//to show the current clicked nav
+            current: 'course',//to show the current clicked nav
             modalVisable: false, //indicate if the login/register component needs to show
         };
     }

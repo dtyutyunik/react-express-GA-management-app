@@ -47,7 +47,7 @@ class InstructorRegisterForm extends React.Component {
     checkAuthCode(rule, value, callback) {
       const form = this.props.form;
       if (value === "general") {
-        callback();
+        callback('auth correct');
       } else {
         callback('auth code not correct');
       }

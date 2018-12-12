@@ -6,6 +6,7 @@ async function getAllStudents() {
   const response = await axios(`${BASE_URL}/students`);
   return response.data;
 }
+
 async function getOneStudent(id) {
     const response = await axios(`${BASE_URL}/${id}`);
     return response.data;

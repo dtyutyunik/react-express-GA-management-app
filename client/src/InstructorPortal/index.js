@@ -2,7 +2,6 @@ import React from 'react';
 import { Menu, Dropdown, Icon, message} from 'antd';
 import InstructorStudents from './instructorStudents';
 import InstructorCourses from './instructorCourses';
-import InstructorScreen from './InstructorScreen';
 import axios from 'axios';
 import { getAllStudents } from '../services/studentAPIService'
 
@@ -10,11 +9,10 @@ class InstructorPortal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      students: [],
       current: 'user',
       screen: '',
-      students: [],
     }
-    this.getAllStudents = this.getAllStudents.bind(this)
   }
 
   setView = (view) => {
@@ -23,17 +21,17 @@ class InstructorPortal extends React.Component {
     });
   }
 
-  // handleClick = (e) => {
-  //   this.setState({
-  //     screen: e
-  //   });
-  // }
+  async componentDidMount() {
+    await this.getAllStudents();
+  }
 
   async getAllStudents() {
     const response = await getAllStudents();
-    const students = response.data;
+    const students = response;
+    console.log(response);
+    // debugger;
     this.setState({
-      students: students
+      students
     });
   }
 
@@ -41,11 +39,8 @@ class InstructorPortal extends React.Component {
     let content;
     switch (this.state.screen) {
       case 'stu':
-        content = ({props.students.map(eachStudent => (
-          <InstructorStudents
-            name={eachStudent.name}
-            />
-        ))}
+        content = (<InstructorStudents
+                    students = {this.state.students}/>);
       break;
       case 'course':
         content = (<InstructorCourses />);

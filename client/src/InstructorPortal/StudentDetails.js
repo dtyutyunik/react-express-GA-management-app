@@ -6,7 +6,14 @@ import { Table, Icon, Switch, Radio, Form, Divider } from 'antd';
 
   return (
     <div className="item">
-      <div>{props.name}, {props.phone}, {props.email}</div>
+      {props.details.map(e=>{
+      return (<div key={e.id}>
+        <p>Name: {e.fullname}</p>
+        <p>Email: {e.email}</p>
+        <p>Phone: {e.phone}</p>
+        <button>Kick Student Out</button>
+      </div>)
+      })}
     </div>
   )
 }

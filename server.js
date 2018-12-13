@@ -375,7 +375,7 @@ app.get('/instructors/:id/courses',async(req,res)=>{
           required:true,
         }]
       });
-      res.json(courseTeach.course);
+      res.json(courseTeach);
     }catch(e){
       res.status(500).json({e:e.message});
     }
@@ -392,8 +392,7 @@ app.get('/instructors/:id/students',async(req,res)=>{
         required:true,
       }]
     });
-
-
+    if(getinststu){
       const finalstu = await Course.findOne({
         where:{id:getinststu.course.id},
         include:[{
@@ -401,10 +400,14 @@ app.get('/instructors/:id/students',async(req,res)=>{
           required:true,
         }]
       });
-
-
-
       res.json(finalstu);
+    }
+    else{
+      res.json("Issue with pull of students")
+    }
+
+
+
   }catch(e){
     res.status(500).json({e:e.message});
   }

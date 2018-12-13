@@ -26,15 +26,19 @@ class InstructorRegisterForm extends React.Component {
                 console.log('Received values of form: ', formDataReq);
                 //start the registration request
                 const response = await axios.post(`${BASE_URL}/users/instructors`, formDataReq);
-                console.log(response.data.user);
+                console.log(response.data);
 
-                if (response) {
-                    message.success(`Dear ${response.data.user.fullname}, you are successfully registered, you can log in now`);
-                    //set modal to disappear
-                    console.log('set modal to disappear');
-                    this.props.setModalVisible(false);
-                    return response.data.user;
-                }
+                if (response.data.user) {
+                      if (response.data.user.fullname !== undefined) {
+                        message.success(`Dear ${response.data.user.fullname}, you are successfully registered, you can log in now`);
+                        //set modal to disappear
+                        console.log('set modal to disappear');
+                        this.props.setModalVisible(false);
+                        return response.data.user;
+                    }
+                } else {
+                   message.error(`Sorry the username has been taken`);
+               }
              }
         })
     }
@@ -106,7 +110,7 @@ class InstructorRegisterForm extends React.Component {
                                             />)}
                 </Form.Item>
 
-                <Form.Item label="confirmpassword">
+                <Form.Item label="confirm password">
                     {getFieldDecorator('confirmPassword', {
                         rules: [{
                             required: true, message: 'Please confirm password!',

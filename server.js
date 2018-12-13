@@ -8,7 +8,7 @@ const Sequelize = require('sequelize');
 
 
 const { Course, Student, Instructor, User } = require('./models');
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(logger('dev'));
@@ -45,7 +45,7 @@ app.post('/users/students', async (req, res) => {
         });
         res.json({user, token});
     }else{
-        res.json("User taken");
+        res.send("User taken");
         console.log('user taken');
       }
 
@@ -78,7 +78,7 @@ app.post('/users/instructors', async (req, res) => {
         });
         res.json({user, token});
     }else{
-        res.json("User taken");
+        res.send("User taken");
         console.log('user taken');
 
     }
@@ -328,9 +328,7 @@ app.delete('/instructors/:id', async (req,res) => {
 //put routes
 app.put('/students/:id', async(req,res)=>{
   try{
-
     const stuinfo= await Student.findByPk(req.params.id);
-
     const userFullNameUpdate= await User.findOne({where:{fullname: stuinfo.fullname}});
     stuinfo.fullname=req.body.fullname;
     stuinfo.phone?stuinfo.phone=req.body.phone:stuinfo.phone=stuinfo.phone;

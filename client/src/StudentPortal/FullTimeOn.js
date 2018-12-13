@@ -10,7 +10,6 @@ class FullTimeOn extends React.Component {
     super(props);
     this.state= {
     }
-    // this.handleClick = this.handleClick.bind(this);
   }
 
   render() {
@@ -29,7 +28,6 @@ class FullTimeOn extends React.Component {
         description = {eachCourse.description}
         details = {eachCourse.details}
         price = {eachCourse.price}
-        // handleClick = {this.handleClick}
         />
       )}
     )}

@@ -1,17 +1,28 @@
 import React from 'react';
 import { Button, List, Avatar, Icon } from 'antd';
+import axios from 'axios';
+import { registerStudent } from '../services/courseAPIService';
+
+const BASE_URL = 'http://localhost:3001';
 
 class FullTimeDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-
     }
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick = (e) => {
-  console.log(this.props.courseId)
-  console.log(this.props.studentId)
+  async handleClick() {
+    let courseId = this.props.courseId
+    let studentId = this.props.studentId
+  await this.registerStudent(courseId, studentId);
+  }
+
+
+  async registerStudent(courseId, studentId) {
+    const response = await registerStudent(courseId, studentId)
+    return response;
   }
 
 

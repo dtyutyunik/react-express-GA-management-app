@@ -42,11 +42,13 @@ export default class HeaderNav extends React.Component {
             } else {
                 this.setState({current: e.key});
             }
-            if (e.key === 'aboutUs'){
+            if (e.key === 'aboutUs') {
               this.props.setPortal('aboutUs');
 
             }
-
+            if (e.key === "course") {
+              this.props.setPortal('course');
+            }
 
 
 

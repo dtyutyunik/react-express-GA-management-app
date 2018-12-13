@@ -14,21 +14,36 @@ export default class UserNav extends React.Component{
                 />
             </Menu.Item> :
             <Menu.Item key='register'>
-                <Icon type='appstore' />Register/Login
+                <Icon type='user' />Register/Login
             </Menu.Item>;
 
         let courseNavShow =
          <Menu.Item key="course">
-             <Icon type="appstore"/>Courses
+             <Icon type="heart"/>Courses
           </Menu.Item>
-         let aboutUsNavShow =
+        let aboutUsNavShow =
           <Menu.Item key="aboutUs">
-             <Icon type="appstore"/>About Us
+             <Icon type="home"/>About Us
           </Menu.Item>
-
+        const adminNavShow =
+          <Menu.Item key="adminNav">
+            Welcome to Bootcamp Admin
+          </Menu.Item>
+        const instructorNavShow =
+          <Menu.Item key="insNav">
+          Welcome to Bootcamp Instructor
+          </Menu.Item>
         let isAdmin = this.props.portal === "admin";
         let isInstructor = this.props.portal === "instructor";
-        courseNavShow = isAdmin || isInstructor ?  null : courseNavShow
+        switch (true) {
+          case isAdmin:
+            courseNavShow = adminNavShow
+            break;
+          case isInstructor:
+            courseNavShow = instructorNavShow
+            break;
+          default:
+        }
         aboutUsNavShow = isAdmin || isInstructor ? null : aboutUsNavShow
         return(
             <Menu mode="horizontal"

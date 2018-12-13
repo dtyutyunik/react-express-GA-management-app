@@ -51,7 +51,7 @@ class InstructorRegisterForm extends React.Component {
     checkConfirm(rule, value, callback) {
         const form = this.props.form;
         if (value && this.state.confirmDirty) {
-            form.validateFields(['confirmPassword'], {force: true});
+            form.validateFields(['confirm Password'], {force: true});
         }
         callback();
     }

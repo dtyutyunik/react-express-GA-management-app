@@ -3,6 +3,7 @@ import React from 'react';
 import { Row, Col, Nav } from 'antd';
 import UserNav from './UserNav';
 import logo from '../images/logo.jpg'
+import './index.scss'
 import LoginRegisterModal from './UserNav/LoginRegisterModal'
 export default class HeaderNav extends React.Component {
   constructor(props) {
@@ -57,11 +58,12 @@ render() {
         <Col span={4}>
             <div className='logo' href='/'>
             <img src={logo} alt='logo'/>
-            <span>Bootcamp Startup</span>
+            <span className="site-title">Bootcamp Startup</span>
             </div>
           </Col>
         <Col span={18}>
         <UserNav
+             className="nav-bar"
              hasLogined={this.props.hasLogined}
              username={this.props.username}
              current={this.state.current}

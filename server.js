@@ -246,35 +246,35 @@ const coursepost = await Course.create(req.body);
 
 //delete routes
 
-app.delete('/students/:id', async (req,res) => {
-  try{
-    const id = req.params.id;
-
-    const students = await Student.findOne({
-      where:{
-        id:id
-      },
-       include: [
-         {
-           model: User,
-           required: true, // only include users where there is an associated student
-         }
-       ]
-     });
-
-
-  User.destroy({where: {id: students.user.id}});
-  Student.destroy({where: {id: id}});
-
-  res.json(students);
-
-
-
-  }catch (e){
-      console.log(e);
-      res.status(500).json({msg:e.message});
-  }
-});
+// app.delete('/students/:id', async (req,res) => {
+//   try{
+//     const id = req.params.id;
+//
+//     const students = await Student.findOne({
+//       where:{
+//         id:id
+//       },
+//        include: [
+//          {
+//            model: User,
+//            required: true, // only include users where there is an associated student
+//          }
+//        ]
+//      });
+//
+//
+//   User.destroy({where: {id: students.user.id}});
+//   Student.destroy({where: {id: id}});
+//
+//   res.json(students);
+//
+//
+//
+//   }catch (e){
+//       console.log(e);
+//       res.status(500).json({msg:e.message});
+//   }
+// });
 
 app.delete('/courses/:id', async (req,res) => {
   try{
@@ -292,36 +292,36 @@ app.delete('/courses/:id', async (req,res) => {
 });
 
 
-// will be used for admin purposes post mvp
-app.delete('/instructors/:id', async (req,res) => {
-
-
-  try{
-    const id = req.params.id;
-
-    const instructor = await Instructor.findOne({
-      where:{
-        id:id
-      },
-       include: [
-         {
-           model: User,
-           required: true, // only include users where there is an associated student
-         }
-       ]
-     });
-
-
-  User.destroy({where: {id: instructor.user.id}});
-  Instructor.destroy({where: {id: id}});
-
-  res.json(instructor);
-
-  }catch (e){
-      console.log(e);
-      res.status(500).json({msg:e.message});
-  }
-});
+// // will be used for admin purposes post mvp
+// app.delete('/instructors/:id', async (req,res) => {
+//
+//
+//   try{
+//     const id = req.params.id;
+//
+//     const instructor = await Instructor.findOne({
+//       where:{
+//         id:id
+//       },
+//        include: [
+//          {
+//            model: User,
+//            required: true, // only include users where there is an associated student
+//          }
+//        ]
+//      });
+//
+//
+//   User.destroy({where: {id: instructor.user.id}});
+//   Instructor.destroy({where: {id: id}});
+//
+//   res.json(instructor);
+//
+//   }catch (e){
+//       console.log(e);
+//       res.status(500).json({msg:e.message});
+//   }
+// });
 
 
 
@@ -430,19 +430,16 @@ app.put('/courses/:id', async(req,res)=>{
   }
 
 });
-// const finalstu = await Course.findOne({
-//   where:{id:getinststu.course.id},
-//   include:[{
-//     model:Student,
-//     required:true,
-//   }]
-// });
+
+
+
 //let instructor kick student out from the course they teach
 app.delete('/instructors/:id/student/:studentid', async(req,res)=>{
     try{
       const coursePull= await Course.findOne({where:{instructor_id: req.params.id}});
-      const studentFind= await Student.findOne({where:{course_id: coursePull.id}})
+      const studentFind= await Student.findOne({where:{id: req.params.studentid}})
 
+      res.json(coursePull);
       if(studentFind.id==req.params.studentid){
 
         studentFind.course_id=null;

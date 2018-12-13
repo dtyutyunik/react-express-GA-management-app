@@ -6,7 +6,7 @@ import PartTimeOn from './PartTimeOn';
 import FullTimeOff from './FullTimeOff';
 import PartTimeOff from './PartTimeOff'
 
-import { getAllCourses } from '../services/courseAPIService';
+import { getAllCourses, registerStudent } from '../services/courseAPIService';
 
 // const BASE_URL = 'http://localhost:3001';
 
@@ -24,6 +24,7 @@ class StudentPortal extends React.Component {
 
   async componentDidMount(){
     await this.getAllCourses();
+    // await this.registerStudent();
   }
 
   setView = (view) => {
@@ -43,12 +44,15 @@ async getAllCourses(){
 }
 
   render() {
-
+    console.log(this.props.studentId, "But does it, though?")
+    let { studentId } = this.props
     let content;
     switch (this.state.screen) {
       case 'fullTimeOn':
         content = (<FullTimeOn
-                    courses ={this.state.courses}/>);
+                    courses ={this.state.courses}
+                    isRegisteredCourse={this.props.isRegisteredCourse}
+                    studentId ={studentId} />);
       break;
       case 'partTimeOn':
         content = (<PartTimeOn />);
@@ -59,6 +63,11 @@ async getAllCourses(){
       case 'partTimeOff':
         content = (<PartTimeOff />);
       break;
+      default:
+        content = (<FullTimeOn
+                    courses = {this.state.courses}
+                    isRegisteredCourse={this.props.isRegisteredCourse}
+                    studentId ={studentId}/>);
     }
 
   const SubMenu = Menu.SubMenu;

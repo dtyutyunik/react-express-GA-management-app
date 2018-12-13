@@ -13,17 +13,26 @@ class FullTimeOn extends React.Component {
   }
 
   render() {
+    console.log(this.props.studentId);
+    let { studentId } = this.props;
+    let { isRegisteredCourse } = this.props;
     return(
       <div>
-      {this.props.courses.map(eachCourse => (
+      {this.props.courses.map(eachCourse => {
+        return (
+
         <FullTimeDetails
         key = {eachCourse.id}
+        courseId = {eachCourse.id}
+        studentId = {studentId}
         title = {eachCourse.title}
         description = {eachCourse.description}
         details = {eachCourse.details}
         price = {eachCourse.price}
+        isRegisteredCourse = {isRegisteredCourse}
         />
-      ))}
+      )}
+    )}
       </div>
     )
   }

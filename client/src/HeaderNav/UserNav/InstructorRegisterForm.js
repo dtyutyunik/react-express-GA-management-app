@@ -29,7 +29,7 @@ class InstructorRegisterForm extends React.Component {
                 console.log(response.data.user);
 
                 if (response) {
-                    message.success(`Dear ${response.data.user.username}, you are successfully registered, you can log in now`);
+                    message.success(`Dear ${response.data.user.fullname}, you are successfully registered, you can log in now`);
                     //set modal to disappear
                     console.log('set modal to disappear');
                     this.props.setModalVisible(false);

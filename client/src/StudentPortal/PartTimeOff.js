@@ -13,9 +13,7 @@ class FullTimeOff extends React.Component {
   render() {
     return (
       <div>
-      <h1>Part-Time Online Course</h1>
-      <p>this is a course</p>
-
+      <h1>Courses Coming Soon!</h1>
       </div>
     )
   }

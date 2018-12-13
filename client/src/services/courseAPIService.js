@@ -7,8 +7,8 @@ async function getAllCourses() {
   return response.data;
 }
 
-async function registerStudent() {
-  const response = await axios.put(`${BASE_URL}/course/:id/student/:stuid`);
+async function registerStudent(id, stuid) {
+  const response = await axios.put(`${BASE_URL}/course/${id}/student/${stuid}`);
   return response.data;
 }
 

@@ -62,6 +62,7 @@ class App extends Component {
 
   render() {
     console.log(this.state.portal);
+    console.log(this.state.userLoginInfo.id)
     let contentView;
     switch (this.state.portal) {
 
@@ -80,7 +81,8 @@ class App extends Component {
         infoSentThrough={this.state.userLoginInfo}/>);
         break;
       case 'student':
-        contentView = (<StudentPortal />);
+        contentView = (<StudentPortal
+            studentId = {this.state.userLoginInfo.id} />);
         break;
 
         case 'aboutUs':

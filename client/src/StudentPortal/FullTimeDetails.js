@@ -9,13 +9,14 @@ class FullTimeDetails extends React.Component {
     }
   }
 
-  async handleClick() {
-
+  handleClick = (e) => {
+  console.log(this.props.courseId)
+  console.log(this.props.studentId)
   }
 
 
   render() {
-
+console.log(this.props.studentId)
   const IconText = ({ type, text }) => (
     <span>
       <Icon type={type} />
@@ -29,16 +30,20 @@ class FullTimeDetails extends React.Component {
 
     <List
   itemLayout="vertical"
-  size="large"
+  size="medium"
   dataSource={this.props.title}
   renderItem={props => (
     <List.Item
       key={this.props.id}
+      // courseId={this.props.id}
       actions=
         {[<IconText type="star-o" text="156" />,
         <IconText type="like-o" text="156" />,
         <IconText type="message" text="2" />,
-        <Button onClick = {this.handleClick} className= "register" type="primary">Apply Now</Button>]}
+        <Button onClick = {this.handleClick}
+                key={this.props.id}
+                className= "register"
+                type="primary">Apply Now</Button>]}
       extra=
         {<img width={272}
         alt="logo"

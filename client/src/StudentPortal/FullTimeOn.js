@@ -10,20 +10,29 @@ class FullTimeOn extends React.Component {
     super(props);
     this.state= {
     }
+    // this.handleClick = this.handleClick.bind(this);
   }
 
   render() {
+    console.log(this.props.studentId);
+    let { studentId } = this.props
     return(
       <div>
-      {this.props.courses.map(eachCourse => (
+      {this.props.courses.map(eachCourse => {
+        return (
+
         <FullTimeDetails
         key = {eachCourse.id}
+        courseId = {eachCourse.id}
+        studentId = {studentId}
         title = {eachCourse.title}
         description = {eachCourse.description}
         details = {eachCourse.details}
         price = {eachCourse.price}
+        // handleClick = {this.handleClick}
         />
-      ))}
+      )}
+    )}
       </div>
     )
   }

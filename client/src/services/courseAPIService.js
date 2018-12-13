@@ -6,6 +6,12 @@ async function getAllCourses() {
   console.log(response);
   return response.data;
 }
+
+async function registerStudent() {
+  const response = await axios.put(`${BASE_URL}/course/:id/student/:stuid`);
+  return response.data;
+}
+
 async function getOneCourse(id) {
     const response = await axios(`${BASE_URL}/${id}`);
     return response.data;
@@ -25,6 +31,7 @@ async function deleteCourse(id) {
 }
 
 export {
+  registerStudent,
   getAllCourses,
   getOneCourse,
   createCourse,

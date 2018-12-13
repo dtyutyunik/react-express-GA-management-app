@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Dropdown, Icon, message} from 'antd';
-import InstructorStudents from './instructorStudents';
+import StudentDetails from './StudentDetails';
 import InstructorCourses from './instructorCourses';
 import axios from 'axios';
 import { getInstrucStu } from '../services/studentAPIService';
@@ -20,11 +20,14 @@ class InstructorPortal extends React.Component {
     this.getCourseInfo = this.getCourseInfo.bind(this);
   }
 
-  setView = (view) => {
+  async setView(view){
     this.setState({
       screen: view
     });
 
+    if(view=='stu'){
+      await this.getInstrucStudents();
+    }
     console.log('thie view is', this.state.screen);
 
   }
@@ -38,21 +41,23 @@ class InstructorPortal extends React.Component {
 
 async getCourseInfo(){
   const pull= await axios(`${BASE_URL}/instructors/${this.state.instructorDetails.id}/courses`);
+  console.log(pull);
   this.setState({
-    courseInfo: pull.data?pull.data:false
+    courseInfo: pull.data?pull.data.course:false
   });
 
 }
 
   async componentDidMount() {
     await this.getCourseInfo();
-    await this.getInstrucStudents();
+    // await this.getInstrucStudents();
 
   }
 
   async getInstrucStudents() {
       try{
         const response= await axios(`${BASE_URL}/instructors/${this.state.instructorDetails.id}/students`);
+        console.log(response);
         this.setState({
           students: response.data?response.data.students:false
         });
@@ -64,13 +69,18 @@ async getCourseInfo(){
 
   }
 
+
   render() {
     let content;
-    console.log(this.state.students)
+    console.log(this.state.students);
+    console.log(this.state.instructorDetails.id)
     switch (this.state.screen) {
       case 'stu':
-        content = (<InstructorStudents
-                    students = {this.state.students}/>);
+        content = (this.state.students?<StudentDetails
+                    students = {this.state.students}
+                    instructorInfo={this.state.instructorDetails.id}
+                    renderStudent={this.getInstrucStudents}/>
+                  :<p>No Students in class</p>);
       break;
       case 'course':
 

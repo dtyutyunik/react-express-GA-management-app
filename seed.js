@@ -313,7 +313,7 @@ function mainRunner(){
   // createInstructorUser();
 
   // studentCourse();
-//
+
   // instructorCourse();
 
 }

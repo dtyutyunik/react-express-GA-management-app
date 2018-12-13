@@ -3,6 +3,7 @@ import { Menu, Dropdown, Icon, message} from 'antd';
 import InstructorStudents from './instructorStudents';
 import InstructorCourses from './instructorCourses';
 import InstructorInfo from './instructorInfo';
+import InstructorEdit from './instructorEdit';
 import axios from 'axios';
 import { getInstrucStu } from '../services/studentAPIService';
 const BASE_URL = 'http://localhost:3001';
@@ -70,6 +71,9 @@ async getCourseInfo(){
     let content;
     console.log(this.state.students)
     switch (this.state.screen) {
+      case 'edit':
+      content =(<InstructorEdit instinfo={this.state.instructorDetails} />);
+      break;
       case 'stu':
         content = (<InstructorStudents
                     students = {this.state.students}/>);

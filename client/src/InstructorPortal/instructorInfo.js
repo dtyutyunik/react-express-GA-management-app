@@ -11,6 +11,8 @@ return(
     <h3>Email:{props.instinfo.email}</h3>
     <h3>Title:{props.instinfo.title}</h3>
 
+    
+
 
   </div>
 

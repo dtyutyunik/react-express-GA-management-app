@@ -18,11 +18,10 @@ class App extends Component {
     this.state = {
       portal: 'landing',
       token: null,
-      username: '',
+      fullname: '',
       password: '',
       hasLogined: false
     }
-    this.updateUserLoginCredential = this.updateUserLoginCredential.bind(this);
     this.logout = this.logout.bind(this);
     this.login = this.login.bind(this);
   }
@@ -30,7 +29,7 @@ class App extends Component {
         localStorage.username = '';
         this.setState({
           hasLogined: false,
-          username: '',
+          fullname: '',
           password: '',
           token: null,
           portal: 'landing'
@@ -41,23 +40,15 @@ class App extends Component {
     console.log(`i m calling this function and the userLogin credential is
       ${JSON.stringify(userLogin)}`)
       this.setState({
-        loginCredential: userLogin,
-        hasLogined: true
+        hasLogined: true,
+        username: userLogin.fullname,
+        password: userLogin.password,
+        token: userLogin.token,
+        portal: userLogin['auth_level']
       });
       // localStorage.username = userLogin.username;
       // localStorage.authLevel = userLogin['auth_level'];
-      this.updateUserLoginCredential(userLogin);
-      console.log(`the userLoginCredential is ${JSON.stringify(userLogin)}`)
-  }
-
-  updateUserLoginCredential(loginCredential) {
-    this.setState({
-      username: loginCredential.username,
-      password: loginCredential.password,
-      token: loginCredential.token,
-      portal: loginCredential['auth_level']
-    })
-    console.log(`updateUserLoginCredential is called and credentials are ${loginCredential}`)
+      console.log(`the useruserLogin is ${JSON.stringify(userLogin)}`)
   }
 
   setPortal(view) {
@@ -95,10 +86,11 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <HeaderNav updateUserLoginCredential={this.updateUserLoginCredential}
-                   logout={this.logout}
-                   login={this.login}
-                   hasLogined={this.state.hasLogined}
+        <HeaderNav
+            logout={this.logout}
+            login={this.login}
+            hasLogined={this.state.hasLogined}
+            username={this.state.username}
                    />
       { contentView }
       </div>

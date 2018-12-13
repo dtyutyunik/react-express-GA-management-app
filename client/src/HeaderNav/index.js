@@ -63,7 +63,7 @@ render() {
         <Col span={18}>
         <UserNav
              hasLogined={this.props.hasLogined}
-             username={this.state.username}
+             username={this.props.username}
              current={this.state.current}
              menuItemClick={this.MenuItemClick.bind(this)}
              logout={this.props.logout}

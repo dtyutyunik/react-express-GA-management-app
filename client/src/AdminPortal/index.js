@@ -3,7 +3,6 @@ import Home from './components/page/Home';
 import Course from './components/page/Course';
 import Instructor from './components/page/Instructor';
 import Student from './components/page/Student';
-import NavTop from './components/NavTop';
 import NavLeft from './components/NavLeft';
 import './index.scss';
 
@@ -40,7 +39,6 @@ class AdminPortal extends Component {
     }
     return (
       <div id='wrapper'>
-        <NavTop returnToLanding={this.props.returnToLanding}/>
         <NavLeft handlePageChange={this.handlePageChange.bind(this)}/>
 
         { contentView }

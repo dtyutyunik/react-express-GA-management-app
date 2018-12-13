@@ -56,17 +56,13 @@ class App extends Component {
       portal: view
     })
   }
-  returnToLanding() {
-    this.setState({
-      portal: 'landing'
-    })
-  }
+
 
   render() {
     let contentView;
     switch (this.state.portal) {
       case 'admin':
-        contentView = (<AdminPortal returnToLanding={this.returnToLanding.bind(this)}/>);
+        contentView = (<AdminPortal />);
         break;
       case 'landing':
         contentView=(<LandingPage
@@ -91,7 +87,8 @@ class App extends Component {
             login={this.login}
             hasLogined={this.state.hasLogined}
             username={this.state.username}
-                   />
+            portal={this.state.portal}
+          />
       { contentView }
       </div>
     );

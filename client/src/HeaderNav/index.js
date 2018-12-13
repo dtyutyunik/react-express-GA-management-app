@@ -67,6 +67,7 @@ render() {
              current={this.state.current}
              menuItemClick={this.MenuItemClick.bind(this)}
              logout={this.props.logout}
+             portal={this.props.portal}
              />
           {  modalVisable ?
          <LoginRegisterModal

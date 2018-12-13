@@ -26,7 +26,9 @@ class InstructorPortal extends React.Component {
     this.setState({
       screen: view
     });
-
+    if(view=='course'){
+      await this.getCourseInfo();
+    }
     if(view=='stu'){
       await this.getInstrucStudents();
     }
@@ -50,19 +52,11 @@ async getCourseInfo(){
 
 }
 
-  async componentDidMount() {
-
-    await this.getCourseInfo();
-
-    await this.getInstrucStudents();
-
-  }
-
 
   async getInstrucStudents() {
       try{
         const response= await axios(`${BASE_URL}/instructors/${this.state.instructorDetails.id}/students`);
-        console.log(response);
+        // console.log(response);
         this.setState({
           students: response.data?response.data.students:false
         });
@@ -77,8 +71,9 @@ async getCourseInfo(){
 
   render() {
     let content;
-    console.log(this.state.students);
-    console.log(this.state.instructorDetails.id)
+    console.log(this.state.courseInfo);
+    // console.log(this.state.students);
+    // console.log(this.state.instructorDetails.id)
     switch (this.state.screen) {
       case 'edit':
       content =(<InstructorEdit instinfo={this.state.instructorDetails} />);

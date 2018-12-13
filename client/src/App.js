@@ -62,7 +62,8 @@ class App extends Component {
 
   render() {
     console.log(this.state.portal);
-    console.log(this.state.userLoginInfo.id)
+    console.log(this.state.userLoginInfo.id);
+    let isRegisteredCourse = this.state.userLoginInfo['course_id'];
     let contentView;
     switch (this.state.portal) {
 
@@ -82,7 +83,9 @@ class App extends Component {
         break;
       case 'student':
         contentView = (<StudentPortal
-            studentId = {this.state.userLoginInfo.id} />);
+            studentId = {this.state.userLoginInfo.id}
+            isRegisteredCourse={isRegisteredCourse}
+            />);
         break;
 
         case 'aboutUs':

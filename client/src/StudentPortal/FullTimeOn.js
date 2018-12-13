@@ -14,7 +14,8 @@ class FullTimeOn extends React.Component {
 
   render() {
     console.log(this.props.studentId);
-    let { studentId } = this.props
+    let { studentId } = this.props;
+    let { isRegisteredCourse } = this.props;
     return(
       <div>
       {this.props.courses.map(eachCourse => {
@@ -28,6 +29,7 @@ class FullTimeOn extends React.Component {
         description = {eachCourse.description}
         details = {eachCourse.details}
         price = {eachCourse.price}
+        isRegisteredCourse = {isRegisteredCourse}
         />
       )}
     )}

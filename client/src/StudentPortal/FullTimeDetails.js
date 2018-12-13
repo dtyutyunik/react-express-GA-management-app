@@ -1,27 +1,56 @@
 import React from 'react';
-import { Button, List, Avatar, Icon } from 'antd';
+import { Button, List, Avatar, Icon, message } from 'antd';
 import axios from 'axios';
 import { registerStudent } from '../services/courseAPIService';
 
 const BASE_URL = 'http://localhost:3001';
 
+//
+
 class FullTimeDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
+      registerOrNot: this.props.isRegistered,
+      applyBtn: ''
     }
     this.handleClick = this.handleClick.bind(this)
   }
-
+  componentDidMount() {
+    if (this.state.registerOrNot) {
+      this.setState ({
+        applyBtn: 'Already A BS Student'
+      })
+    } else {
+      this.setState ({
+        applyBtn: 'Apply Now'
+      })
+    }
+  }
   async handleClick() {
     let courseId = this.props.courseId
     let studentId = this.props.studentId
-  await this.registerStudent(courseId, studentId);
+    console.log(courseId);
+    const response = await this.registerStudent(courseId, studentId);
+    if (response.id) {
+      message.success(`You have successfully registered for this course`);
+      this.setState({
+        registerOrNot: true,
+        applyBtn:'Already A BS Student'
+      })
+    } else {
+      message.error(response);
+      this.setState({
+        registerOrNot: false,
+        applyBtn: 'Apply Now'
+      })
+    }
   }
 
 
   async registerStudent(courseId, studentId) {
     const response = await registerStudent(courseId, studentId)
+    console.log(response)
     return response;
   }
 
@@ -34,6 +63,16 @@ console.log(this.props.studentId)
       {text}
     </span>
   );
+  let applyBtn;
+  console.log(this.state.registerOrNot)
+  // this.state.registerOrNot ?
+  // applyBtn = 'Apply Now' :
+
+  if(this.state.registerOrNot) {
+    applyBtn = 'Already A BS Student'
+  } else {
+    applyBtn = 'Apply Now'
+  }
 
   return (
 
@@ -54,7 +93,8 @@ console.log(this.props.studentId)
         <Button onClick = {this.handleClick}
                 key={this.props.id}
                 className= "register"
-                type="primary">Apply Now</Button>]}
+                type="primary">{this.state.applyBtn}
+                </Button>]}
       extra=
         {<img width={272}
         alt="logo"

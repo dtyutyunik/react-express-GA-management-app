@@ -51,6 +51,7 @@ async getAllCourses(){
       case 'fullTimeOn':
         content = (<FullTimeOn
                     courses ={this.state.courses}
+                    isRegisteredCourse={this.props.isRegisteredCourse}
                     studentId ={studentId} />);
       break;
       case 'partTimeOn':
@@ -65,6 +66,7 @@ async getAllCourses(){
       default:
         content = (<FullTimeOn
                     courses = {this.state.courses}
+                    isRegisteredCourse={this.props.isRegisteredCourse}
                     studentId ={studentId}/>);
     }
 

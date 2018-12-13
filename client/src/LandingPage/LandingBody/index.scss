@@ -1,14 +1,24 @@
 
-.landing-card {
-  width: 500px;
-  height: 120px;
+.course-list {
+  display: grid;
+
 }
-.card-1 {
-  background: yellow
+
+.landAnimate > div {
+  width: 700px;
+  height: 190px;
+  margin: 0 auto;
+  margin-top: 20px;
+  background: #4286f4;
 }
-.card-2 {
-  background: blue
+
+.landAnimate > div > h1 {
+  color: white
 }
-.card-3 {
-  background: green
+.landAnimate > div > p {
+  color: black;
+  font-size: 14px;
+}
+.landAnimate > div > .enroll {
+  background-color: red;
 }

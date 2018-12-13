@@ -5,10 +5,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="page-wrapper">
-
-          Home
-
-
+          Home for Admin
       </div>
 
     )

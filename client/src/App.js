@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import AdminPortal from './AdminPortal';
+import AboutPortal from './AboutPortal';
 import InstructorPortal from './InstructorPortal';
 import StudentPortal from './StudentPortal';
 import LandingPage from './LandingPage';
@@ -19,6 +20,7 @@ class App extends Component {
     }
     this.logout = this.logout.bind(this);
     this.login = this.login.bind(this);
+    this.setPortal= this.setPortal.bind(this);
   }
   logout() {
         localStorage.username = '';
@@ -50,12 +52,15 @@ class App extends Component {
     this.setState({
       portal: view
     })
+    console.log(this.state.portal);
   }
 
 
   render() {
+    console.log(this.state.portal);
     let contentView;
     switch (this.state.portal) {
+
       case 'admin':
         contentView = (<AdminPortal />);
         break;
@@ -72,6 +77,10 @@ class App extends Component {
       case 'student':
         contentView = (<StudentPortal />);
         break;
+
+        case 'aboutUs':
+        contentView = (<AboutPortal />)
+        break;
       default:
         contentView = (<LandingPage />);
     }
@@ -83,6 +92,7 @@ class App extends Component {
             hasLogined={this.state.hasLogined}
             username={this.state.username}
             portal={this.state.portal}
+            setPortal={this.setPortal}
           />
       { contentView }
       </div>

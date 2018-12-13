@@ -31,6 +31,8 @@ export default class HeaderNav extends React.Component {
   MenuItemClick(e) {
             //when the login/register MenuItem clicked，set current value，
             //  to show the modal
+            console.log ('Menu item is clicked!')
+            console.log(e.key);
             if (e.key === 'register') {
                 //highlight the menu
                 this.setState({current: 'register'});
@@ -40,6 +42,14 @@ export default class HeaderNav extends React.Component {
             } else {
                 this.setState({current: e.key});
             }
+            if (e.key === 'aboutUs'){
+              this.props.setPortal('aboutUs');
+
+            }
+
+
+
+
         }
     //set if the login/register modal to show
     //default state of modal is invisible

@@ -7,23 +7,14 @@ class InstructorStudents extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      studentInfo: props.students
     }
   }
 
   render() {
-    return (
-      <div>
-      <h1>Instructor Students</h1>
-      {this.props.students.map(eachStudent => (
-        <StudentDetails
-        key = {eachStudent.id}
-        name = {eachStudent.fullname}
-        phone = {eachStudent.phone}
-        email = {eachStudent.email}
-        />
-      ))}
-      </div>
-    )
+    return(this.state.studentInfo?<StudentDetails details={this.state.studentInfo}/>:<p>No Students Currently Enrolled</p>)
   }
+
+
 }
 export default InstructorStudents;

@@ -200,19 +200,7 @@ app.get('/courses/:id',  async(req,res) => {
   }
 });
 
-
 // post routes
-
-app.post('/students', async (req,res) => {
-try{
-const studentpost = await Student.create(req.body);
-  res.json(studentsput);
-}catch (e){
-  console.log(e);
-  res.status(500).json({msg:e.message});
-  }
-});
-
 // Will be used for admin purposes if implemented post mvp
 
 // app.post('/instructors', async (req,res) => {
@@ -224,6 +212,22 @@ const studentpost = await Student.create(req.body);
 //   res.status(500).json({msg:e.message});
 //   }
 // });
+
+
+
+//not needed
+// app.post('/students', async (req,res) => {
+// try{
+//
+// const studentpost = await Student.create(req.body);
+//   res.json(studentsput);
+// }catch (e){
+//   console.log(e);
+//   res.status(500).json({msg:e.message});
+//   }
+// });
+///////////////
+
 
 
 app.post('/courses', async (req,res) => {
@@ -242,33 +246,32 @@ const coursepost = await Course.create(req.body);
 app.delete('/students/:id', async (req,res) => {
   try{
     const id = req.params.id;
-    const destroystu = await Student.destroy({
+
+    const students = await Student.findOne({
       where:{
-        id: id
-      }
-    })
-    res.json(destroystu);
+        id:id
+      },
+       include: [
+         {
+           model: User,
+           required: true, // only include users where there is an associated student
+         }
+       ]
+     });
+
+
+  User.destroy({where: {id: students.user.id}});
+  Student.destroy({where: {id: id}});
+
+  res.json(students);
+
+
+
   }catch (e){
       console.log(e);
       res.status(500).json({msg:e.message});
   }
 });
-
-//will be used for admin purposes post mvp
-// app.delete('/instructors/:id', async (req,res) => {
-//   try{
-//     const id = req.params.id;
-//     const destroyinst = await Instructor.destroy({
-//       where:{
-//         id: id
-//       }
-//     })
-//     res.json(destroyinst);
-//   }catch (e){
-//       console.log(e);
-//       res.status(500).json({msg:e.message});
-//   }
-// });
 
 app.delete('/courses/:id', async (req,res) => {
   try{
@@ -285,14 +288,52 @@ app.delete('/courses/:id', async (req,res) => {
   }
 });
 
+
+// will be used for admin purposes post mvp
+app.delete('/instructors/:id', async (req,res) => {
+
+
+  try{
+    const id = req.params.id;
+
+    const instructor = await Instructor.findOne({
+      where:{
+        id:id
+      },
+       include: [
+         {
+           model: User,
+           required: true, // only include users where there is an associated student
+         }
+       ]
+     });
+
+
+  User.destroy({where: {id: instructor.user.id}});
+  Instructor.destroy({where: {id: id}});
+
+  res.json(instructor);
+
+  }catch (e){
+      console.log(e);
+      res.status(500).json({msg:e.message});
+  }
+});
+
+
+
 //put routes
 app.put('/students/:id', async(req,res)=>{
   try{
 
     const stuinfo= await Student.findByPk(req.params.id);
+
+    const userFullNameUpdate= await User.findOne({where:{fullname: stuinfo.fullname}});
     stuinfo.fullname=req.body.fullname;
-    stuinfo.phone=req.body.phone;
-    stuinfo.email=req.body.email;
+    stuinfo.phone?stuinfo.phone=req.body.phone:stuinfo.phone=stuinfo.phone;
+    stuinfo.email?stuinfo.email=req.body.email:stuinfo.email=stuinfo.email;
+    userFullNameUpdate.fullname=stuinfo.fullname;
+    userFullNameUpdate.save();
     stuinfo.save();
     res.json(stuinfo);
 
@@ -325,8 +366,15 @@ app.put('/instructors/:id', async(req,res)=>{
 //gets courses that instructor teaches
 app.get('/instructors/:id/courses',async(req,res)=>{
     try{
-      const courseTeach= await Course.findOne({where:{instructor_id: req.params.id}});
-      res.json(courseTeach);
+        const id = req.params.id;
+      const courseTeach= await Instructor.findOne({
+        where:{id: id},
+        include:[{
+          model:Course,
+          required:true,
+        }]
+      });
+      res.json(courseTeach.course);
     }catch(e){
       res.status(500).json({e:e.message});
     }
@@ -336,13 +384,29 @@ app.get('/instructors/:id/courses',async(req,res)=>{
 //gets students that instructor teaches
 app.get('/instructors/:id/students',async(req,res)=>{
   try{
-    const getStudents= await Student.findAll({where:{course_id: studentTeach.id}});
+    const id = req.params.id;
+    const getinststu= await Instructor.findOne({
+      where:{id:id},
+      include:[{
+        model:Course,
+        required:true,
+      }]
+    });
       // const studentTeach= await Course.findOne(
       //   {where:{instructor_id: req.params.id}},
       // include: getStudents);
       // res.json(studentTeach);
+      const finalstu = await Course.findOne({
+        where:{id:getinststu.course.id},
+        include:[{
+          model:Student,
+          required:true,
+        }]
+      });
 
-      res.json(studentTeach);
+
+
+      res.json(finalstu.students);
   }catch(e){
     res.status(500).json({e:e.message});
   }
@@ -367,6 +431,27 @@ app.put('/courses/:id', async(req,res)=>{
 
 });
 
+//lets students register to a course
+app.put('/course/:id/student/:stuid', async(req,res)=>{
+  try{
+    const getCourse= await Course.findOne({where: {id: req.params.id}})
+
+    const isStudentRegistered= await Student.findOne({where:{id: req.params.stuid}});
+    if(!isStudentRegistered.course_id && getCourse.capacity>0){
+      getCourse.capacity=getCourse.capacity-1;
+      await getCourse.save();
+      isStudentRegistered.course_id=req.params.id;
+      await isStudentRegistered.save();
+      res.json(isStudentRegistered);
+    }else{
+      res.json("Course is at capacity or student already registered for a course");
+    }
+
+  }catch(e){
+    res.status(500).json({e:e.message});
+  }
+  process.exit();
+});
 
 app.listen(PORT, () => {
   console.log('up and ATOM!!')

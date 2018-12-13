@@ -12,6 +12,7 @@ class InstructorStudents extends React.Component {
   }
 
   render() {
+    console.log('students are', this.state.studentInfo);
     return(this.state.studentInfo?<StudentDetails details={this.state.studentInfo}/>:<p>No Students Currently Enrolled</p>)
   }
 

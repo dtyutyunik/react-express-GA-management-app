@@ -3,24 +3,30 @@ import { Menu, Dropdown, Icon, message} from 'antd';
 import InstructorStudents from './instructorStudents';
 import InstructorCourses from './instructorCourses';
 import axios from 'axios';
-import { getInstrucStu } from '../services/studentAPIService'
+import { getInstrucStu } from '../services/studentAPIService';
+const BASE_URL = 'http://localhost:3001';
 
 class InstructorPortal extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       students: [],
       current: 'user',
+      instructorDetails: props.infoSentThrough,
       screen: '',
+      courseInfo: []
     }
-    this.getInstrucStu = this.getInstrucStu.bind(this);
+    this.getInstrucStudents = this.getInstrucStudents.bind(this);
+    this.getCourseInfo = this.getCourseInfo.bind(this);
   }
 
   setView = (view) => {
     this.setState({
       screen: view
     });
+
+    console.log('thie view is', this.state.screen);
+
   }
 
   handleClick = (e) => {
@@ -29,47 +35,56 @@ class InstructorPortal extends React.Component {
   });
 }
 
+
+async getCourseInfo(){
+  const pull= await axios(`${BASE_URL}/instructors/${this.state.instructorDetails.id}/courses`);
+  this.setState({
+    courseInfo: pull.data?pull.data:false
+  });
+
+}
+
   async componentDidMount() {
-    // await this.getAllStudents();
-    await this.getInstrucStu();
+    await this.getCourseInfo();
+    await this.getInstrucStudents();
+
   }
 
-  // async getAllStudents() {
-  //   const response = await getAllStudents();
-  //   const students = response;
-  //   this.setState({
-  //     students
-  //   });
-  // }
+  async getInstrucStudents() {
+      try{
+        const response= await axios(`${BASE_URL}/instructors/${this.state.instructorDetails.id}/students`);
+        this.setState({
+          students: response.data?response.data.students:false
+        });
 
-  async getInstrucStu() {
-    const response = await getInstrucStu(1);
-    const students = response;
-    console.log(response);
-    this.setState({
-      students
-    });
+      }catch(e){
+
+        console.log(e);
+      }
+
   }
 
   render() {
     let content;
+    console.log(this.state.students)
     switch (this.state.screen) {
       case 'stu':
         content = (<InstructorStudents
                     students = {this.state.students}/>);
       break;
       case 'course':
-        content = (<InstructorCourses />);
+
+        content = (<InstructorCourses
+          courseInfo={this.state.courseInfo}/>);
       break;
-      // case 'user':
-      //   content = (<InstructorPortal />);
-      // break;
+
     }
 
   const SubMenu = Menu.SubMenu;
 
     return (
       <div>
+
       <nav className='instructorMenu'>
         <Menu
           selectedKeys={[this.state.current]}

@@ -16,7 +16,8 @@ class App extends Component {
       token: null,
       fullname: '',
       password: '',
-      hasLogined: false
+      hasLogined: false,
+      userLoginInfo: {}
     }
     this.logout = this.logout.bind(this);
     this.login = this.login.bind(this);
@@ -41,11 +42,14 @@ class App extends Component {
         username: userLogin.fullname,
         password: userLogin.password,
         token: userLogin.token,
-        portal: userLogin['auth_level']
+        portal: userLogin['auth_level'],
+        userLoginInfo: userLogin
       });
+
+      // console.log(this.state.userLoginInfo);
       // localStorage.username = userLogin.username;
       // localStorage.authLevel = userLogin['auth_level'];
-      console.log(`the useruserLogin is ${JSON.stringify(userLogin)}`)
+      // console.log(`the useruserLogin is ${JSON.stringify(userLogin)}`)
   }
 
   setPortal(view) {
@@ -72,7 +76,8 @@ class App extends Component {
         );
         break;
       case 'instructor':
-        contentView = (<InstructorPortal />);
+        contentView = (<InstructorPortal
+        infoSentThrough={this.state.userLoginInfo}/>);
         break;
       case 'student':
         contentView = (<StudentPortal />);

@@ -4,9 +4,6 @@ import AdminPortal from './AdminPortal';
 import InstructorPortal from './InstructorPortal';
 import StudentPortal from './StudentPortal';
 import { Button } from 'antd'
-import Login from './Login';
-import Signup from './Signup';
-import SignupInstructor from './SignupInstructor';
 import LandingPage from './LandingPage';
 import HeaderNav from './HeaderNav';
 import axios from 'axios';

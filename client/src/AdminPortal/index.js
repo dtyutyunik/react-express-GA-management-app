@@ -13,10 +13,12 @@ class AdminPortal extends Component {
       screen: 'home',
     }
   }
-  handlePageChange(e) {
+  handlePageChange(screen) {
+    console.log(`im clicked and ready to set screen`);
     this.setState({
-      screen: e.currentTarget.name,
-    })
+      screen
+    });
+    console.log(this.state.screen);
   }
   render() {
     let contentView;

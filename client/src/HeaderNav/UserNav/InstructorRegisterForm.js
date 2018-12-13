@@ -2,7 +2,6 @@ import React from 'react';
 import { Icon, message,  Form, Input, Button } from 'antd';
 import { userInstructorSignup } from '../../services/userAPIService';
 import axios from 'axios';
-
 const BASE_URL = "http://localhost:3001";
 // form for instructor to register
 // some code snippet imported from ant design

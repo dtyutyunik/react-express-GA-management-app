@@ -1,58 +1,71 @@
 import React from 'react';
+import { Menu, Icon } from 'antd';
+const SubMenu = Menu.SubMenu;
 
-export default function NavLeft(props) {
-  return (
-    // general layout is modified based on
-    // Author : www.webthemez.com
-    // License: Commons Attribution 3.0
-    // http://creativecommons.org/licenses/by/3.0/
-    <div className="navbar-default navbar-side" role="navigation">
-        <div className="sidebar-collapse">
-            <ul className="nav" id="main-menu">
-                  <li>
-                      <a className="active-menu">
-                        DashBoard
-                      </a>
-                  </li>
-                  <li className="active">
+export default class NavLeft extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  // submenu keys of first level
+  rootSubmenuKeys = ['row1', 'row2', 'row3', 'row4'];
 
-                      <span>Course</span>
-                      <span className="fa arrow"></span>
-                      <ul className="nav nav-second-level collapse in">
-                          <li>
-                            <a onClick={props.handlePageChange}
-                               name="course"
-                          >Course Management</a>
+  state = {
+    openKeys: ['row1'],
+  };
 
-                          </li>
-                        </ul>
-                   </li>
-                   <li className="active">
-                       <i className="fa fa-check-square-o"></i>
-                        <span>Instructor Management</span>
-                        <span className="fa arrow"></span>
-                        <ul className="nav nav-second-level collapse in">
-                    <li>
-                          <a onClick={props.handlePageChange}
-                             name="instructor"
-                          >Instructor Management</a>
-                         </li>
-                         </ul>
-                    </li>
-                      <li className="active">
-                          <i className="fa fa-user-o"></i>
-                          <span>Student Management</span>
-                          <span className="fa arrow"></span>
-                           <ul className="nav nav-second-level collapse in">
-                              <li>
-                                  <a onClick={props.handlePageChange}
-                                  name="student"
-                                  >Student List</a>
-                              </li>
-                          </ul>
-                      </li>
-                </ul>
-            </div>
-        </div>
-  )
+  onOpenChange = (openKeys) => {
+    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
+    if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      this.setState({ openKeys });
+    } else {
+      this.setState({
+        openKeys: latestOpenKey ? [latestOpenKey] : [],
+      });
+        console.log(`the openKeys is ${openKeys}`)
+    }
+    switch (this.state.openKeys[1]) {
+      case 'row1':
+        this.props.handlePageChange('home');
+        break;
+      case 'row2':
+        this.props.handlePageChange('course');
+        break;
+      case 'row3':
+        this.props.handlePageChange('student');
+        break;
+      default:
+        this.props.handlePageChange('home');
+    }
+  }
+
+  render() {
+    return (
+      <Menu
+        mode="inline"
+        openKeys={this.state.openKeys}
+        onOpenChange={this.onOpenChange}
+        style={{ width: 248 }}
+      >
+        <SubMenu key="row1" title={<span><Icon type="appstore" />
+        <span>Home</span></span>}>
+          <Menu.Item key="Home">Statistic</Menu.Item>
+          <Menu.Item key="2">Revenue</Menu.Item>
+        </SubMenu>
+        <SubMenu key="row2" title={<span><Icon type="setting" />
+        <span>Course Management</span></span>}>
+          <Menu.Item key="5">Course List</Menu.Item>
+          <Menu.Item key="6">Course Edit</Menu.Item>
+        </SubMenu>
+        <SubMenu key="row3" title={<span><Icon type="setting"/>
+        <span>Student Management</span></span>}>
+            <Menu.Item key="7">Student List</Menu.Item>
+        </SubMenu>
+        <SubMenu key="row4" title={<span><Icon type="setting" />
+        <span>Instructor Management</span></span>}>
+          <Menu.Item key="9">Instructor List</Menu.Item>
+          <Menu.Item key="10">Edit Instructor</Menu.Item>
+        </SubMenu>
+      </Menu>
+    );
+  }
 }

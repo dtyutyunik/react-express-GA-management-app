@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu, Dropdown, Icon, message} from 'antd';
 import InstructorStudents from './instructorStudents';
 import InstructorCourses from './instructorCourses';
+import InstructorInfo from './instructorInfo';
 import axios from 'axios';
 import { getInstrucStu } from '../services/studentAPIService';
 const BASE_URL = 'http://localhost:3001';
@@ -45,10 +46,11 @@ async getCourseInfo(){
 }
 
   async componentDidMount() {
+
     await this.getCourseInfo();
     await this.getInstrucStudents();
-
   }
+
 
   async getInstrucStudents() {
       try{
@@ -77,6 +79,9 @@ async getCourseInfo(){
         content = (<InstructorCourses
           courseInfo={this.state.courseInfo}/>);
       break;
+
+      default:
+      content =(<InstructorInfo instinfo={this.state.instructorDetails}  />);
 
     }
 

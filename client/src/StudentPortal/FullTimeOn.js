@@ -15,7 +15,6 @@ class FullTimeOn extends React.Component {
   render() {
     return(
       <div>
-      <h1>Available Courses</h1>
       {this.props.courses.map(eachCourse => (
         <FullTimeDetails
         key = {eachCourse.id}

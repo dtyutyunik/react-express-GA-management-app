@@ -16,6 +16,8 @@ export default class UserNav extends React.Component{
             <Menu.Item key='register'>
                 <Icon type='appstore' />Register/Login
             </Menu.Item>;
+
+        
         return(
             <Menu mode="horizontal"
                   selectedKeys={[this.props.current]}

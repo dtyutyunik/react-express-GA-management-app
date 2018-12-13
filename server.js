@@ -391,25 +391,28 @@ app.get('/instructors/:id/students',async(req,res)=>{
     const getinststu= await Instructor.findOne({
       where:{id:id},
       include:[{
-        model:Course,
+        model: Course,
         required:true,
       }]
     });
+
       // const studentTeach= await Course.findOne(
       //   {where:{instructor_id: req.params.id}},
       // include: getStudents);
       // res.json(studentTeach);
-      const finalstu = await Course.findOne({
-        where:{id:getinststu.course.id},
-        include:[{
-          model:Student,
-          required:true,
-        }]
-      });
+
+      // const finalstu = await Course.findOne({
+      //   where:{id:getinststu.course.id},
+      //   include:[{
+      //     model:Student,
+      //     required:true,
+      //   }]
+      // });
+
+res.json(getinststu);
 
 
-
-      res.json(finalstu.students);
+      // res.json(finalstu.students);
   }catch(e){
     res.status(500).json({e:e.message});
   }

@@ -2,6 +2,11 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3001';
 
+async function getInstrucStu(id) {
+  const response = await axios(`${BASE_URL}/instructors/${id}/students`);
+  return response.data;
+}
+
 async function getAllStudents() {
   const response = await axios(`${BASE_URL}/students`);
   return response.data;
@@ -26,6 +31,7 @@ async function deleteStudent(id) {
 }
 
 export {
+  getInstrucStu,
   getAllStudents,
   getOneStudent,
   createStudent,

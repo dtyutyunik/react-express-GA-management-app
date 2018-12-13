@@ -40,7 +40,6 @@ class AdminPortal extends Component {
     return (
       <div id='wrapper'>
         <NavLeft handlePageChange={this.handlePageChange.bind(this)}/>
-
         { contentView }
        </div>
 

@@ -3,11 +3,9 @@ import './App.css';
 import AdminPortal from './AdminPortal';
 import InstructorPortal from './InstructorPortal';
 import StudentPortal from './StudentPortal';
-import { Button } from 'antd'
 import LandingPage from './LandingPage';
 import HeaderNav from './HeaderNav';
-import axios from 'axios';
-const BASE_URL = "http://localhost:3001";
+
 
 class App extends Component {
   constructor(props) {

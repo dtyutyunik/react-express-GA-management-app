@@ -53,7 +53,6 @@ app.post('/users/students', async (req, res) => {
     console.log(e);
     res.status(500).json({msg: e.message});
   }
-  // process.exit();
 });
 
 app.post('/users/instructors', async (req, res) => {
@@ -87,7 +86,6 @@ app.post('/users/instructors', async (req, res) => {
     console.log(e);
     res.status(500).json({msg: e.message});
   }
-  // process.exit();
 });
 
 app.post('/login', async (req, res) => {
@@ -134,7 +132,6 @@ app.post('/login', async (req, res) => {
   } catch(e) {
     res.status(401).json({msg: e.message});
   }
-  // process.exit();
 });
 
 app.get('/currentuser', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -384,7 +381,6 @@ app.get('/instructors/:id/courses',async(req,res)=>{
     }catch(e){
       res.status(500).json({e:e.message});
     }
-    process.exit();
 });
 
 //gets students that instructor teaches
@@ -414,7 +410,6 @@ app.get('/instructors/:id/students',async(req,res)=>{
   }catch(e){
     res.status(500).json({e:e.message});
   }
-  process.exit();
 });
 
 app.put('/courses/:id', async(req,res)=>{
@@ -462,7 +457,6 @@ app.delete('/instructors/:id/student/:studentid', async(req,res)=>{
     }catch(e){
       res.status(500).json({e: e.message});
     }
-    process.exit();
 });
 
 //let instructor edit course detail,description
@@ -496,7 +490,6 @@ app.put('/instructor/:id/course/:courseId', async(req,res)=>{
   catch(e){
     res.status(500).json({e:e.message});
   }
-  process.exit();
   });
 
 
@@ -520,7 +513,6 @@ app.put('/course/:id/student/:stuid', async(req,res)=>{
   }catch(e){
     res.status(500).json({e:e.message});
   }
-  process.exit();
 });
 
 app.listen(PORT, () => {

@@ -6,28 +6,24 @@ import PartTimeOn from './PartTimeOn';
 import FullTimeOff from './FullTimeOff';
 import PartTimeOff from './PartTimeOff'
 
-import {
-  getAllCourses,
-  getOneCourse,
-  createCourse,
-  deleteCourse,
-  editCourse
-} from '../services/courseAPIService';
+import { getAllCourses } from '../services/courseAPIService';
+
+// const BASE_URL = 'http://localhost:3001';
 
 class StudentPortal extends React.Component {
   constructor(props) {
     super(props);
     console.log(props)
     this.state = {
+      courses: [],
       current: 'user',
-      screen: '',
-      courses: []
+      screen: ''
     }
-    this.getAllCourses =this.getAllCourses.bind(this);
+    this.getAllCourses = this.getAllCourses.bind(this);
   }
 
   async componentDidMount(){
-    await getAllCourses();
+    await this.getAllCourses();
   }
 
   setView = (view) => {
@@ -36,16 +32,11 @@ class StudentPortal extends React.Component {
     });
   }
 
-//   handleClick = (e) => {
-//   console.log('click ', e);
-//   this.setState({
-//     current: e.key,
-//   });
-// }
 
 async getAllCourses(){
   const response = await getAllCourses();
-  const courses = response.data;
+  console.log(response);
+  const courses = response;
   this.setState({
     courses
   })
@@ -57,7 +48,7 @@ async getAllCourses(){
     switch (this.state.screen) {
       case 'fullTimeOn':
         content = (<FullTimeOn
-                    courses = {this.state.courses}/>);
+                    courses ={this.state.courses}/>);
       break;
       case 'partTimeOn':
         content = (<PartTimeOn />);

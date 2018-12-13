@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Menu, Dropdown, Icon, message} from 'antd';
 import FullTimeDetails from './FullTimeDetails';
-import StudentPortal from './index'
+import StudentPortal from './index';
 
 
 class FullTimeOn extends React.Component {
@@ -14,7 +14,8 @@ class FullTimeOn extends React.Component {
 
   render() {
     return(
-      <div className="CoursesOutter">
+      <div>
+      <h1>Available Courses</h1>
       {this.props.courses.map(eachCourse => (
         <FullTimeDetails
         key = {eachCourse.id}

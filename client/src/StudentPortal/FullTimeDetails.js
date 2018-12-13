@@ -4,7 +4,6 @@ import React from 'react';
   return (
 
     <div className="item">
-    hey
       <div>{props.title}, {props.description}, {props.details}, {props.price}</div>
     </div>
   )

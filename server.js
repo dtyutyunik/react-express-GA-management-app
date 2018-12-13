@@ -53,6 +53,7 @@ app.post('/users/students', async (req, res) => {
     console.log(e);
     res.status(500).json({msg: e.message});
   }
+  // process.exit();
 });
 
 app.post('/users/instructors', async (req, res) => {
@@ -86,6 +87,7 @@ app.post('/users/instructors', async (req, res) => {
     console.log(e);
     res.status(500).json({msg: e.message});
   }
+  // process.exit();
 });
 
 app.post('/login', async (req, res) => {
@@ -132,6 +134,7 @@ app.post('/login', async (req, res) => {
   } catch(e) {
     res.status(401).json({msg: e.message});
   }
+  // process.exit();
 });
 
 app.get('/currentuser', passport.authenticate('jwt', { session: false }), (req, res) => {

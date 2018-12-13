@@ -38,20 +38,15 @@ export default class HeaderNav extends React.Component {
                 this.setState({current: 'register'});
                 //to show the modal
                 this.setModalVisible(true);
-
             } else {
                 this.setState({current: e.key});
             }
             if (e.key === 'aboutUs') {
               this.props.setPortal('aboutUs');
-
             }
             if (e.key === "course") {
               this.props.setPortal('course');
             }
-
-
-
         }
     //set if the login/register modal to show
     //default state of modal is invisible

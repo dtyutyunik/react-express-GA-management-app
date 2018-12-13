@@ -4,23 +4,21 @@
 
 }
 
-.landing-card {
+.landAnimate > div {
   width: 700px;
-  height: 180px;
+  height: 190px;
   margin: 0 auto;
+  margin-top: 20px;
   background: #4286f4;
 }
-.landAnimate > * {
-  font-size: 20px;
-  margin-top: 20px;
 
+.landAnimate > div > h1 {
+  color: white
 }
-.card-1 {
-
+.landAnimate > div > p {
+  color: black;
+  font-size: 14px;
 }
-.card-2 {
-
-}
-.card-3 {
-
+.landAnimate > div > .enroll {
+  background-color: red;
 }

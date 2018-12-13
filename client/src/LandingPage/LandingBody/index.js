@@ -1,4 +1,5 @@
 import React from 'react';
+import EachCourseDetails from './EachCourseDetails';
 import QueueAnim from 'rc-queue-anim';
 import './index.scss';
 import {
@@ -26,10 +27,15 @@ export default class LandingBody extends React.Component {
     return (
     (<div className="course-list">
       <QueueAnim className="landAnimate">
-      <div key="d1" className="landing-card card-1">Web Development Immersive</div>
-      <div key="d2" className="landing-card card-2">User Experience Design Immersive</div>
-      <div key="d3" className="landing-card card-3">Data Science Immersive</div>
-      <div key="d4" className="landing-card card-4">Digital Marketing Immersive</div>
+      {this.state.courses.map(e => (
+        <EachCourseDetails
+          key={e.id}
+          id={e.id}
+          title={e.title}
+          details={e.details}
+        />
+      ))
+      }
     </QueueAnim>
     </div>
      )

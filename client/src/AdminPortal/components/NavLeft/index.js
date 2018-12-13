@@ -6,9 +6,8 @@ export default class NavLeft extends React.Component {
   constructor(props) {
     super(props);
   }
-  // submenu keys of first level
+  // submenu keys of first/top level
   rootSubmenuKeys = ['row1', 'row2', 'row3', 'row4'];
-
   state = {
     openKeys: ['row1'],
   };
@@ -21,21 +20,25 @@ export default class NavLeft extends React.Component {
       this.setState({
         openKeys: latestOpenKey ? [latestOpenKey] : [],
       });
-        console.log(`the openKeys is ${openKeys}`)
+        console.log(`the openKeys is ${this.state.openKeys}`)
     }
-    switch (this.state.openKeys[1]) {
-      case 'row1':
-        this.props.handlePageChange('home');
-        break;
-      case 'row2':
-        this.props.handlePageChange('course');
-        break;
-      case 'row3':
-        this.props.handlePageChange('student');
-        break;
-      default:
-        this.props.handlePageChange('home');
-    }
+  }
+
+    handleMenuItemClick = e => {
+      switch (this.state.openKeys[1]) {
+        case 'row1':
+          this.props.handlePageChange('home');
+          break;
+        case 'row2':
+          this.props.handlePageChange('course');
+          break;
+        case 'row3':
+          this.props.handlePageChange('student');
+          break;
+        default:
+          this.props.handlePageChange('home');
+      }
+    
   }
 
   render() {
@@ -48,7 +51,9 @@ export default class NavLeft extends React.Component {
       >
         <SubMenu key="row1" title={<span><Icon type="appstore" />
         <span>Home</span></span>}>
-          <Menu.Item key="Home">Statistic</Menu.Item>
+          <Menu.Item key="Home"
+                     onClick={this.handleMenuItemClick}
+          >Statistic</Menu.Item>
           <Menu.Item key="2">Revenue</Menu.Item>
         </SubMenu>
         <SubMenu key="row2" title={<span><Icon type="setting" />

@@ -316,9 +316,6 @@ function mainRunner(){
 
   instructorCourse();
 
-
-
-
 }
 
 mainRunner();

@@ -15,7 +15,7 @@ async function userInstructorSignup(userData) {
 async function userLogin(userData) {
   const response = await axios.post(`${BASE_URL}/login`, userData);
   console.log(response);
-  return response.data['auth_level'];
+  return response.data;
 }
 
 export {

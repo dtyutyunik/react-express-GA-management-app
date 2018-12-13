@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon, Form, Input, Button, Checkbox } from 'antd';
-import { userLogin } from '../../../services/userAPIService'
+import { userLogin } from '../../services/userAPIService'
 //login form component
 class LoginForm extends React.Component {
   constructor(props) {
@@ -19,17 +19,18 @@ class LoginForm extends React.Component {
         console.log('Received values of form: ', formData);
           //axios api request
             const resp = await userLogin(formData);
-            console.log(resp);
+            console.log(resp)
             if (resp !== null) {
-                console.log(resp);
-                let userLogin = {
+                console.log(`response is not null`);
+                let userLoginCredential = {
                   username: resp.username
                 };
-                this.props.login(userLogin);
+                this.props.login(userLoginCredential);
                 //set the modal to disappear
                 this.props.setModalVisible(false);
                 } else {
                   //if json is null, username or password wrong
+                  console.log('username password not working')
                   this.setState({hasUser: 'wrong username or password '});
                 }
              }

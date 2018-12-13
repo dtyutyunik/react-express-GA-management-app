@@ -9,15 +9,10 @@ export default class Logout extends React.Component {
   render() {
     return (
       <div>
-          <a href='#' target='_blank'><Button type='primary'>{this.props.userName}</Button></a>
+          <a href='#' target='_blank'><Button type='primary'>{this.props.username}</Button></a>
           &nbsp;&nbsp;
           <Button type='ghost' onClick={this.props.logout}>Logout User</Button>
       </div>
       );
   }
 }
-
-// set username is required
-Logout.propTypes = {
-    userName: PropTypes.string.isRequired
-};

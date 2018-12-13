@@ -8,7 +8,7 @@ import Login from './Login';
 import Signup from './Signup';
 import SignupInstructor from './SignupInstructor';
 import LandingPage from './LandingPage';
-
+import HeaderNav from './HeaderNav';
 import axios from 'axios';
 const BASE_URL = "http://localhost:3001";
 
@@ -18,30 +18,18 @@ class App extends Component {
     this.state = {
       portal: 'landing',
       token: null,
-      loginFormData: {
-        username: '',
-        password: ''
-      },
-      signupFormData: {
-        fullName: '',
-        username: '',
-        password: '',
-        auth_level: 'student'
-      },
-      signupInsFormData: {
-        fullName: '',
-        username: '',
-        password: '',
-        auth_level: 'instructor',
-        authcode: ''
-      }
+      username: ''
     }
-  //  this.buildHeaders=this.buildHeaders.bind(this)
-    this.changeRegistration=this.changeRegistration.bind(this);
+    this.updateUsername = this.updateUsername.bind(this);
   }
 
   async componentDidMount() {
 
+  }
+  updateUsername(username) {
+    this.setState({
+      username
+    })
   }
   async userStudentSignup(userData) {
     const response = await axios.post(`${BASE_URL}/users/students`, userData);
@@ -179,45 +167,9 @@ class App extends Component {
       default:
         contentView = (<LandingPage />);
     }
-    const landingNavBar = <div className="navbar">
-              <img className="Logo" src="https://lh3.googleusercontent.com/-AlEjJmP0ofE/VOVDme9hxKI/AAAAAAAAABE/LXO0f_WTqMY/s530-p/bs.png" alt="logo"/>
-              <h1>BootCamp Startup</h1>
-              <button className='btn btn-primary'
-                      onClick={() => {this.setPortal('admin')}}
-                >Admin</button>
-              <button className='btn btn-success'
-                      onClick={() => {this.setPortal('instructor')}}
-                >Instructor</button>
-              <button className='btn btn-default'
-                      onClick={() => {this.setPortal('student')}}
-                >Student</button>
-
-              <Login onChange={this.handleChange}
-                     onSubmit={this.handleSubmit}
-                     username={this.state.loginFormData.username}
-                     password={this.state.loginFormData.password}
-
-                />
-              <Signup onSignupChange={this.handleSignupChange}
-                      onSignupSubmit={this.handleSingupSubmit}
-                      fullName={this.state.signupFormData.fullName}
-                      username={this.state.signupFormData.username}
-                      password={this.state.signupFormData.password}
-
-                />
-              <SignupInstructor
-                      onSignupInsChange={this.handleSignupInsChange}
-                      onSignupInsSubmit={this.handleSignupInsSubmit}
-                      fullName={this.state.signupFormData.fullName}
-                      username={this.state.signupInsFormData.username}
-                      password={this.state.signupInsFormData.password}
-                      authcode={this.state.signupInsFormData.authcode}
-                />
-            </div>
-    let isLandingPortal = this.state.portal === 'landing';
     return (
       <div className="App">
-        { isLandingPortal ? (landingNavBar) : null }
+        <HeaderNav updateUsername={this.updateUsername}/>
       { contentView }
       </div>
     );

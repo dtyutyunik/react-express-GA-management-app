@@ -1,6 +1,5 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
-import HeaderNav from './HeaderNav';
 import LandingBody from './LandingBody';
 export default class LandingPage extends React.Component{
     constructor(props){
@@ -9,7 +8,6 @@ export default class LandingPage extends React.Component{
     render(){
         return(
             <div>
-                <HeaderNav />
                 <LandingBody />
                  {/*{this.props.children}*/}
                 {/*<img className="stats"

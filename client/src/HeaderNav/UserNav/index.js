@@ -1,5 +1,5 @@
 import React from 'react';
-import Logout from './Logout';
+import Logout from './Logout.js';
 import { Menu, Icon } from 'antd';
 import LoginRegisterModal from './LoginRegisterModal';
 
@@ -10,7 +10,7 @@ export default class UserNav extends React.Component{
             <Menu.Item key="logout">
                 <Logout
                 logout={this.props.logout}
-                userName={this.props.userName}
+                userName={this.props.username}
                 />
             </Menu.Item> :
             <Menu.Item key='register'>

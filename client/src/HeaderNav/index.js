@@ -2,14 +2,14 @@
 import React from 'react';
 import { Row, Col, Nav } from 'antd';
 import UserNav from './UserNav';
-import logo from '../../images/logo.jpg'
+import logo from '../images/logo.jpg'
 import LoginRegisterModal from './UserNav/LoginRegisterModal'
 export default class HeaderNav extends React.Component {
   constructor(props) {
         super(props);
         this.state = {
             hasLogined: false, // to show if Login
-            userName: '', //to show username
+            username: '', //to show username
             userId: '',   //to show id
             current: 'course',//to show the current clicked nav
             modalVisable: false, //indicate if the login/register component needs to show
@@ -49,23 +49,22 @@ export default class HeaderNav extends React.Component {
     this.setState({
       modalVisable: value,
     });
-
   }
-
     // add modal inside of return
   logout() {
-        localStorage.userName = '';
+        localStorage.username = '';
         this.setState({
           hasLogined: false,
-          userName: ''
+          username: ''
           });
         }
   login(userLogin) {
       this.setState({
-        userName: userLogin.userName,
+        username: userLogin.username,
         hasLogined: true
       });
-      localStorage.userName = userLogin.userName;
+      localStorage.username = userLogin.username;
+      this.props.updateUsername(this.state.username);
     }
 render() {
   let modalVisable = this.state.modalVisable;
@@ -83,7 +82,7 @@ render() {
         <UserNav
              hasLogined={this.state.hasLogined}
              logout={this.logout.bind(this)}
-             userName={this.state.userName}
+             username={this.state.username}
              current={this.state.current}
              menuItemClick={this.MenuItemClick.bind(this)}
              />

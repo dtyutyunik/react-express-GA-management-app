@@ -94,15 +94,12 @@ app.post('/login', async (req, res) => {
     const user = await User.find({where: { username }});
     const passwordValid = await bcrypt.compare(password, user.password);
     const { id, auth_level } = user;
-
     let stock;
     if (passwordValid) {
-
       try{
         if(user['auth_level'] === 'student'){
             stock = await user.getStudent();
     }
-
     else if(user['auth_level'] === 'instructor'){
         stock = await user.getInstructor();
       }

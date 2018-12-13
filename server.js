@@ -163,11 +163,11 @@ app.get('/instructors', async(req,res) => {
 
 app.get('/courses', async(req,res) => {
   try{
-    const courseList = await Course.findAll({});
+    const courseList = await Course.findAll();
     res.json(courseList);
   }
   catch(e){
-    console.log(e);
+    res.status(500).json({e: e.message});
   }
 });
 

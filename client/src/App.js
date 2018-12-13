@@ -18,48 +18,46 @@ class App extends Component {
     this.state = {
       portal: 'landing',
       token: null,
-      username: ''
+      username: '',
+      password: '',
+      hasLogined: false
     }
-    this.updateUsername = this.updateUsername.bind(this);
+    this.updateUserLoginCredential = this.updateUserLoginCredential.bind(this);
+    this.logout = this.logout.bind(this);
+    this.login = this.login.bind(this);
+  }
+  logout() {
+        localStorage.username = '';
+        this.setState({
+          hasLogined: false,
+          username: '',
+          password: '',
+          token: null,
+          portal: 'landing'
+      });
   }
 
-  async componentDidMount() {
-
+  login(userLogin) {
+    console.log(`i m calling this function and the userLogin credential is
+      ${JSON.stringify(userLogin)}`)
+      this.setState({
+        loginCredential: userLogin,
+        hasLogined: true
+      });
+      // localStorage.username = userLogin.username;
+      // localStorage.authLevel = userLogin['auth_level'];
+      this.updateUserLoginCredential(userLogin);
+      console.log(`the userLoginCredential is ${JSON.stringify(userLogin)}`)
   }
-  updateUsername(username) {
+
+  updateUserLoginCredential(loginCredential) {
     this.setState({
-      username
+      username: loginCredential.username,
+      password: loginCredential.password,
+      token: loginCredential.token,
+      portal: loginCredential['auth_level']
     })
-  }
-  async userStudentSignup(userData) {
-    const response = await axios.post(`${BASE_URL}/users/students`, userData);
-    return response.user;
-  }
-
-  async userInstructorSignup(userData) {
-    const response = await axios.post(`${BASE_URL}/users/instructors`, userData);
-    return response.user;
-  }
-  // buildHeaders() {
-  //     const { token } = this.state;
-  //     return {
-  //       headers: {
-  //         'Authorization': `Bearer ${token}`
-  //       }
-  //     };
-  //   }
-
-  async userLogin(userData) {
-    const response = await axios.post(`${BASE_URL}/login`, userData);
-    console.log(response);
-    return response.data['auth_level'];
-  }
-
-  changeRegistration(){
-
-    this.setState({
-      process: 'Signed In'
-    })
+    console.log(`updateUserLoginCredential is called and credentials are ${loginCredential}`)
   }
 
   setPortal(view) {
@@ -67,83 +65,12 @@ class App extends Component {
       portal: view
     })
   }
-
   returnToLanding() {
     this.setState({
       portal: 'landing'
     })
   }
-  async userLoginAttemp(userData) {
-    const response = await this.userLogin(userData);
 
-    this.setState({
-      // portal: response['auth_level'],
-      // token: response.token
-    });
-
-
-
-  }
-  async userSignupAttemp(userData) {
-    const response = await this.userStudentSignup(userData);
-    // this.setState({
-    //   portal: 'student'
-    // });
-  }
-  async instructorSignupAttemp(userData) {
-    const response = await this.userInstructorSignup(userData);
-    // this.setState({
-    //   portal: 'instructor'
-    // })
-  }
-
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState(prevState => {
-      return {
-        loginFormData: {
-          ...prevState.loginFormData,
-          [name]: value
-        }
-      }
-    });
-  }
-  handleSubmit = async e => {
-    e.preventDefault();
-    await this.userLoginAttemp(this.state.loginFormData);
-
-  }
-  handleSignupChange = e => {
-    const { name, value } = e.target;
-    this.setState( prevState => {
-      return {
-        signupFormData: {
-          ...prevState.signupFormData,
-          [name]: value
-        }
-      }
-    });
-  }
-  handleSingupSubmit = async e => {
-    e.preventDefault();
-    await this.userSignupAttemp(this.state.signupFormData);
-
-  }
-  handleSignupInsChange = e => {
-    const { name, value } = e.target;
-    this.setState( prevState => {
-      return {
-        signupInsFormData: {
-          ...prevState.signupInsFormData,
-          [name]: value
-        }
-      }
-    });
-  }
-  handleSignupInsSubmit = async e => {
-    e.preventDefault();
-    await this.instructorSignupAttemp(this.state.signupInsFormData);
-  }
   render() {
     let contentView;
     switch (this.state.portal) {
@@ -154,7 +81,6 @@ class App extends Component {
         contentView=(<LandingPage
           info={this.state.process}
           changeRegistration={this.changeRegistration}
-
           />
         );
         break;
@@ -169,7 +95,11 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <HeaderNav updateUsername={this.updateUsername}/>
+        <HeaderNav updateUserLoginCredential={this.updateUserLoginCredential}
+                   logout={this.logout}
+                   login={this.login}
+                   hasLogined={this.state.hasLogined}
+                   />
       { contentView }
       </div>
     );

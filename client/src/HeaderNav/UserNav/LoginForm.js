@@ -19,11 +19,13 @@ class LoginForm extends React.Component {
         console.log('Received values of form: ', formData);
           //axios api request
             const resp = await userLogin(formData);
+            console.log(`the response data is`)
             console.log(resp)
             if (resp !== null) {
-                console.log(`response is not null`);
                 let userLoginCredential = {
-                  username: resp.username
+                   ...resp.stock,
+                   ['auth_level']: resp['auth_level'],
+                   token: resp.token
                 };
                 this.props.login(userLoginCredential);
                 //set the modal to disappear
@@ -33,7 +35,7 @@ class LoginForm extends React.Component {
                   console.log('username password not working')
                   this.setState({hasUser: 'wrong username or password '});
                 }
-             }
+          }
       });
     }
   render() {

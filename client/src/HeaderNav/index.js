@@ -8,9 +8,6 @@ export default class HeaderNav extends React.Component {
   constructor(props) {
         super(props);
         this.state = {
-            hasLogined: false, // to show if Login
-            username: '', //to show username
-            userId: '',   //to show id
             current: 'course',//to show the current clicked nav
             modalVisable: false, //indicate if the login/register component needs to show
             activeKey: '1' // set the Tabpane default tab is log in Tab
@@ -22,13 +19,13 @@ export default class HeaderNav extends React.Component {
     //show logout component
   componentWillMount() {
         //to show if user existed
-    if (localStorage.token && localStorage.token != '') {
-        this.setState({
-            token: localStorage.token,
-            auth_level: localStorage.authLevel,
-            hasLogined: true
-          });
-      }
+    // if (localStorage.token && localStorage.token != '') {
+    //   console.log(`localstorage.token existed ${localStorage.token}`)
+    //     this.setState({
+    //         auth_level: localStorage.authLevel,
+    //         hasLogined: true
+    //       });
+    //   }
     }
   MenuItemClick(e) {
             //when the login/register MenuItem clicked，set current value，
@@ -43,29 +40,14 @@ export default class HeaderNav extends React.Component {
                 this.setState({current: e.key});
             }
         }
-        //set if the login/register modal to show
-        //default state of modal is invisible
+    //set if the login/register modal to show
+    //default state of modal is invisible
  setModalVisible(value) {
     this.setState({
       modalVisable: value,
     });
   }
-    // add modal inside of return
-  logout() {
-        localStorage.username = '';
-        this.setState({
-          hasLogined: false,
-          username: ''
-          });
-        }
-  login(userLogin) {
-      this.setState({
-        username: userLogin.username,
-        hasLogined: true
-      });
-      localStorage.username = userLogin.username;
-      this.props.updateUsername(this.state.username);
-    }
+  // add modal inside of return
 render() {
   let modalVisable = this.state.modalVisable;
   return (
@@ -80,18 +62,19 @@ render() {
           </Col>
         <Col span={18}>
         <UserNav
-             hasLogined={this.state.hasLogined}
-             logout={this.logout.bind(this)}
+             hasLogined={this.props.hasLogined}
              username={this.state.username}
              current={this.state.current}
              menuItemClick={this.MenuItemClick.bind(this)}
+             logout={this.props.logout}
              />
+          {  modalVisable ?
          <LoginRegisterModal
              setModalVisible={this.setModalVisible.bind(this)}
              activeKey={this.state.activeKey}
-             login={this.login.bind(this)}
+             login={this.props.login}
              visible={modalVisable}
-             />
+             /> : null }
           </Col>
         </Row>
       </header>

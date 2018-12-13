@@ -9,9 +9,9 @@ export default class Logout extends React.Component {
   render() {
     return (
       <div>
-          <a href='#' target='_blank'><Button type='primary'>{this.props.username}</Button></a>
+          <button type='ghost' >{this.props.username}</button>
           &nbsp;&nbsp;
-          <Button type='ghost' onClick={this.props.logout}>Logout User</Button>
+          <Button type='ghost' onClick={this.props.logout}>Logout</Button>
       </div>
       );
   }

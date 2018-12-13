@@ -10,7 +10,7 @@ export default class UserNav extends React.Component{
             <Menu.Item key="logout">
                 <Logout
                 logout={this.props.logout}
-                userName={this.props.username}
+                username={this.props.username}
                 />
             </Menu.Item> :
             <Menu.Item key='register'>

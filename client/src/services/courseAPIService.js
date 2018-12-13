@@ -3,6 +3,7 @@ const BASE_URL = 'http://localhost:3001';
 
 async function getAllCourses() {
   const response = await axios(`${BASE_URL}/courses`);
+  console.log(response.data);
   return response.data;
 }
 async function getOneCourse(id) {

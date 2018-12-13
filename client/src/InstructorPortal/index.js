@@ -3,16 +3,18 @@ import { Menu, Dropdown, Icon, message} from 'antd';
 import InstructorStudents from './instructorStudents';
 import InstructorCourses from './instructorCourses';
 import axios from 'axios';
-import { getAllStudents } from '../services/studentAPIService'
+import { getInstrucStu } from '../services/studentAPIService'
 
 class InstructorPortal extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
       students: [],
       current: 'user',
       screen: '',
     }
+    this.getInstrucStu = this.getInstrucStu.bind(this);
   }
 
   setView = (view) => {
@@ -21,15 +23,29 @@ class InstructorPortal extends React.Component {
     });
   }
 
+  handleClick = (e) => {
+  this.setState({
+    current: e.key,
+  });
+}
+
   async componentDidMount() {
-    await this.getAllStudents();
+    // await this.getAllStudents();
+    await this.getInstrucStu();
   }
 
-  async getAllStudents() {
-    const response = await getAllStudents();
+  // async getAllStudents() {
+  //   const response = await getAllStudents();
+  //   const students = response;
+  //   this.setState({
+  //     students
+  //   });
+  // }
+
+  async getInstrucStu() {
+    const response = await getInstrucStu(1);
     const students = response;
     console.log(response);
-    // debugger;
     this.setState({
       students
     });

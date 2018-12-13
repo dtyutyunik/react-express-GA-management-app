@@ -342,7 +342,7 @@ app.put('/students/:id', async(req,res)=>{
   }
 
 });
-
+//edit instructor profile info
 app.put('/instructors/:id', async(req,res)=>{
   try{
 
@@ -392,10 +392,8 @@ app.get('/instructors/:id/students',async(req,res)=>{
         required:true,
       }]
     });
-      // const studentTeach= await Course.findOne(
-      //   {where:{instructor_id: req.params.id}},
-      // include: getStudents);
-      // res.json(studentTeach);
+
+
       const finalstu = await Course.findOne({
         where:{id:getinststu.course.id},
         include:[{
@@ -406,7 +404,7 @@ app.get('/instructors/:id/students',async(req,res)=>{
 
 
 
-      res.json(finalstu.students);
+      res.json(finalstu);
   }catch(e){
     res.status(500).json({e:e.message});
   }
@@ -430,6 +428,72 @@ app.put('/courses/:id', async(req,res)=>{
   }
 
 });
+// const finalstu = await Course.findOne({
+//   where:{id:getinststu.course.id},
+//   include:[{
+//     model:Student,
+//     required:true,
+//   }]
+// });
+//let instructor kick student out from the course they teach
+app.delete('/instructors/:id/student/:studentid', async(req,res)=>{
+    try{
+      const coursePull= await Course.findOne({where:{instructor_id: req.params.id}});
+      const studentFind= await Student.findOne({where:{course_id: coursePull.id}})
+
+      if(studentFind.id==req.params.studentid){
+
+        studentFind.course_id=null;
+        coursePull.capacity+=1;
+        await coursePull.save();
+        await studentFind.save();
+        res.json('Student deleted and capacity increased of course');
+      }else{
+        res.json('that student is not part of your class');
+      }
+
+
+    }catch(e){
+      res.status(500).json({e: e.message});
+    }
+    process.exit();
+});
+
+//let instructor edit course detail,description
+app.put('/instructor/:id/course/:courseId', async(req,res)=>{
+  try{
+
+    const courseTaughtByInstructor= await Course.findOne({
+        where:{id: req.params.courseId}
+  });
+  const instructorInfo= await Instructor.findByPk(req.params.id);
+    if(courseTaughtByInstructor.instructor_id!==null){
+      if(instructorInfo.id==courseTaughtByInstructor.instructor_id){
+        courseTaughtByInstructor.description= req.body.description;
+        courseTaughtByInstructor.details= req.body.details;
+        await courseTaughtByInstructor.save();
+        res.json(courseTaughtByInstructor);
+      }else{
+        res.json("the instructor doesnt teach that course so you can't edit it");
+      }
+
+    }else{
+      res.json("no one is teaching that course");
+    }
+
+  // res.json(instructorInfo);
+
+
+
+
+  }
+  catch(e){
+    res.status(500).json({e:e.message});
+  }
+  process.exit();
+  });
+
+
 
 //lets students register to a course
 app.put('/course/:id/student/:stuid', async(req,res)=>{

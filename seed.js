@@ -310,9 +310,9 @@ async function studentUser(){
 function mainRunner(){
   // seed();
   // createStudentUser();
-  createInstructorUser();
+  // createInstructorUser();
 
-  // studentCourse();
+  studentCourse();
 
   // instructorCourse();
 

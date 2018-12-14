@@ -1,4 +1,5 @@
 @import '~antd/dist/antd.css';
+
 .App {
   text-align: center;
 }
@@ -19,10 +20,6 @@
 
 }
 
-.item{
-  display: grid;
-}
 .studentList{
-  margin: 1% 0 1% 0;
-  justify-content: space-around;
+  border: 1px solid red;
 }

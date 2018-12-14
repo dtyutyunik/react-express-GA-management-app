@@ -96,6 +96,9 @@ async getCourseInfo(){
         content = (<InstructorCourses
           courseInfo={this.state.courseInfo}/>);
       break;
+      case 'prof':
+        content = (<InstructorInfo
+                    instructorInfo = {this.state.instructorDetails}/>)
 
       default:
       content =(<InstructorInfo instinfo={this.state.instructorDetails} setView={this.setView} />);
@@ -111,7 +114,8 @@ async getCourseInfo(){
         <Menu
           selectedKeys={[this.state.current]}
           mode="horizontal">
-          <Menu.Item key="user">
+          <Menu.Item onClick={() => this.setView('prof')}
+          key="user">
             <Icon type="user"/>My Profile
           </Menu.Item>
 

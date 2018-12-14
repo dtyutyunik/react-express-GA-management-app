@@ -1,0 +1,18 @@
+.courseInfo {
+  display: grid;
+  grid-template-rows: 1fr, 2fr, 3fr, 1fr;
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.courseInfo > h1 {
+  color: #4249ce;
+  margin-top: 30px;
+}
+.courseInfo > p {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 700;
+}

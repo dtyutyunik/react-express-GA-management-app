@@ -23,6 +23,8 @@ class StudentPortal extends React.Component {
       studentProfile: props.studentProfile,
     }
     this.getAllCourses = this.getAllCourses.bind(this);
+    this.updateStudentProfile = this.updateStudentProfile.bind(this);
+
   }
 
   async componentDidMount(){
@@ -44,13 +46,25 @@ async getAllCourses(){
     courses
   })
 }
+async updateStudentProfile(stu) {
+     const response = await axios.put(`${BASE_URL}/students/${this.props.studentProfile.id}`,
+     stu);
+     console.log(response.data);
+     this.setState({
+       studentProfile: response.data,
+     })
+ }
 
-  render() {
+render() {
     let { studentId } = this.props
     let content;
     switch (this.state.screen) {
       case 'Stedit':
-        content = (<StudentEdit studentProfile={this.state.studentProfile} setView={this.setView}  />);
+        content = (<StudentEdit
+          studentProfile={this.state.studentProfile}
+          setView={this.setView}
+          updateStudentProfile={this.updateStudentProfile}
+          />);
         break;
       case 'fullTimeOn':
         content = (<FullTimeOn

@@ -7,7 +7,7 @@ function InstructorCourses(props){
 
 console.log(props.courseInfo);
     return(
-      props.courseInfo?<div>
+      props.courseInfo?<div className="courseInfo">
         <h1>{props.courseInfo.title}</h1>
         <p>Description:{props.courseInfo.description}</p>
         <p>Details:{props.courseInfo.details}</p>

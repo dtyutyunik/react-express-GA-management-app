@@ -21,6 +21,7 @@ class InstructorPortal extends React.Component {
     this.getInstrucStudents = this.getInstrucStudents.bind(this);
     this.getCourseInfo = this.getCourseInfo.bind(this);
     this.setView = this.setView.bind(this);
+    this.updateInstructorProfile = this.updateInstructorProfile.bind(this);
   }
 
   async setView(view){
@@ -47,14 +48,25 @@ class InstructorPortal extends React.Component {
     current: e.key,
   });
 }
+  async updateInstructorProfile(stu) {
+    console.log(`inside update instructor profile`)
+     const response = await axios.put(`${BASE_URL}/instructors/${this.state.instructorDetails.id}`,
+     stu);
+     console.log(response.data);
+     this.setState({
+       instructorDetails: response.data,
+     });
+     console.log(this.state.instructorDetails);
+     
+ }
 
 
-async getCourseInfo(){
-  const pull= await axios(`${BASE_URL}/instructors/${this.state.instructorDetails.id}/courses`);
-  console.log(pull);
-  this.setState({
-    courseInfo: pull.data?pull.data.course:false
-  });
+  async getCourseInfo(){
+    const pull= await axios(`${BASE_URL}/instructors/${this.state.instructorDetails.id}/courses`);
+    console.log(pull);
+    this.setState({
+      courseInfo: pull.data?pull.data.course:false
+    });
 
 }
 
@@ -82,7 +94,10 @@ async getCourseInfo(){
     // console.log(this.state.instructorDetails.id)
     switch (this.state.screen) {
       case 'edit':
-      content =(<InstructorEdit instinfo={this.state.instructorDetails} setView={this.setView} />);
+      content =(<InstructorEdit instinfo={this.state.instructorDetails}
+                                setView={this.setView}
+                                updateInstructorProfile = {this.updateInstructorProfile}
+                                />);
       break;
       case 'stu':
         content = (this.state.students?<StudentDetails
@@ -98,10 +113,15 @@ async getCourseInfo(){
       break;
       case 'prof':
         content = (<InstructorInfo
-                    instructorInfo = {this.state.instructorDetails}/>)
+                    instructorInfo = {this.state.instructorDetails}
+                    />
+                  )
 
       default:
-      content =(<InstructorInfo instinfo={this.state.instructorDetails} setView={this.setView} />);
+      content =(<InstructorInfo instinfo={this.state.instructorDetails}
+                                setView={this.setView}
+
+                                />);
 
     }
 

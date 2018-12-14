@@ -11,10 +11,6 @@ const BASE_URL = 'http://localhost:3001';
      const pull=await axios.delete(`${BASE_URL}/instructors/${props.instructorInfo}/student/${e.id}`);
      await props.renderStudent();
    };
-
-
-
-
   return (
     <div className="item">
       {props.students.map(e=>{

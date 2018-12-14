@@ -26,7 +26,8 @@ class StudentRegisterForm extends React.Component {
               const response = await axios.post(`${BASE_URL}/users/students`, formDataReq);
               console.log(response.data.user);
                  if (response.data.user) {
-                       message.success(`Hello ${response.data.user.fullname}! you are successfully registered`);
+                       message.success(`Hello ${response.data.user.fullname}! you are successfully registered,
+                         please login now`);
                        //set modal to disappear
                        this.props.setModalVisible(false);
               } else {

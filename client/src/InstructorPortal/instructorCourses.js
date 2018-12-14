@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Menu, Dropdown, Icon, message} from 'antd';
+import './instructorCourses.scss';
 
 function InstructorCourses(props){
 

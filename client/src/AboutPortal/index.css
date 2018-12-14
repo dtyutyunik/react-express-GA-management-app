@@ -1,10 +1,11 @@
 .AboutPortal {
-
+  font-family: 'Lora', serif;
   margin: 0 auto;
+  margin-top: 50px;
   max-width: 50%;
 
 }
 
 .about-me {
-  font-size: 20px;
+  font-size: 24px;
 }

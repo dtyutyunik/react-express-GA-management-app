@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { Table, Icon, Switch, Radio, Form, Divider } from 'antd';
+import './studentDetails.scss' ;
+
 const BASE_URL = 'http://localhost:3001';
 
  function StudentDetails(props) {

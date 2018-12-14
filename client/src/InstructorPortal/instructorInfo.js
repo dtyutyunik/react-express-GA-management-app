@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Card } from 'antd';
 import './instructorInfo.scss';
 
@@ -17,7 +18,8 @@ function InstructorInfo (props){
         <p>Email: {props.instinfo.email}</p>
         <p>Title: {props.instinfo.title}</p>
      </Card>
-   </div>
+   <button onClick={() => props.setView('edit')} >Edit</button>
+    </div>
  )
 }
 

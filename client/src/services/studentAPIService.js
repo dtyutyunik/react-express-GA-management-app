@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://polar-refuge-58258.herokuapp.com';
 
 async function getInstrucStu(id) {
   const response = await axios(`${BASE_URL}/instructors/${id}/students`);

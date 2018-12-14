@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button } from 'antd';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://polar-refuge-58258.herokuapp.com';
 
 function StudentInfo (props){
 

@@ -3,7 +3,7 @@ import { Button, List, Avatar, Icon, message } from 'antd';
 import axios from 'axios';
 import { registerStudent } from '../services/courseAPIService';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://polar-refuge-58258.herokuapp.com';
 
 class FullTimeDetails extends React.Component {
   constructor(props) {
@@ -59,7 +59,7 @@ class FullTimeDetails extends React.Component {
       {text}
     </span>
   );
-  
+
   let applyBtn;
   if(this.state.registerOrNot) {
     applyBtn = 'Already A BS Student'

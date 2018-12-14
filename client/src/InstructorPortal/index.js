@@ -6,7 +6,7 @@ import InstructorInfo from './instructorInfo';
 import InstructorEdit from './instructorEdit';
 import axios from 'axios';
 import { getInstrucStu } from '../services/studentAPIService';
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://polar-refuge-58258.herokuapp.com';
 
 class InstructorPortal extends React.Component {
   constructor(props) {

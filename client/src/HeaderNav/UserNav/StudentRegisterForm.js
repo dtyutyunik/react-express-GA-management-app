@@ -3,7 +3,7 @@ import { Icon, message,  Form, Input, Button } from 'antd';
 import axios from 'axios';
 // form for student to register
 // code snippet imported from ant design
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "https://polar-refuge-58258.herokuapp.com";
 class StudentRegisterForm extends React.Component {
     constructor(props) {
         super(props);

@@ -18,6 +18,7 @@ return(
     <h3>Phone: {props.studentProfile.phone}</h3>
     <h3>Email: {props.studentProfile.email}</h3>
     </Card>
+    <button onClick={() => props.setView('edit')} >Edit</button>
 
   </div>
 

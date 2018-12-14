@@ -28,3 +28,5 @@ They are able to browse the course they teach and edit info of that specific cou
 ![Admin Story](wireFrames/admin_story.jpg)
 ![Instructor Story](wireFrames/instructor_story.jpg)
 ![Student/Guest Story](wireFrames/student_guest_story.jpg)
+![CodeSnippet of deleting student](wireFrames/codesnippet.jpg)
+

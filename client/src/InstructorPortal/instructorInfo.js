@@ -1,5 +1,5 @@
 import React from 'react';
-const BASE_URL = 'http://localhost:3001';
+
 
 function InstructorInfo (props){
 
@@ -10,8 +10,8 @@ return(
     <h3>Phone:{props.instinfo.phone}</h3>
     <h3>Email:{props.instinfo.email}</h3>
     <h3>Title:{props.instinfo.title}</h3>
+<button onClick={() => props.setView('edit')} >Edit</button>
 
-    
 
 
   </div>

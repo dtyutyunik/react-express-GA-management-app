@@ -22,6 +22,7 @@ class App extends Component {
     this.logout = this.logout.bind(this);
     this.login = this.login.bind(this);
     this.setPortal= this.setPortal.bind(this);
+    this.setUserLogininfo = this.setUserLogininfo.bind(this);
   }
   logout() {
         localStorage.username = '';
@@ -59,6 +60,11 @@ class App extends Component {
     console.log(this.state.portal);
   }
 
+  setUserLogininfo(y){
+    this.setState({
+      userLoginInfo:y
+    })
+  }
 
   render() {
     console.log(this.state.portal);

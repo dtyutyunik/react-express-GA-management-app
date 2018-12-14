@@ -5,82 +5,65 @@ class InstructorEdit extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      fullname:"",
-      email: "",
-      phone:"",
-      title:""
+        fullname:`${props.instinfo.fullname}`,
+        email: `${props.instinfo.email}`,
+        phone:`${props.instinfo.phone}`
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 handleChange = (e) => {
-  // TODO: update state.formData when input fields change
-const {name, value} = e.target;
-// const name = e.target.name
-// const value = e.target.value
-this.setState(prevState => {
- return {
-   formData: {
-     ...prevState.formData,
-     [name]: value
-   }
- }
-})
+const{ name, value } = e.target;
+this.setState({
+  [name]:value
+  })
 }
 
 handleSubmit = async(e) => {
   e.preventDefault();
-   console.log(this.state.formData);
-   await this.instructoredit(this.state.formData);
-
+   console.log(this.state);
+   await this.putInstructorEdit(this.state);
+   this.props.setView('0');
 }
-async putInstructorEdit(){
-
+async putInstructorEdit(passinstruct){
+  console.log(passinstruct);
+  console.log(this.props.instinfo.id);
+const putinstructor = await axios.put(`${BASE_URL}/instructors/${this.props.instinfo.id}`,passinstruct)
 }
 
-async componentDidMount(){
 
-}
 
 
 render (){
 
 
   return (
-    { // <form onSubmit={props.onSubmit} className=“InstructorEdit”>
-     //   <label>
-     //     Name:
-     //     <input type=‘text’
-     //       name=‘name’
-     //       value={props.name}
-     //       onChange={props.onChange} />
-     //   </label>
-     //   <label>
-     //     Email:
-     //     <input
-     //       type=‘text’
-     //       name=‘Email’
-     //       value={props.hometown}
-     //       onChange={props.onChange} />
-     //   </label>
-     //   <label>
-     //     Phone:
-     //     <textarea
-     //       name=‘phone’
-     //       value={props.bio}
-     //       onChange={props.onChange} />
-     //   </label>
-     //   <label>
-     //     Title:
-     //     <textarea
-     //       name=‘title’
-     //       value={props.bio}
-     //       onChange={props.onChange} />
-     //   </label>
-     //   <button type=“submit”>Submit</button>
-     // </form>
-   }
+      <form onSubmit={this.handleSubmit} className="InstructorEdit">
+        <label>
+          Name:
+          <input type='text'
+            name='fullname'
+            value={this.state.fullname}
+            onChange={this.handleChange} />
+        </label>
+        <label>
+          Email:
+          <input
+            type='text'
+            name='email'
+            value={this.state.email}
+            onChange={this.handleChange} />
+        </label>
+        <label>
+          Phone:
+          <textarea
+            name='phone'
+            value={this.state.phone}
+            onChange={this.handleChange} />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
    )
  }
 }

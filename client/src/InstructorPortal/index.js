@@ -20,6 +20,7 @@ class InstructorPortal extends React.Component {
     }
     this.getInstrucStudents = this.getInstrucStudents.bind(this);
     this.getCourseInfo = this.getCourseInfo.bind(this);
+    this.setView = this.setView.bind(this);
   }
 
   async setView(view){
@@ -32,6 +33,11 @@ class InstructorPortal extends React.Component {
     if(view=='stu'){
       await this.getInstrucStudents();
     }
+    if(view=='edit'){
+
+    }
+
+
     console.log('thie view is', this.state.screen);
 
   }
@@ -76,7 +82,7 @@ async getCourseInfo(){
     // console.log(this.state.instructorDetails.id)
     switch (this.state.screen) {
       case 'edit':
-      content =(<InstructorEdit instinfo={this.state.instructorDetails} />);
+      content =(<InstructorEdit instinfo={this.state.instructorDetails} setView={this.setView} />);
       break;
       case 'stu':
         content = (this.state.students?<StudentDetails
@@ -92,7 +98,7 @@ async getCourseInfo(){
       break;
 
       default:
-      content =(<InstructorInfo instinfo={this.state.instructorDetails}  />);
+      content =(<InstructorInfo instinfo={this.state.instructorDetails} setView={this.setView} />);
 
     }
 

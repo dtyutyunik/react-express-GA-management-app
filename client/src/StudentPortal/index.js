@@ -15,7 +15,6 @@ const BASE_URL = 'http://localhost:3001';
 class StudentPortal extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       courses: [],
       current: '',
@@ -40,7 +39,6 @@ class StudentPortal extends React.Component {
 
 async getAllCourses(){
   const response = await getAllCourses();
-  console.log(response);
   const courses = response;
   this.setState({
     courses
@@ -49,8 +47,6 @@ async getAllCourses(){
 async updateStudentProfile(stu) {
      const response = await axios.put(`${BASE_URL}/students/${this.props.studentProfile.id}`,
      stu);
-     console.log(response);
-     console.log(response.data);
      this.setState({
        studentProfile: response.data,
      })

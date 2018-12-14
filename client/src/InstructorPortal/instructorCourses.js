@@ -5,7 +5,6 @@ import './instructorCourses.scss';
 
 function InstructorCourses(props){
 
-console.log(props.courseInfo);
     return(
       props.courseInfo?<div className="courseInfo">
         <h1>{props.courseInfo.title}</h1>

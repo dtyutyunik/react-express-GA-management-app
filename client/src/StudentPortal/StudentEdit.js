@@ -34,21 +34,15 @@ class StudentEditForm extends React.Component{
     e.preventDefault();
     this.props.form.validateFieldsAndScroll( async (err, values) => {
      if (!err) {
-       // make api calls
-       console.log('Received values of form: ', values);
        this.setState({
          formData: values
        })
-       console.log(this.state.formData);
        await this.props.updateStudentProfile(values);
        this.props.setView('0');
      }
    });
   }
   async putStudentEdit(passtu){
-    console.log(passtu);
-    console.log(this.props);
-    console.log(this.props.studentProfile.id);
     const putStudent = await axios.put(`${BASE_URL}/students/${this.props.studentProfile.id}`,passtu)
   }
 

@@ -23,7 +23,7 @@ return(
     <Button type="primary"
             style={{ margin: "20px" }}
             onClick={() => props.setView('Stedit')} >Edit</Button>
-    
+
 
 
   </div>

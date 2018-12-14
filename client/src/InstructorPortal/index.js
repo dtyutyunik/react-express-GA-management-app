@@ -37,7 +37,6 @@ class InstructorPortal extends React.Component {
     if(view=='edit'){
 
     }
-    console.log('thie view is', this.state.screen);
 
   }
 
@@ -47,21 +46,16 @@ class InstructorPortal extends React.Component {
   });
 }
   async updateInstructorProfile(stu) {
-    console.log(`inside update instructor profile`)
      const response = await axios.put(`${BASE_URL}/instructors/${this.state.instructorDetails.id}`,
      stu);
-     console.log(response.data);
      this.setState({
        instructorDetails: response.data,
      });
-     console.log(this.state.instructorDetails);
-
  }
 
 
   async getCourseInfo(){
     const pull= await axios(`${BASE_URL}/instructors/${this.state.instructorDetails.id}/courses`);
-    console.log(pull);
     this.setState({
       courseInfo: pull.data?pull.data.course:false
     });
@@ -72,7 +66,6 @@ class InstructorPortal extends React.Component {
   async getInstrucStudents() {
       try{
         const response= await axios(`${BASE_URL}/instructors/${this.state.instructorDetails.id}/students`);
-        // console.log(response);
         this.setState({
           students: response.data?response.data.students:false
         });
@@ -87,9 +80,6 @@ class InstructorPortal extends React.Component {
 
   render() {
     let content;
-    console.log(this.state.courseInfo);
-    // console.log(this.state.students);
-    // console.log(this.state.instructorDetails.id)
     switch (this.state.screen) {
       case 'edit':
       content =(<InstructorEdit instinfo={this.state.instructorDetails}

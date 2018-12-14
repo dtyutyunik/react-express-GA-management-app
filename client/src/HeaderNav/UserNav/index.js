@@ -31,10 +31,15 @@ export default class UserNav extends React.Component{
           </Menu.Item>
         const instructorNavShow =
           <Menu.Item key="insNav">
-          Welcome to Bootcamp Instructor
+            Welcome to Bootcamp Instructor
+          </Menu.Item>
+        const studentNavShow =
+          <Menu.Item key="stuNav">
+            Welcome to Bootcamp
           </Menu.Item>
         let isAdmin = this.props.portal === "admin";
         let isInstructor = this.props.portal === "instructor";
+        let isStudent = this.props.portal === "student";
         switch (true) {
           case isAdmin:
             courseNavShow = adminNavShow
@@ -42,9 +47,12 @@ export default class UserNav extends React.Component{
           case isInstructor:
             courseNavShow = instructorNavShow
             break;
+          case isStudent:
+            courseNavShow = studentNavShow
+            break;
           default:
         }
-        aboutUsNavShow = isAdmin || isInstructor ? null : aboutUsNavShow
+        aboutUsNavShow = isAdmin || isInstructor || isStudent ? null : aboutUsNavShow
         return(
             <Menu mode="horizontal"
                   selectedKeys={[this.props.current]}

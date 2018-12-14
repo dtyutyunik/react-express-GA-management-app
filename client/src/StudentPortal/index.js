@@ -10,7 +10,7 @@ import StudentEdit from './StudentEdit';
 
 import { getAllCourses, registerStudent } from '../services/courseAPIService';
 
-// const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'http://localhost:3001';
 
 class StudentPortal extends React.Component {
   constructor(props) {

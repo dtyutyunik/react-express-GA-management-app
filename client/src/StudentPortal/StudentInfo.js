@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 
 const BASE_URL = 'http://localhost:3001';
 
@@ -8,7 +8,8 @@ function StudentInfo (props){
 return(
 
   <div id='studentInfo' style={{ background: '#9ca7e2', padding: '60px',
-  marginRright: '50px' }}>
+    paddingRight: '200px',
+  marginRright: '30px' }}>
     <Card className = 'stuinfo'
           title = 'My Profile'
           bordered={false} style={{ width: 500 },
@@ -19,8 +20,10 @@ return(
     <h3>Email: {props.studentProfile.email}</h3>
     </Card>
 
-      <button onClick={() => props.setView('Stedit')} >Edit</button>
-
+    <Button type="primary"
+            style={{ margin: "20px" }}
+            onClick={() => props.setView('Stedit')} >Edit</Button>
+    
 
 
   </div>

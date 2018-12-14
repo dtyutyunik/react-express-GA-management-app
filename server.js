@@ -351,7 +351,7 @@ app.put('/instructors/:id', async(req,res)=>{
     const userFullNameUpdate= await User.findOne({where:{fullname: instinfo.fullname}});
     instinfo.fullname=req.body.fullname;
     instinfo.phone=req.body.phone;
-    instinfo.emailreq.body.email;
+    instinfo.email=req.body.email;
     userFullNameUpdate.fullname=instinfo.fullname;
     userFullNameUpdate.save();
     instinfo.save();

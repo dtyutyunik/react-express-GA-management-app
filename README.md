@@ -29,4 +29,4 @@ They are able to browse the course they teach and edit info of that specific cou
 ![Instructor Story](wireFrames/instructor_story.jpg)
 ![Student/Guest Story](wireFrames/student_guest_story.jpg)
 ![CodeSnippet of deleting student](wireFrames/codesnippet.png)
-
+![Implementation of Ant Design](wireFrames/ant-design.png)

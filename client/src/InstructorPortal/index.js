@@ -37,8 +37,6 @@ class InstructorPortal extends React.Component {
     if(view=='edit'){
 
     }
-
-
     console.log('thie view is', this.state.screen);
 
   }
@@ -57,7 +55,7 @@ class InstructorPortal extends React.Component {
        instructorDetails: response.data,
      });
      console.log(this.state.instructorDetails);
-     
+
  }
 
 
@@ -122,7 +120,6 @@ class InstructorPortal extends React.Component {
                                 setView={this.setView}
 
                                 />);
-
     }
 
   const SubMenu = Menu.SubMenu;

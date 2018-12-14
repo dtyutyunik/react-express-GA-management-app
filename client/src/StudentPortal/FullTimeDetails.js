@@ -9,7 +9,7 @@ class FullTimeDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      registerOrNot: this.props.isRegistered,
+      registerOrNot: props.isRegistered,
       applyBtn: '',
 
     }

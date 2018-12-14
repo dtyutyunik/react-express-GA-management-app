@@ -10,12 +10,15 @@ const Option = Select.Option;
 class InstructorEditForm extends React.Component{
   constructor(props){
     super(props);
+    const fullname = `${props.instinfo.fullname}`;
+    const email = `${props.instinfo.email}`;
+    const phone = `${props.instinfo.phone}`
     this.state={
      confirmDirty: false,
      formData: {
-       fullname: `${props.instinfo.fullname}`,
-       email: `${props.instinfo.email}`,
-       phone: `${props.instinfo.phone}`
+       fullname,
+       email,
+       phone
      }
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,21 +29,21 @@ class InstructorEditForm extends React.Component{
      if (!err) {
        // make api calls
        console.log('Received values of form: ', values);
-       this.setState({
-         formData: values
-       })
+       // this.setState({
+       //   formData: values
+       // })
        await this.props.updateInstructorProfile(values);
        console.log(this.state.formData);
        this.props.setView('0');
      }
    });
   }
-  async putStudentEdit(passtu){
-    console.log(passtu);
-    console.log(this.props);
-    console.log(this.props.studentProfile.id);
-    const putStudent = await axios.put(`${BASE_URL}/students/${this.props.studentProfile.id}`,passtu)
-  }
+  // async putStudentEdit(passtu){
+  //   console.log(passtu);
+  //   console.log(this.props);
+  //   console.log(this.props.studentProfile.id);
+  //   const putStudent = await axios.put(`${BASE_URL}/students/${this.props.studentProfile.id}`,passtu)
+  // }
 
   render (){
      const { getFieldDecorator } = this.props.form;

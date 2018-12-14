@@ -11,8 +11,8 @@ async function userInstructorSignup(userData) {
   return response.user;
 }
 
-
 async function userLogin(userData) {
+  console.log('user login attemps')
   const response = await axios.post(`${BASE_URL}/login`, userData);
   console.log(response);
   return response.data;

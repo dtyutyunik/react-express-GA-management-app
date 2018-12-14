@@ -17,11 +17,8 @@ class FullTimeOn extends React.Component {
     let { studentId } = this.props;
     let { isRegisteredCourse } = this.props;
     return(
-
+      
       <div>
-
-
-
         <FullTimeDetails
         infosent={this.props.courses}
 

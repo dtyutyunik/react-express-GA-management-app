@@ -49,6 +49,7 @@ async getAllCourses(){
 async updateStudentProfile(stu) {
      const response = await axios.put(`${BASE_URL}/students/${this.props.studentProfile.id}`,
      stu);
+     console.log(response);
      console.log(response.data);
      this.setState({
        studentProfile: response.data,

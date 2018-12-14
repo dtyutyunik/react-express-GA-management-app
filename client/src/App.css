@@ -19,6 +19,10 @@
 
 }
 
+.item{
+  display: grid;
+}
 .studentList{
-  border: 1px solid red;
+  margin: 1% 0 1% 0;
+  justify-content: space-around;
 }

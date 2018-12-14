@@ -5,21 +5,21 @@ import { registerStudent } from '../services/courseAPIService';
 
 const BASE_URL = 'http://localhost:3001';
 
-//
-
 class FullTimeDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
       registerOrNot: this.props.isRegistered,
-      applyBtn: ''
+      applyBtn: '',
+
     }
     this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount() {
+    console.log(this.props.infosent);
     if (this.state.registerOrNot) {
       this.setState ({
-        applyBtn: 'Enrolled'
+        applyBtn: 'Already A BS Student'
       })
     } else {
       this.setState ({
@@ -27,10 +27,12 @@ class FullTimeDetails extends React.Component {
       })
     }
   }
-  async handleClick() {
-    let courseId = this.props.courseId
+  async handleClick(e) {
+    // console.log(e.target.id);
+    let courseId = e.target.id
     let studentId = this.props.studentId
-    console.log(courseId);
+    console.log('course id is',courseId);
+    console.log('studentId id is',studentId);
     const response = await this.registerStudent(courseId, studentId);
     if (response.id) {
       message.success(`You have successfully registered for this course`);
@@ -56,7 +58,7 @@ class FullTimeDetails extends React.Component {
 
 
   render() {
-console.log(this.props.studentId)
+// console.log(this.props.studentId)
   const IconText = ({ type, text }) => (
     <span>
       <Icon type={type} />
@@ -76,20 +78,23 @@ console.log(this.props.studentId)
 
   return (
 
+  <div className="item">
+
     <List
   itemLayout="vertical"
   size="medium"
-  dataSource={this.props.title}
+  dataSource={this.props.infosent}
   renderItem={props => (
     <List.Item
-      key={this.props.id}
-      // courseId={this.props.id}
+      key={props.id}
+
       actions=
         {[<IconText type="star-o" text="156" />,
         <IconText type="like-o" text="156" />,
         <IconText type="message" text="2" />,
         <Button onClick = {this.handleClick}
-                key={this.props.id}
+                key={props.id}
+                id={props.id}
                 className= "register"
                 type="primary">{this.state.applyBtn}
                 </Button>]}
@@ -99,16 +104,15 @@ console.log(this.props.studentId)
         src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
     >
       <List.Item.Meta
-        title={this.props.title}
-        description={this.props.description}
+        title={props.title}
+        description={props.description}
       />
     </List.Item>
   )}
 />
-      // <h1>{this.props.title}</h1>
-      // <h2>{this.props.description}</h2>
-      // <p>{this.props.details}</p>
-      // <h3>{this.props.price}</h3>
+
+
+    </div>
     )
   }
 }

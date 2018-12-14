@@ -6,6 +6,7 @@ import PartTimeOn from './PartTimeOn';
 import FullTimeOff from './FullTimeOff';
 import PartTimeOff from './PartTimeOff';
 import StudentInfo from './StudentInfo';
+import StudentEdit from './StudentEdit';
 
 import { getAllCourses, registerStudent } from '../services/courseAPIService';
 
@@ -48,6 +49,9 @@ async getAllCourses(){
     let { studentId } = this.props
     let content;
     switch (this.state.screen) {
+      case 'Stedit':
+        content = (<StudentEdit studentProfile={this.state.studentProfile} setView={this.setView}  />);
+        break;
       case 'fullTimeOn':
         content = (<FullTimeOn
                     courses ={this.state.courses}
@@ -65,10 +69,10 @@ async getAllCourses(){
       break;
       case 'studentInfo':
         content = (<StudentInfo
-                    studentProfile = {this.state.studentProfile} />);
+                    studentProfile = {this.state.studentProfile} setView={this.setView} />);
       default:
         content = (<StudentInfo
-                    studentProfile = {this.state.studentProfile} />);
+                    studentProfile = {this.state.studentProfile} setView={this.setView} />);
     }
 
   const SubMenu = Menu.SubMenu;

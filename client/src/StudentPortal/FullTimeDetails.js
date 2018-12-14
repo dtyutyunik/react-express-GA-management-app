@@ -16,7 +16,6 @@ class FullTimeDetails extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount() {
-    console.log(this.props.infosent);
     if (this.state.registerOrNot) {
       this.setState ({
         applyBtn: 'Already A BS Student'
@@ -28,11 +27,8 @@ class FullTimeDetails extends React.Component {
     }
   }
   async handleClick(e) {
-    // console.log(e.target.id);
     let courseId = e.target.id
     let studentId = this.props.studentId
-    console.log('course id is',courseId);
-    console.log('studentId id is',studentId);
     const response = await this.registerStudent(courseId, studentId);
     if (response.id) {
       message.success(`You have successfully registered for this course`);
@@ -52,24 +48,19 @@ class FullTimeDetails extends React.Component {
 
   async registerStudent(courseId, studentId) {
     const response = await registerStudent(courseId, studentId)
-    console.log(response)
     return response;
   }
 
 
   render() {
-// console.log(this.props.studentId)
   const IconText = ({ type, text }) => (
     <span>
       <Icon type={type} />
       {text}
     </span>
   );
+  
   let applyBtn;
-  console.log(this.state.registerOrNot)
-  // this.state.registerOrNot ?
-  // applyBtn = 'Apply Now' :
-
   if(this.state.registerOrNot) {
     applyBtn = 'Already A BS Student'
   } else {

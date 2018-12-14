@@ -20,7 +20,6 @@ export default class NavLeft extends React.Component {
       this.setState({
         openKeys: latestOpenKey ? [latestOpenKey] : [],
       });
-        console.log(`the openKeys is ${this.state.openKeys}`)
     }
   }
 
@@ -38,7 +37,7 @@ export default class NavLeft extends React.Component {
         default:
           this.props.handlePageChange('home');
       }
-    
+
   }
 
   render() {

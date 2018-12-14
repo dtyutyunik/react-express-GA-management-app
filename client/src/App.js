@@ -84,6 +84,7 @@ class App extends Component {
       case 'student':
         contentView = (<StudentPortal
             studentId = {this.state.userLoginInfo.id}
+            studentProfile = {this.state.userLoginInfo}
             isRegisteredCourse={isRegisteredCourse}
             />);
         break;

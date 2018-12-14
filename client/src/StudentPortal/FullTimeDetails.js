@@ -19,7 +19,7 @@ class FullTimeDetails extends React.Component {
   componentDidMount() {
     if (this.state.registerOrNot) {
       this.setState ({
-        applyBtn: 'Already A BS Student'
+        applyBtn: 'Enrolled'
       })
     } else {
       this.setState ({
@@ -76,8 +76,6 @@ console.log(this.props.studentId)
 
   return (
 
-  <div className="item">
-
     <List
   itemLayout="vertical"
   size="medium"
@@ -107,12 +105,10 @@ console.log(this.props.studentId)
     </List.Item>
   )}
 />
-      <h1>{this.props.title}</h1>
-      <h2>{this.props.description}</h2>
-      <p>{this.props.details}</p>
-      <h3>{this.props.price}</h3>
-
-    </div>
+      // <h1>{this.props.title}</h1>
+      // <h2>{this.props.description}</h2>
+      // <p>{this.props.details}</p>
+      // <h3>{this.props.price}</h3>
     )
   }
 }

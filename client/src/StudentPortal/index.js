@@ -4,7 +4,8 @@ import axios from 'axios';
 import FullTimeOn from './FullTimeOn';
 import PartTimeOn from './PartTimeOn';
 import FullTimeOff from './FullTimeOff';
-import PartTimeOff from './PartTimeOff'
+import PartTimeOff from './PartTimeOff';
+import StudentInfo from './StudentInfo';
 
 import { getAllCourses, registerStudent } from '../services/courseAPIService';
 
@@ -16,20 +17,20 @@ class StudentPortal extends React.Component {
     console.log(props)
     this.state = {
       courses: [],
-      current: 'user',
-      screen: ''
+      current: '',
+      screen: '',
+      studentProfile: props.studentProfile,
     }
     this.getAllCourses = this.getAllCourses.bind(this);
   }
 
   async componentDidMount(){
     await this.getAllCourses();
-    // await this.registerStudent();
   }
 
   setView = (view) => {
     this.setState({
-      screen: view
+      screen: view,
     });
   }
 
@@ -44,7 +45,6 @@ async getAllCourses(){
 }
 
   render() {
-    console.log(this.props.studentId, "But does it, though?")
     let { studentId } = this.props
     let content;
     switch (this.state.screen) {
@@ -63,11 +63,12 @@ async getAllCourses(){
       case 'partTimeOff':
         content = (<PartTimeOff />);
       break;
+      case 'studentInfo':
+        content = (<StudentInfo
+                    studentProfile = {this.state.studentProfile} />);
       default:
-        content = (<FullTimeOn
-                    courses = {this.state.courses}
-                    isRegisteredCourse={this.props.isRegisteredCourse}
-                    studentId ={studentId}/>);
+        content = (<StudentInfo
+                    studentProfile = {this.state.studentProfile} />);
     }
 
   const SubMenu = Menu.SubMenu;
@@ -76,9 +77,10 @@ async getAllCourses(){
       <div>
       <nav>
       <Menu
-        selectedKeys={[this.state.current]}
+        selectedKeys={this.state.current}
         mode="horizontal">
-        <Menu.Item key="user">
+        <Menu.Item onClick={() => this.setView('studentInfo')}
+                    key="user">
           <Icon type="user"/>My Profile
         </Menu.Item>
 

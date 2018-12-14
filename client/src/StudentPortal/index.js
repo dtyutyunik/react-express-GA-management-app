@@ -67,6 +67,9 @@ async getAllCourses(){
       case 'partTimeOff':
         content = (<PartTimeOff />);
       break;
+      // case 'edit':
+      //   content = (<StudentEdit />);
+      // break;
       case 'studentInfo':
         content = (<StudentInfo
                     studentProfile = {this.state.studentProfile} setView={this.setView} />);

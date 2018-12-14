@@ -314,7 +314,7 @@ function mainRunner(){
 
   // studentCourse();
 
-  // instructorCourse();
+  instructorCourse();
 
 }
 

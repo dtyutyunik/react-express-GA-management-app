@@ -33,7 +33,7 @@ They are able to browse the course they teach and edit info of that specific cou
 
 
 Deployed Link:
-[Deploayed Link](http://bootcamp_startup.surge.sh/)
+[Bootcamp startup link](http://bootcamp_startup.surge.sh/)
 
 ## Route Structure
 Route maps

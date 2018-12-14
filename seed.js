@@ -309,8 +309,8 @@ async function studentUser(){
 // for mainRunner run each line one at a time
 function mainRunner(){
   // seed();
-  createStudentUser();
-  // createInstructorUser();
+  // createStudentUser();
+  createInstructorUser();
 
   // studentCourse();
 

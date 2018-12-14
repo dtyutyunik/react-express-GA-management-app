@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Table, Icon, Switch, Radio, Form, Divider } from 'antd';
 import './studentDetails.scss' ;
 
-const BASE_URL = 'https://polar-refuge-58258.herokuapp.com';
+const BASE_URL = "https://still-ridge-45074.herokuapp.com";
 
  function StudentDetails(props) {
 

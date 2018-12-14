@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = "https://polar-refuge-58258.herokuapp.com";
+const BASE_URL = "https://still-ridge-45074.herokuapp.com";
 
 async function userStudentSignup(userData) {
   const response = await axios.post(`${BASE_URL}/users/students`, userData);

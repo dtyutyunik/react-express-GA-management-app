@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, Button } from 'antd';
 import './instructorInfo.scss';
 
-const BASE_URL = 'https://polar-refuge-58258.herokuapp.com';
+const BASE_URL = "https://still-ridge-45074.herokuapp.com";
 function InstructorInfo (props){
   return (
     <div id="instructorInfo" style={{ background: '#9ca7e2', padding: '80px',

@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon, message,  Form, Input, Button } from 'antd';
 import { userInstructorSignup } from '../../services/userAPIService';
 import axios from 'axios';
-const BASE_URL = "https://polar-refuge-58258.herokuapp.com";
+const BASE_URL = "https://still-ridge-45074.herokuapp.com";
 // form for instructor to register
 // some code snippet imported from ant design
 class InstructorRegisterForm extends React.Component {

@@ -10,7 +10,7 @@ import StudentEdit from './StudentEdit';
 
 import { getAllCourses, registerStudent } from '../services/courseAPIService';
 
-const BASE_URL = 'https://polar-refuge-58258.herokuapp.com';
+const BASE_URL = "https://still-ridge-45074.herokuapp.com";
 
 class StudentPortal extends React.Component {
   constructor(props) {

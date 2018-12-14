@@ -31,15 +31,19 @@ They are able to browse the course they teach and edit info of that specific cou
 ![CodeSnippet of deleting student](wireFrames/codesnippet.png)
 ![Implementation of Ant Design](wireFrames/ant-design.png)
 
+
+Deployed Link:
+[Deploayed Link](http://bootcamp_startup.surge.sh/)
+
 ## Route Structure
 Route maps
 
 Get routes that give you everything
 
-/students  -> gives all students with 
+/students  -> gives all students with
 {id,fullname,email,phone,created_at,updated_at, and associated user_id}
 
-/instructors -> gives all instructors with 
+/instructors -> gives all instructors with
 {id, fullname,email,phone,title,created_at,updated_at, and associated user_id}
 
 /courses -> gives all courses with {id,title,description,details,price,start_date,end_date,capacity,created_at,updated_at, and associated instructor_id}
@@ -59,7 +63,7 @@ Delete routes
 
 Put routes to edit any value of their type
 /students/:id  -> edit a student and its associated user fullname
-accepts fields of 
+accepts fields of
 {fullname:
 phone:
 email:
@@ -67,7 +71,7 @@ email:
 to update
 
 /instructors/:id -> edit a instructor and its associated userfulname
-accepts fields of 
+accepts fields of
 {fullname:
 phone:
 email:
@@ -75,7 +79,7 @@ email:
 to update
 
 /courses/:id -> edit a course
-accepts fields of 
+accepts fields of
 {details:
 title:
 description:
@@ -95,14 +99,14 @@ Special Get routes for instructor
 /instructors/:id/students -> gets students that an instructor teaches
 
 Special Put routes to register a student to a course
-/course/:id/student/:stuid 
+/course/:id/student/:stuid
 
 Special Delete route for Instructor
-/instructors/:id/student/:studentid -> removes a student from a course and increases their capacity after they are removed 
+/instructors/:id/student/:studentid -> removes a student from a course and increases their capacity after they are removed
 
 Special Put Instructor specific course edit of detail or description
 /instructor/:id/course/:courseId -> edits id specified course of id specified instructor accepts fields of
 {description:
 details:
 }
-if the course is not taught by the instructor, or a course doesnt have an instructor an error will be thrown 
+if the course is not taught by the instructor, or a course doesnt have an instructor an error will be thrown

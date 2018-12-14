@@ -312,7 +312,7 @@ function mainRunner(){
   // createStudentUser();
   // createInstructorUser();
 
-  studentCourse();
+  // studentCourse();
 
   // instructorCourse();
 

@@ -2,7 +2,7 @@ import React from 'react';
 import {  Form, Input, Button, Row, Col, Tooltip, Icon, Select } from 'antd';
 import axios from 'axios';
 import './StudentEdit.scss'
-const BASE_URL = 'https://polar-refuge-58258.herokuapp.com';
+const BASE_URL = "https://still-ridge-45074.herokuapp.com";
 const FormItem = Form.Item;
 const Option = Select.Option;
 

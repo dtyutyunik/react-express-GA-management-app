@@ -3,7 +3,7 @@ import { Button, List, Avatar, Icon, message } from 'antd';
 import axios from 'axios';
 import { registerStudent } from '../services/courseAPIService';
 
-const BASE_URL = 'https://polar-refuge-58258.herokuapp.com';
+const BASE_URL = "https://still-ridge-45074.herokuapp.com";
 
 class FullTimeDetails extends React.Component {
   constructor(props) {

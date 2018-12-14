@@ -331,8 +331,8 @@ app.put('/students/:id', async(req,res)=>{
     const stuinfo= await Student.findByPk(req.params.id);
     const userFullNameUpdate= await User.findOne({where:{fullname: stuinfo.fullname}});
     stuinfo.fullname=req.body.fullname;
-    stuinfo.phone?stuinfo.phone=req.body.phone:stuinfo.phone=stuinfo.phone;
-    stuinfo.email?stuinfo.email=req.body.email:stuinfo.email=stuinfo.email;
+    stuinfo.phone=req.body.phone;
+    stuinfo.email=req.body.email;
     userFullNameUpdate.fullname=stuinfo.fullname;
     userFullNameUpdate.save();
     stuinfo.save();
@@ -350,8 +350,8 @@ app.put('/instructors/:id', async(req,res)=>{
     const instinfo= await Instructor.findByPk(req.params.id);
     const userFullNameUpdate= await User.findOne({where:{fullname: instinfo.fullname}});
     instinfo.fullname=req.body.fullname;
-    instinfo.phone?instinfo.phone=req.body.phone:instinfo.phone=instinfo.phone;
-    instinfo.email?instinfo.email=req.body.email:instinfo.email=instinfo.email;
+    instinfo.phone=req.body.phone;
+    instinfo.emailreq.body.email;
     userFullNameUpdate.fullname=instinfo.fullname;
     userFullNameUpdate.save();
     instinfo.save();
